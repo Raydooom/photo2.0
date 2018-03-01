@@ -1,0 +1,150 @@
+<!--pages/hot/hot.wxml-->
+<view class="top-title">
+    <text class="main-title">热门推荐</text>
+    <text></text>
+</view>
+<swiper previous-margin="30rpx" duration="300" next-margin="30rpx">
+    <block wx:for="{{swiperData}}">
+        <swiper-item>
+            <view class="swiper-item">
+                <image src="{{item.imgUrl}}" mode='aspectFill' class="slide-image" />
+                <view class="article-info">
+                    <text class="title">黑白摄影</text>
+                    <text class="discription">简简单单也是中美！</text>
+                </view>
+                <view class="main-view">
+                    <image src='../../assets/icons/views.png'></image> 156</view>
+            </view>
+        </swiper-item>
+    </block>
+</swiper>
+<view class="classify">
+    <view class="classify-title">风景摄影
+        <navigator class="view-all" url=''>查看全部</navigator>
+    </view>
+    <swiper previous-margin="30rpx" duration="300" next-margin="30rpx" class="article-warp">
+        <swiper-item>
+            <navigator hover-class="none" class="article-item">
+                <image class="article-clover" src='../../assets/test/2.jpg'></image>
+                <view class="article-info">
+                    <text class="article-title">黑白摄影</text>
+                    <text class="article-description">第一次玩黑白摄影，觉得挺有意思的，好喜欢那种简单的画面。在黑白的世界里，可以不用顾忌色彩的干扰！简简单单也是中美！</text>
+                    <view class="article-view">
+                        <image src='../../assets/icons/views_gray.png'></image> 256</view>
+                </view>
+            </navigator>
+            <navigator class="article-item">
+                <image class="article-clover" src='../../assets/test/2.jpg'></image>
+                <view class="article-info">
+                    <text class="article-title">黑白摄影</text>
+                    <text class="article-description">第一次玩黑白摄影，觉得挺有意思的，好喜欢那种简单的画面。在黑白的世界里，可以不用顾忌色彩的干扰！简简单单也是中美！</text>
+                    <view class="article-view">
+                        <image src='../../assets/icons/views_gray.png'></image> 256</view>
+                </view>
+            </navigator>
+            <navigator class="article-item">
+                <image class="article-clover" src='../../assets/test/2.jpg'></image>
+                <view class="article-info">
+                    <text class="article-title">黑白摄影</text>
+                    <text class="article-description">第一次玩黑白摄影，觉得挺有意思的，好喜欢那种简单的画面。在黑白的世界里，可以不用顾忌色彩的干扰！简简单单也是中美！</text>
+                    <view class="article-view">
+                        <image src='../../assets/icons/views_gray.png'></image> 256</view>
+                </view>
+            </navigator>
+        </swiper-item>
+        <swiper-item>
+            <navigator class="article-item">
+                <image class="article-clover" src='../../assets/test/2.jpg'></image>
+                <view class="article-info">
+                    <text class="article-title">黑白摄影</text>
+                    <text class="article-description">第一次玩黑白摄影，觉得挺有意思的，好喜欢那种简单的画面。在黑白的世界里，可以不用顾忌色彩的干扰！简简单单也是中美！</text>
+                    <view class="article-view">
+                        <image src='../../assets/icons/views_gray.png'></image> 256</view>
+                </view>
+            </navigator>
+            <navigator class="article-item">
+                <image class="article-clover" src='../../assets/test/2.jpg'></image>
+                <view class="article-info">
+                    <text class="article-title">黑白摄影</text>
+                    <text class="article-description">第一次玩黑白摄影，觉得挺有意思的，好喜欢那种简单的画面。在黑白的世界里，可以不用顾忌色彩的干扰！简简单单也是中美！</text>
+                    <view class="article-view">
+                        <image src='../../assets/icons/views_gray.png'></image> 256</view>
+                </view>
+            </navigator>
+            <navigator class="article-item">
+                <image class="article-clover" src='../../assets/test/2.jpg'></image>
+                <view class="article-info">
+                    <text class="article-title">黑白摄影</text>
+                    <text class="article-description">第一次玩黑白摄影，觉得挺有意思的，好喜欢那种简单的画面。在黑白的世界里，可以不用顾忌色彩的干扰！简简单单也是中美！</text>
+                    <view class="article-view">
+                        <image src='../../assets/icons/views_gray.png'></image> 256</view>
+                </view>
+            </navigator>
+        </swiper-item>
+    </swiper>
+</view>
+<view class="classify">
+    <view class="classify-title">风景摄影
+        <navigator class="view-all" url=''>查看全部</navigator>
+    </view>
+    <swiper previous-margin="30rpx" duration="300" next-margin="30rpx" class="article-warp">
+        <swiper-item>
+            <navigator class="article-item">
+                <image class="article-clover" src='../../assets/test/2.jpg'></image>
+                <view class="article-info">
+                    <text class="article-title">黑白摄影</text>
+                    <text class="article-description">第一次玩黑白摄影，觉得挺有意思的，好喜欢那种简单的画面。在黑白的世界里，可以不用顾忌色彩的干扰！简简单单也是中美！</text>
+                    <view class="article-view">
+                        <image src='../../assets/icons/views_gray.png'></image> 256</view>
+                </view>
+            </navigator>
+            <navigator class="article-item">
+                <image class="article-clover" src='../../assets/test/2.jpg'></image>
+                <view class="article-info">
+                    <text class="article-title">黑白摄影</text>
+                    <text class="article-description">第一次玩黑白摄影，觉得挺有意思的，好喜欢那种简单的画面。在黑白的世界里，可以不用顾忌色彩的干扰！简简单单也是中美！</text>
+                    <view class="article-view">
+                        <image src='../../assets/icons/views_gray.png'></image> 256</view>
+                </view>
+            </navigator>
+            <navigator class="article-item">
+                <image class="article-clover" src='../../assets/test/2.jpg'></image>
+                <view class="article-info">
+                    <text class="article-title">黑白摄影</text>
+                    <text class="article-description">第一次玩黑白摄影，觉得挺有意思的，好喜欢那种简单的画面。在黑白的世界里，可以不用顾忌色彩的干扰！简简单单也是中美！</text>
+                    <view class="article-view">
+                        <image src='../../assets/icons/views_gray.png'></image> 256</view>
+                </view>
+            </navigator>
+        </swiper-item>
+        <swiper-item>
+            <navigator class="article-item">
+                <image class="article-clover" src='../../assets/test/2.jpg'></image>
+                <view class="article-info">
+                    <text class="article-title">黑白摄影</text>
+                    <text class="article-description">第一次玩黑白摄影，觉得挺有意思的，好喜欢那种简单的画面。在黑白的世界里，可以不用顾忌色彩的干扰！简简单单也是中美！</text>
+                    <view class="article-view">
+                        <image src='../../assets/icons/views_gray.png'></image> 256</view>
+                </view>
+            </navigator>
+            <navigator class="article-item">
+                <image class="article-clover" src='../../assets/test/2.jpg'></image>
+                <view class="article-info">
+                    <text class="article-title">黑白摄影</text>
+                    <text class="article-description">第一次玩黑白摄影，觉得挺有意思的，好喜欢那种简单的画面。在黑白的世界里，可以不用顾忌色彩的干扰！简简单单也是中美！</text>
+                    <view class="article-view">
+                        <image src='../../assets/icons/views_gray.png'></image> 256</view>
+                </view>
+            </navigator>
+            <navigator class="article-item">
+                <image class="article-clover" src='../../assets/test/2.jpg'></image>
+                <view class="article-info">
+                    <text class="article-title">黑白摄影</text>
+                    <text class="article-description">第一次玩黑白摄影，觉得挺有意思的，好喜欢那种简单的画面。在黑白的世界里，可以不用顾忌色彩的干扰！简简单单也是中美！</text>
+                    <view class="article-view">
+                        <image src='../../assets/icons/views_gray.png'></image> 256</view>
+                </view>
+            </navigator>
+        </swiper-item>
+    </swiper>
+</view>

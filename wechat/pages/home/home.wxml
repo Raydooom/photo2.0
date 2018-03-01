@@ -1,0 +1,63 @@
+<!--pages/home/home.wxml-->
+<swiper class="home-warp" duration='300' next-margin="40rpx" previous-margin="40rpx">
+    <swiper-item class="home-item">
+        <navigator class="article-warp">
+            <image class="main-img" mode='aspectFill' src='../../assets/test/1.jpg'></image>
+            <view class="article-info">
+                <view class="title-warp">
+                    <text class="classify">风景</text>
+                    <text class="title">败荷。摄影 </text>
+                    <text class="description">败荷影像，傍晚时分取景。佳能EOS650D普通套机。无任何诸如红外滤镜、三脚架、遮光罩、广角镜等等附带设备。</text>
+                </view>
+                <view class="article-view">
+                    <image src='../../assets/icons/views_gray.png'></image> 156
+                </view>
+            </view>
+        </navigator>
+    </swiper-item>
+    <swiper-item class="home-item">
+        <navigator class="article-warp">
+            <image class="main-img" mode='aspectFill' src='../../assets/test/1.jpg'></image>
+            <view class="article-info">
+                <view class="title-warp">
+                    <text class="classify">风景</text>
+                    <text class="title">败荷。摄影 </text>
+                    <text class="description">败荷影像，傍晚时分取景。佳能EOS650D普通套机。无任何诸如红外滤镜、三脚架、遮光罩、广角镜等等附带设备。</text>
+                </view>
+                <view class="article-view">
+                    <image src='../../assets/icons/views_gray.png'></image> 156
+                </view>
+            </view>
+        </navigator>
+    </swiper-item>
+    <swiper-item class="home-item">
+        <navigator class="article-warp">
+            <image class="main-img" mode='aspectFill' src='../../assets/test/1.jpg'></image>
+            <view class="article-info">
+                <view class="title-warp">
+                    <text class="classify">风景</text>
+                    <text class="title">败荷。摄影 </text>
+                    <text class="description">败荷影像，傍晚时分取景。佳能EOS650D普通套机。无任何诸如红外滤镜、三脚架、遮光罩、广角镜等等附带设备。</text>
+                </view>
+                <view class="article-view">
+                    <image src='../../assets/icons/views_gray.png'></image> 156
+                </view>
+            </view>
+        </navigator>
+    </swiper-item>
+    <swiper-item class="home-item">
+        <navigator class="article-warp">
+            <image class="main-img" mode='aspectFill' src='../../assets/test/1.jpg'></image>
+            <view class="article-info">
+                <view class="title-warp">
+                    <text class="classify">风景</text>
+                    <text class="title">败荷。摄影 </text>
+                    <text class="description">败荷影像，傍晚时分取景。佳能EOS650D普通套机。无任何诸如红外滤镜、三脚架、遮光罩、广角镜等等附带设备。</text>
+                </view>
+                <view class="article-view">
+                    <image src='../../assets/icons/views_gray.png'></image> 156
+                </view>
+            </view>
+        </navigator>
+    </swiper-item>
+</swiper>

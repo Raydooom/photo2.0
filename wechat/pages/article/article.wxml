@@ -1,0 +1,27 @@
+<view class="article-cover">
+    <image mode='aspectFill' src="../../assets/test/1.jpg"></image>
+    <view class="title-warp">
+        <text class="classify">风景</text>
+        <text class="title">结合iOS11的设计风格对洛基英语App重新设计</text>
+    </view>
+</view>
+<view class="article-warp">
+    <view class="guide">
+        前段时间苹果更新的IOS11版本，相信不少人已经更新到新了吧，今天的视频是用Sketch实操新系统中的AppStore的UI设计。
+    </view>
+    <view class="article-main">
+        <text class="photo-title">风景</text>
+        <text class="photo-description">前段时间苹果更新的IOS11版本，相信不少人已经更新到新了吧，今天的视频是用Sketch实操新系统中的AppStore的UI设计。</text>
+        <image src='../../assets/test/2.jpg'></image>
+    </view>
+    <view class="article-main">
+        <text class="photo-title">风景</text>
+        <text class="photo-description">前段时间苹果更新的IOS11版本，相信不少人已经更新到新了吧，今天的视频是用Sketch实操新系统中的AppStore的UI设计。</text>
+        <image src='../../assets/test/2.jpg'></image>
+    </view>
+    <view class="article-main">
+        <text class="photo-title">风景</text>
+        <text class="photo-description">前段时间苹果更新的IOS11版本，相信不少人已经更新到新了吧，今天的视频是用Sketch实操新系统中的AppStore的UI设计。</text>
+        <image src='../../assets/test/2.jpg'></image>
+    </view>
+</view>
