@@ -24,7 +24,7 @@
     </view>
     <swiper previous-margin="30rpx" duration="300" next-margin="30rpx" class="article-warp">
         <swiper-item>
-            <navigator hover-class="none" class="article-item">
+            <navigator hover-class="none" class="article-item" url='../article/article'>
                 <image class="article-clover" src='../../assets/test/2.jpg'></image>
                 <view class="article-info">
                     <text class="article-title">黑白摄影</text>

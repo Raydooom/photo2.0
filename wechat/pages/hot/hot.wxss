@@ -67,9 +67,6 @@ swiper-item .discription {
     position: absolute;
     bottom: 20rpx;
     right: 40rpx;
-}
-
-.main-view {
     color: #fff;
     font-size: 28rpx;
 }

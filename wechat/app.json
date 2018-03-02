@@ -1,11 +1,13 @@
 {
     "pages": [
-        "pages/article/article",
         "pages/home/home",
         "pages/classify/classify",
         "pages/hot/hot",
-        "pages/index/index",
         "pages/center/center",
+        "pages/credits/credits",
+        "pages/commentList/commentList",
+        "pages/article/article",
+        "pages/index/index",
         "pages/logs/logs"
     ],
     "window": {
