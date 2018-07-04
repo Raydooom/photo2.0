@@ -1,19 +1,17 @@
 {
     "pages": [
+        "pages/hot/hot",
         "pages/home/home",
         "pages/classify/classify",
-        "pages/hot/hot",
         "pages/center/center",
         "pages/credits/credits",
         "pages/commentList/commentList",
-        "pages/article/article",
-        "pages/index/index",
-        "pages/logs/logs"
+        "pages/article/article"
     ],
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "WeChat",
+        "navigationBarTitleText": "我想学摄影",
         "navigationBarTextStyle": "black"
     },
     "tabBar": {
@@ -22,14 +20,14 @@
         "borderStyle": "black",
         "list": [
             {
-                "pagePath": "pages/home/home",
-                "text": "首页",
+                "pagePath": "pages/hot/hot",
+                "text": "热门",
                 "iconPath": "/assets/icons/home.png",
                 "selectedIconPath": "/assets/icons/home_active.png"
             },
             {
-                "pagePath": "pages/hot/hot",
-                "text": "分类",
+                "pagePath": "pages/home/home",
+                "text": "专题",
                 "iconPath": "/assets/icons/classify.png",
                 "selectedIconPath": "/assets/icons/classify_active.png"
             },

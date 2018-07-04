@@ -103,7 +103,7 @@ swiper-item .discription {
 }
 
 .article-warp {
-    height: 460rpx;
+    height: 570rpx;
 }
 
 .article-item {
@@ -114,17 +114,17 @@ swiper-item .discription {
 
 .article-item .article-clover {
     float: left;
-    width: 120rpx;
-    height: 120rpx;
-    border-radius: 20rpx;
+    width: 220rpx;
+    height: 160rpx;
+    border-radius: 16rpx 0 0 16rpx;
 }
 
 .article-item .article-info {
     float: left;
     padding-left: 20rpx;
-    width: 500rpx;
+    width: 430rpx;
     border-bottom: 1px solid #efefef;
-    padding-bottom: 10rpx;
+    padding-bottom: 20rpx;
 }
 
 .article-item .article-title {
@@ -133,6 +133,8 @@ swiper-item .discription {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: #111;
+    font-weight: bold;
 }
 
 .article-item .article-description {
@@ -142,9 +144,11 @@ swiper-item .discription {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    padding-top: 10rpx;
 }
 
 .article-view {
+    padding-top: 20rpx;
     color: #999;
     font-size: 24rpx;
     margin-top: 10rpx;

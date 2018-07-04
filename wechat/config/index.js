@@ -1,0 +1,5 @@
+const HOST = "";
+
+export {
+    HOST,
+}

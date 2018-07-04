@@ -1,7 +1,6 @@
 <!--pages/home/home.wxml-->
-<loading></loading>
-
-<swiper class="home-warp" duration='300' next-margin="40rpx" previous-margin="40rpx">
+<loading wx:if="{{loading}}"></loading>
+<swiper wx:else class="home-warp" duration='300' next-margin="40rpx" previous-margin="40rpx">
     <swiper-item class="home-item">
         <navigator class="article-warp">
             <image class="main-img" mode='aspectFill' src='../../assets/test/1.jpg'></image>
