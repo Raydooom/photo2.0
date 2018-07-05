@@ -4,19 +4,15 @@
       <div class="logo">
         我想学摄影
       </div>
-      <el-menu default-active="0" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-        <router-link to="/dashBoard">
-          <el-menu-item index="0">
-            <i class="el-icon-menu"></i>
-            <span slot="title">统计</span>
-          </el-menu-item>
-        </router-link>
-        <router-link to="/addArticle">
-          <el-menu-item index="1">
-            <i class="el-icon-menu"></i>
-            <span slot="title">文章管理</span>
-          </el-menu-item>
-        </router-link>
+      <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" router>
+        <el-menu-item index="/dashBoard">
+          <i class="el-icon-menu"></i>
+          <span slot="title">统计</span>
+        </el-menu-item>
+        <el-menu-item index="/addArticle">
+          <i class="el-icon-menu"></i>
+          <span slot="title">文章管理</span>
+        </el-menu-item>
         <el-submenu index="2">
           <template slot="title">
             <i class="el-icon-location"></i>
@@ -83,7 +79,7 @@ export default {
   padding: 0 25px;
   h3 {
     font-size: 20px;
-    margin:20px 0;
+    margin: 20px 0;
   }
 }
 </style>
