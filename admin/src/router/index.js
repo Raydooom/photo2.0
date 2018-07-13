@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+const test = r => require.ensure([], () => r(require('@/pages/test')), 'test')
 const home = r => require.ensure([], () => r(require('@/pages/home')), 'home')
 const login = r => require.ensure([], () => r(require('@/pages/login')), 'login')
 const dashBoard = r => require.ensure([], () => r(require('@/pages/dashBoard')), 'dashBoard')
@@ -8,8 +9,7 @@ const addArticle = r => require.ensure([], () => r(require('@/pages/addArticle')
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: '/login',
       component: login
     },
@@ -18,8 +18,7 @@ export default new Router({
       name: 'home',
       component: home,
       redirect: 'dashBoard',
-      children: [
-        {
+      children: [{
           path: 'dashBoard',
           component: dashBoard
         },
@@ -29,6 +28,10 @@ export default new Router({
         },
 
       ]
+    }, {
+      path: '/test',
+      name: test,
+      component: test
     }
   ]
 })
