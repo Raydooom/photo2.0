@@ -12,6 +12,8 @@ import 'quill/dist/quill.core.css' // 编辑器css
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
+import Cookie from 'js-cookie'
+
 Vue.use(VueQuillEditor)
 Vue.use(ElementUI)
 
@@ -21,10 +23,10 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 
-/*登录拦截 */
+// /*登录拦截 */
 router.beforeEach((to, from, next) => {
-  // router.push('/login')
-  next()
+  
+  next();
 })
 
 new Vue({

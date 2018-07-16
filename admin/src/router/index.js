@@ -5,7 +5,8 @@ const home = r => require.ensure([], () => r(require('@/pages/home')), 'home')
 const login = r => require.ensure([], () => r(require('@/pages/login')), 'login')
 const dashBoard = r => require.ensure([], () => r(require('@/pages/dashBoard')), 'dashBoard')
 const addArticle = r => require.ensure([], () => r(require('@/pages/addArticle')), 'addArticle')
-
+const articleList = r => require.ensure([], () => r(require('@/pages/articleList')), 'articleList')
+const errorPage = r => require.ensure([], () => r(require('@/pages/errorPage')), 'errorPage')
 Vue.use(Router)
 
 export default new Router({
@@ -23,6 +24,10 @@ export default new Router({
           component: dashBoard
         },
         {
+          path: 'articleList',
+          component: articleList
+        },
+        {
           path: 'addArticle',
           component: addArticle
         },
@@ -32,6 +37,10 @@ export default new Router({
       path: '/test',
       name: test,
       component: test
+    }, {
+      path: '*',
+      name: errorPage,
+      component: errorPage
     }
   ]
 })

@@ -1,26 +1,28 @@
 <template>
-	<div class="login-wrap">
-		<div class="left">
-			<img src="../assets/images/login.jpg">
-		</div>
-		<div class="right">
-			<h2>我想学摄影管理系统</h2>
-			<ul class="form-wrap">
-				<li>
-					<el-input placeholder="请输入管理员账号" maxlength="16" v-model="account" clearable autofocus></el-input>
-				</li>
-				<li>
-					<el-input placeholder="请输入管理员密码" type="password" v-model="password" maxlength="16" clearable></el-input>
-				</li>
-				<li class="btn">
-					<el-button type="primary" @click="login" round>登录</el-button>
-				</li>
-			</ul>
-		</div>
-	</div>
+  <div class="login-wrap">
+    <div class="left">
+      <img src="../assets/images/login.jpg">
+    </div>
+    <div class="right">
+      <h2>我想学摄影管理系统</h2>
+      <ul class="form-wrap">
+        <li>
+          <el-input placeholder="请输入管理员账号" maxlength="16" v-model="account" clearable autofocus></el-input>
+        </li>
+        <li>
+          <el-input placeholder="请输入管理员密码" type="password" v-model="password" maxlength="16" clearable></el-input>
+        </li>
+        <li class="btn">
+          <el-button type="primary" @click="login" round>登录</el-button>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
+import { md5Encrypt } from "@/utils/utils";
+
 export default {
   data() {
     return {
@@ -38,13 +40,18 @@ export default {
         this.$message.error("密码不能为空");
         return;
       }
-
       this.$axios
         .get("/api/login", {
-          params: { account: this.account, password: this.password }
+          params: { account: this.account, password: md5Encrypt(this.password) }
         })
         .then(res => {
-          console.log(res);
+          if (res.data.status == "1") {
+            this.$message.success(res.data.msg);
+            console.log(this);
+            setTimeout(() => this.$router.push("/"), 500);
+          } else {
+            this.$message.error(res.data.msg);
+          }
         });
     }
   }
