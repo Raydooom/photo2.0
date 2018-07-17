@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 import http from './utils/http'
 import ElementUI from 'element-ui'
 import VueQuillEditor from 'vue-quill-editor' // 编辑器
@@ -25,13 +26,14 @@ Vue.config.productionTip = false
 
 // /*登录拦截 */
 router.beforeEach((to, from, next) => {
-  
+
   next();
 })
 
 new Vue({
   el: '#app',
   router,
+  store,
   components: {
     App
   },
