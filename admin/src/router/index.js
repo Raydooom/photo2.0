@@ -21,15 +21,24 @@ export default new Router({
       redirect: 'dashBoard',
       children: [{
           path: 'dashBoard',
-          component: dashBoard
+          component: dashBoard,
+          meta: {
+            title: '统计信息'
+          }
         },
         {
           path: 'articleList',
-          component: articleList
+          component: articleList,
+          meta: {
+            title: '文章列表'
+          }
         },
         {
           path: 'addArticle',
-          component: addArticle
+          component: addArticle,
+          meta: {
+            title: '添加文章'
+          }
         },
 
       ]

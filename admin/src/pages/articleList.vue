@@ -1,6 +1,6 @@
 <template>
     <div>
-        列表页
+        <slot></slot>
     </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   },
   mounted() {
     this.$axios.get("/api/articleList").then(res => {
-      console.log(res);
+      // console.log(res);
     });
   }
 };

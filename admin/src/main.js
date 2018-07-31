@@ -10,8 +10,8 @@ import VueQuillEditor from 'vue-quill-editor' // 编辑器
 import './assets/scss/theme.scss' // 主题颜色自定义
 import './assets/fonts/iconfont.css' // 字体图标
 import 'quill/dist/quill.core.css' // 编辑器css
-import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+import 'quill/dist/quill.snow.css'
 
 import Cookie from 'js-cookie'
 
@@ -26,7 +26,8 @@ Vue.config.productionTip = false
 
 // /*登录拦截 */
 router.beforeEach((to, from, next) => {
-
+  let routerTitle = to.meta.title;
+  store.commit("routerTitle", routerTitle);
   next();
 })
 

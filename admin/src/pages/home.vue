@@ -25,7 +25,7 @@
       <top-bar></top-bar>
       <div class="main-content">
         <router-view>
-          <h3>栏目标题</h3>
+          <h3>{{routerTitle}}</h3>
         </router-view>
       </div>
     </div>
@@ -37,6 +37,14 @@ import topBar from "../components/topBar";
 export default {
   components: {
     topBar
+  },
+  mounted() {
+    console.log(this.$store);
+  },
+  computed: {
+    routerTitle() {
+      return this.$store.state.routerTitle;
+    }
   },
   methods: {
     handleOpen(key, keyPath) {

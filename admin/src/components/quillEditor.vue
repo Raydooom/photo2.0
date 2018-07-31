@@ -1,19 +1,62 @@
 <template>
-  <quill-editor ref="myTextEditor" v-model="content" :config="editorOption" @change="onEditorChange($event)">
-  </quill-editor>
+  <section>
+    <el-row v-loading="false">
+      <quill-editor ref="Editor" v-model="content" :options="editorOption" @change="onEditorChange($event)">
+      </quill-editor>
+    </el-row>
+    <el-upload id="quill-upload" class="avatar-uploader" :action="action" name="img" :show-file-list="false" :on-success="uploadSuccess" :on-error="uploadError" :before-upload="beforeUpload">
+    </el-upload>
+  </section>
 </template>
 
 <script>
 import { quillEditor } from "vue-quill-editor"; //调用编辑器
 import { mapMutations } from "vuex";
 
+// 工具栏配置
+const toolbarOptions = [
+  ["bold", "italic", "underline", "strike"], // toggled buttons
+  ["blockquote", "code-block"],
+
+  [{ header: 1 }, { header: 2 }], // custom button values
+  [{ list: "ordered" }, { list: "bullet" }],
+  [{ script: "sub" }, { script: "super" }], // superscript/subscript
+  [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+  [{ direction: "rtl" }], // text direction
+
+  [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+  [{ font: [] }],
+  [{ align: [] }],
+  ["link", "image", "video"],
+  ["clean"] // remove formatting button
+];
+
 export default {
   data() {
     return {
+      action: "https://api.raydom.wang/uploadImg", // 上传图片地址
       content: "",
-      editor: "123",
+      imgType: ["image/jpeg", "image/png", "images/gif"],
       editorOption: {
-        // something config
+        placeholder: "",
+        theme: "snow", // or 'bubble'
+        modules: {
+          toolbar: {
+            container: toolbarOptions, // 工具栏
+            handlers: {
+              image: function(value) {
+                if (value) {
+                  document.querySelector("#quill-upload input").click();
+                } else {
+                  this.quill.format("image", false);
+                }
+              }
+            }
+          }
+        }
       }
     };
   },
@@ -21,12 +64,62 @@ export default {
     quillEditor
   },
   methods: {
-    ...mapMutations([
-      'changeContent'
-    ]),
+    ...mapMutations(["changeContent"]),
     onEditorChange({ editor, html, text }) {
       this.changeContent(this.content);
-    }
+    },
+    // 上传图片
+    beforeUpload(file) {
+      if (!this.imgType.includes(file.type)) {
+        this.$message.error("图片格式错误！");
+        console.log(123);
+        return false;
+      }
+      //创建临时的路径来展示图片
+      var windowURL = window.URL || window.webkitURL;
+
+      this.src = windowURL.createObjectURL(file);
+      //重新写一个表单上传的方法
+      this.param = new FormData();
+      this.param.append("img", file, file.name);
+      //下面append的东西就会到form表单数据的fields中；
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      //然后通过下面的方式把内容通过axios来传到后台
+      this.$axios
+        .post("https://api.raydom.wang/uploadImg", this.param, config)
+        .then(res => {
+          let imageUrl = `https://api.raydom.wang${res.data}`;
+          // 上传成功后，将返回的图片插入编辑器
+          this.insertImg(imageUrl, file);
+        });
+      return false;
+    },
+    // 图片插入编辑器
+    insertImg(imageUrl, file) {
+      // res为图片服务器返回的数据
+      // 获取富文本组件实例
+      let quill = this.$refs.Editor.quill;
+      // 如果上传成功
+      if (imageUrl) {
+        // 获取光标所在位置
+        let length = quill.getSelection().index;
+        // 插入图片  res.info为服务器返回的图片地址
+        quill.insertEmbed(length, "image", imageUrl);
+        // 调整光标到最后
+        quill.setSelection(length + 1);
+      } else {
+        this.$message.error("图片插入失败");
+      }
+      // loading动画消失
+      this.quillUpdateImg = false;
+    },
+
+    uploadSuccess() {},
+    uploadError() {}
   },
   // if you need to get the current editor object, you can find the editor object like this, the $ref object is a ref attribute corresponding to the dom redefined
   // 如果你需要得到当前的editor对象来做一些事情，你可以像下面这样定义一个方法属性来获取当前的editor对象，实际上这里的$refs对应的是当前组件内所有关联了ref属性的组件元素对象
