@@ -17,6 +17,7 @@ http.interceptors.response.use(
     if (res.data.status == "0" && res.data.msg.indexOf("登录") != -1) {
       // 当接口返回未登录状态时，跳转登录页面
       router.push("/login")
+      return res
     } else {
       return res;
     }

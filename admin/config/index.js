@@ -13,7 +13,7 @@ module.exports = {
 
 
     // Various Dev Server settings
-    host: '0.0.0.0', // can be overwritten by process.env.HOST
+    host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
@@ -21,7 +21,7 @@ module.exports = {
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
     proxyTable: {
       '/api': {
-        target: 'https://api.raydom.wang/photoAdmin', //设置你调用的接口域名和端口号 别忘了加http
+        target: 'http://localhost:8360', //设置你调用的接口域名和端口号 别忘了加http
         secure: true,  // https接口需要配置
         changeOrigin: true,  // 跨域配置
         pathRewrite: {

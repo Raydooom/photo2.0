@@ -43,4 +43,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.main-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.05);
+}
 </style>

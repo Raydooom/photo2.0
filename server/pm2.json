@@ -1,0 +1,15 @@
+{
+  "apps": [{
+    "name": "photo2.0\server",
+    "script": "production.js",
+    "cwd": "D:\projects\photo2.0\server",
+    "exec_mode": "fork",
+    "max_memory_restart": "1G",
+    "autorestart": true,
+    "node_args": [],
+    "args": [],
+    "env": {
+      
+    }
+  }]
+}

@@ -24,7 +24,7 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 
-// /*登录拦截 */
+// 
 router.beforeEach((to, from, next) => {
   let routerTitle = to.meta.title;
   store.commit("routerTitle", routerTitle);

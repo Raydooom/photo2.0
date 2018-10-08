@@ -1,7 +1,7 @@
 <template>
   <section>
     <slot></slot>
-    <div class="form-wrap">
+    <div class="main-container">
       <form>
         <ul>
           <li>
@@ -70,8 +70,10 @@ export default {
   methods: {
     // 获取分类
     getKindList() {
-      this.$axios.get("/api/kindList").then(res => {
+      this.$axios.post("/api/kindList").then(res => {
         this.kindList = res.data.data;
+      }).catch(err=>{
+        console.log(err)
       });
     },
     // 发布文章
@@ -89,7 +91,7 @@ export default {
       } else {
         this.$axios
           .post("/api/publish", {
-            pramas: {
+            params: {
               title: this.form.title,
               coverUrl: this.coverUrl,
               kind: this.form.kindId,
@@ -110,24 +112,18 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.form-wrap {
-  background: #fff;
-  padding: 20px;
-  border-radius: 4px;
-  box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.05);
-  li {
-    span {
-      font-size: 14px;
-      display: block;
-      margin: 20px 0 10px;
-      font-weight: bold;
-    }
-    .input-wrap {
-      max-width: 400px;
-    }
-    .editor {
-      padding: 20px 0;
-    }
+li {
+  span {
+    font-size: 14px;
+    display: block;
+    margin: 20px 0 10px;
+    font-weight: bold;
+  }
+  .input-wrap {
+    max-width: 400px;
+  }
+  .editor {
+    padding: 20px 0;
   }
 }
 </style>
