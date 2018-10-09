@@ -1,7 +1,16 @@
 const path = require('path');
 const isDev = think.env === 'development';
+const jwt = require('koa-jwt');
 
 module.exports = [
+  {
+    handle: jwt,
+    options: {
+      cookie: think.config('jwt')['cookie'],
+      secret: think.config('jwt')['secret'],
+      passthrough: true
+    }
+  },
   {
     handle: 'meta',
     options: {
