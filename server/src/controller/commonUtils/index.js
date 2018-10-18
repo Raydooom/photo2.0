@@ -1,5 +1,19 @@
-import crypto from 'crypto';
+const crypto = require('crypto');
 
+/**
+ * 生成随机字符串
+ * @param {number} len 生成随机字符串的长度 
+ */
+export const randomString = (len) => {
+  let length = len || 32;
+  let $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+  let maxPos = $chars.length;
+  let str = '';
+  for (i = 0; i < length; i++) {
+    str += $chars.charAt(Math.floor(Math.random() * maxPos));
+  }
+  return str;
+}
 /**
  * 加密
  * @param {string} data 待加密字符串

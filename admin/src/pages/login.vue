@@ -4,7 +4,7 @@
       <img src="../assets/images/login.jpg">
     </div>
     <div class="right">
-      <h2>我想学摄影管理系统</h2>
+      <!-- <h2>我想学摄影管理系统</h2> -->
       <ul class="form-wrap">
         <li>
           <el-input placeholder="请输入管理员账号" maxlength="16" v-model="account" clearable autofocus></el-input>
@@ -21,17 +21,30 @@
 </template>
 
 <script>
-import { md5Encrypt } from "@/utils/utils";
+import { getKey, login } from "../api";
+import { aesEncrypt, aesDecrypt } from "@/utils/utils";
 
 export default {
   data() {
     return {
+      aesKey: "",
       account: "",
       password: ""
     };
   },
-  created() {},
+  created() {
+    this.getKey();
+  },
   methods: {
+    getKey() {
+      getKey().then(res => {
+        if (res.errno == 0) {
+          this.aesKey = res.data;
+        } else {
+          console.log("获取加密key失败!");
+        }
+      });
+    },
     login() {
       if (!this.account) {
         this.$message.error("账号不能为空");
@@ -40,19 +53,18 @@ export default {
         this.$message.error("密码不能为空");
         return;
       }
-      this.$axios
-        .get("/api/login", {
-          params: { account: this.account, password: md5Encrypt(this.password) }
-        })
-        .then(res => {
-          if (res.data.status == "1") {
-            this.$message.success(res.data.msg);
-            console.log(this);
-            setTimeout(() => this.$router.push("/"), 500);
-          } else {
-            this.$message.error(res.data.msg);
-          }
-        });
+      let params = {
+        account: this.account,
+        password: aesEncrypt(this.password, this.aesKey, this.aesKey)
+      };
+      login(params).then(res => {
+        if (res.errno == "0") {
+          this.$message.success(res.errmsg);
+          setTimeout(() => this.$router.push("/"), 500);
+        } else {
+          this.$message.error(res.errmsg);
+        }
+      });
     }
   }
 };

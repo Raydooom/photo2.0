@@ -1,18 +1,23 @@
 module.exports = class extends think.Controller {
   __before() {
-    const { secret, cookie, expire } = this.config('jwt');
-    const userToken = this.header('jwt-token');
     if (this.ctx.state.user && this.ctx.state.user.name) {
-      if (userToken != this.cookie(cookie)) {
-        this.fail("登录信息异常");
-        return false;
-      }
+      this.success(this.ctx.state.user)
+      console.log(this.ctx.state.user)
     } else {
       this.fail("未登录");
       return false;
     }
   }
-  indexAction() {
-    this.success("123")
+  // 获取列表
+  async getListAction() {
+    let { page, pageSize } = this.post();
+    const list = await this.model('admin/index').getList(page, pageSize);
+    this.success(list, "获取成功")
+  }
+
+  // 添加文章
+  async addArticleAction() {
+    let { data } = this.post();
+    this.success(data, "添加成功")
   }
 }
