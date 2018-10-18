@@ -1,6 +1,7 @@
 module.exports = class extends think.Model {
   async getUser() {
-    let userList = await this.model('admin_user').select();
+    let model = this.model("admin_user");
+    let userList = await model.select();
     return userList;
   }
 }

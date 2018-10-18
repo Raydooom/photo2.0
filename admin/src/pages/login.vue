@@ -36,6 +36,7 @@ export default {
     this.getKey();
   },
   methods: {
+    // 获取加密key
     getKey() {
       getKey().then(res => {
         if (res.errno == 0) {
@@ -45,6 +46,7 @@ export default {
         }
       });
     },
+    // 登录
     login() {
       if (!this.account) {
         this.$message.error("账号不能为空");
@@ -60,7 +62,7 @@ export default {
       login(params).then(res => {
         if (res.errno == "0") {
           this.$message.success(res.errmsg);
-          setTimeout(() => this.$router.push("/"), 500);
+          setTimeout(() => this.$router.go(-1), 500);
         } else {
           this.$message.error(res.errmsg);
         }

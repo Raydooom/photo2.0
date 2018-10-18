@@ -51,6 +51,7 @@ module.exports = class extends think.Controller {
       await this.display("errorPage");
     }
   }
+  // 登录检测
   isLoginAction() {
     if (this.ctx.state.user && this.ctx.state.user.name) {
       this.success({ userName: this.ctx.state.user.name }, "已登录");
@@ -58,6 +59,7 @@ module.exports = class extends think.Controller {
       this.fail("未登录");
     }
   }
+  // 退出登录
   logoutAction() {
     const { secret, cookie, expire } = this.config('jwt');
     this.cookie(cookie, null);

@@ -11,7 +11,7 @@
           </template>
         </el-table-column>
         <el-table-column label="标题" width="200" prop="article_title" align="center"></el-table-column>
-        <el-table-column label="分类" width="120" sortable prop="kind" align="center"></el-table-column>
+        <el-table-column label="分类" width="120" sortable prop="kindName" align="center"></el-table-column>
         <el-table-column label="内容" align="center">
           <template slot-scope="scope">
             <div class="content" v-html="scope.row.content"></div>
@@ -33,13 +33,14 @@
 </template>
 
 <script>
+import { getArticleList } from "../api";
 export default {
   data() {
     return {
       articleList: [],
       total: 0,
       page: 1,
-      pageSize: 1
+      pageSize: 10
     };
   },
   mounted() {
@@ -47,21 +48,18 @@ export default {
   },
   methods: {
     getList() {
-      this.$axios
-        .post("/api/articleList", {
-          params: {
-            pageSize: this.pageSize,
-            page: this.page
-          }
-        })
-        .then(res => {
-          if (res.data.state == 1) {
-            this.total = res.data.length;
-            this.articleList = res.data.data;
-          } else {
-            this.$message.error("列表获取成功！");
-          }
-        });
+      let params = {
+        pageSize: this.pageSize,
+        page: this.page
+      };
+      getArticleList(params).then(res => {
+        if (res.errno == 0) {
+          this.total = res.data.length;
+          this.articleList = res.data.data;
+        } else {
+          this.$message.error("列表获取失败！");
+        }
+      });
     },
     // 翻页
     changePage(e) {
