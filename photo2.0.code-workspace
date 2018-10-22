@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "admin"
+		},
+		{
+			"path": "server"
+		},
+		{
+			"path": "wechat"
+		}
+	],
+	"settings": {}
+}

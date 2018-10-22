@@ -1,6 +1,6 @@
 <template>
   <section>
-    <el-upload class="upload-demo" drag :before-upload="beforeupload" action="https://api.raydom.wang/uploadImg" name="img" :on-change="handleChange">
+    <el-upload class="upload-demo" drag :before-upload="beforeupload" :action="action" :headers="headers" :on-success="uploadOnSuccess" name="img" :on-change="handleChange">
       <img v-if="imageUrl" :src="imageUrl" class="cover">
       <div class="upload-icon">
         <i class="el-icon-upload"></i>
@@ -12,9 +12,12 @@
   </section>
 </template>
 <script>
+import { uploadImg, uploadImgUrl } from "../api/admin";
 export default {
   data() {
     return {
+      action: uploadImgUrl,
+      headers: { "Content-Type": "multipart/form-data" },
       imgType: ["image/jpeg", "image/png", "images/gif"],
       param: "",
       imageUrl: ""
@@ -25,7 +28,6 @@ export default {
       console.log(this.imgType.includes(file.type));
       if (!this.imgType.includes(file.type)) {
         this.$message.error("图片格式错误！");
-        console.log(123);
         return false;
       }
       //创建临时的路径来展示图片
@@ -36,11 +38,12 @@ export default {
       this.param = new FormData();
       this.param.append("img", file, file.name);
       //下面append的东西就会到form表单数据的fields中；
-      let config = {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      };
+
+      uploadImg(this.param).then(res => {
+        this.imageUrl = res.data;
+        this.$store.commit("coverUrl", this.imageUrl);
+      });
+      return;
       //然后通过下面的方式把内容通过axios来传到后台
       this.$axios
         .post("https://api.raydom.wang/uploadImg", this.param, config)
@@ -49,6 +52,9 @@ export default {
           this.$store.commit("coverUrl", this.imageUrl);
         });
       return false;
+    },
+    uploadOnSuccess(res) {
+      console.log(res);
     },
     httprequest() {},
     handleChange(file) {}

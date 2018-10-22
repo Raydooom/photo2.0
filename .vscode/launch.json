@@ -1,14 +1,17 @@
 {
-    // 使用 IntelliSense 了解相关属性。 
-    // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
+    "version": "2.0.0",
+    "tasks": [
         {
-            "type": "node",
-            "request": "launch",
-            "name": "npm run dev",
-            "program": "${workspaceFolder}/app.js"
+            "label": "Launch Google App Engine",
+            "command": "python",
+            "type": "shell",
+            "args": [
+                "/usr/local/google_appengine/dev_appserver.py",
+                "--python_startup_script=${workspaceFolder}/pydev_startup.py",
+                "--automatic_restart=no",
+                "--max_module_instances=default:1",
+                "${workspaceFolder}/app.yaml"
+            ]
         }
     ]
 }

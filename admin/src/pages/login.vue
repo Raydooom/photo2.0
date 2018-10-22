@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { getKey, login } from "../api";
+import { getKey, login } from "../api/admin";
 import { aesEncrypt, aesDecrypt } from "@/utils/utils";
 
 export default {

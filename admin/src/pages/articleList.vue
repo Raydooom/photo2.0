@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { getArticleList } from "../api";
+import { getArticleList } from "../api/admin";
 export default {
   data() {
     return {
