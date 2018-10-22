@@ -11,4 +11,10 @@ module.exports = class extends think.Model {
     let kindList = await kindModel.select();
     return kindList;
   }
+  // 发布文章
+  async addArticle(data) {
+    let articleModel = this.model("article_list");
+    let addResult = await articleModel.add(data);
+    return addResult;
+  }
 };
