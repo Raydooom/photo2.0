@@ -44,11 +44,17 @@ module.exports = class extends think.Controller {
 
   // 添加文章
   async addArticleAction() {
-    let data = this.post();
-    console.log(data)
-    const result = await this.model('admin/index').addArticle();
+    let currentTime = new Date();
+    let { title, coverUrl, kind, content } = this.post();
+    let data = {
+      article_title: title,
+      coverImg: coverUrl,
+      kind_id: kind,
+      content: content,
+      date: think.datetime(currentTime)
+    };
+    const result = await this.model('admin/index').addArticle(data);
     this.success(result, "添加成功")
   }
-
 
 }

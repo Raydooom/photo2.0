@@ -33,5 +33,7 @@ output.tar.gz
 runtime/
 app/
 
+uploadImg/
+
 config.development.js
 adapter.development.js

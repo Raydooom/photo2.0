@@ -12,6 +12,7 @@
 <script>
 import { quillEditor } from "vue-quill-editor"; //调用编辑器
 import { mapMutations } from "vuex";
+import { uploadImgUrl } from "../api/admin";
 
 // 工具栏配置
 const toolbarOptions = [
@@ -37,7 +38,7 @@ const toolbarOptions = [
 export default {
   data() {
     return {
-      action: "https://api.raydom.wang/uploadImg", // 上传图片地址
+      action: uploadImgUrl, // 上传图片地址
       content: "",
       imgType: ["image/jpeg", "image/png", "images/gif"],
       editorOption: {
@@ -68,38 +69,24 @@ export default {
     onEditorChange({ editor, html, text }) {
       this.changeContent(this.content);
     },
-    // 上传图片
+
     beforeUpload(file) {
       if (!this.imgType.includes(file.type)) {
         this.$message.error("图片格式错误！");
-        console.log(123);
         return false;
+      } else if (file.size > this.fileSize) {
+        this.$message.error(`图片大小不能超过${this.fileSize / 1024}kb`);
       }
       //创建临时的路径来展示图片
       var windowURL = window.URL || window.webkitURL;
-
-      this.src = windowURL.createObjectURL(file);
-      //重新写一个表单上传的方法
-      this.param = new FormData();
-      this.param.append("img", file, file.name);
-      //下面append的东西就会到form表单数据的fields中；
-      let config = {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      };
-      //然后通过下面的方式把内容通过axios来传到后台
-      this.$axios
-        .post("https://api.raydom.wang/uploadImg", this.param, config)
-        .then(res => {
-          let imageUrl = `https://api.raydom.wang${res.data}`;
-          // 上传成功后，将返回的图片插入编辑器
-          this.insertImg(imageUrl, file);
-        });
-      return false;
+      this.imageUrl = windowURL.createObjectURL(file);
+    },
+    uploadSuccess(res) {
+      let imageUrl = `${process.env.HOST}${res.data}`;
+      this.insertImg(imageUrl);
     },
     // 图片插入编辑器
-    insertImg(imageUrl, file) {
+    insertImg(imageUrl) {
       // res为图片服务器返回的数据
       // 获取富文本组件实例
       let quill = this.$refs.Editor.quill;
@@ -118,7 +105,6 @@ export default {
       this.quillUpdateImg = false;
     },
 
-    uploadSuccess() {},
     uploadError() {}
   },
   // if you need to get the current editor object, you can find the editor object like this, the $ref object is a ref attribute corresponding to the dom redefined
@@ -137,5 +123,8 @@ export default {
 <style>
 .ql-editor {
   min-height: 200px;
+}
+.ql-snow .ql-editor img {
+  max-width: 800px;
 }
 </style>

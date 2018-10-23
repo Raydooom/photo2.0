@@ -2,7 +2,7 @@ const fs = require("fs");
 
 module.exports = class extends think.Controller {
   async indexAction() {
-    let file = think.extend({}, this.file("img"));
+    let file = this.file("img");
     let savepath = think.ROOT_PATH + "/www/static/uploadimg/";
     let filepath = file.path; //文件路径
     let filename = file.name; //文件名
@@ -12,7 +12,7 @@ module.exports = class extends think.Controller {
     let datas = fs.readFileSync(filepath);
     //写文件
     fs.writeFileSync(savepath + newfilename, datas);
-    let newpath = savepath + newfilename;
+    let newpath = "/static/uploadimg/" + newfilename;
 
     this.success(newpath, "上传成功！")
   }

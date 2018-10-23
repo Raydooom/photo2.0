@@ -1,60 +1,45 @@
 <template>
   <section>
-    <el-upload class="upload-demo" drag :before-upload="beforeupload" :action="action" :headers="headers" :on-success="uploadOnSuccess" name="img" :on-change="handleChange">
+    <el-upload class="upload-demo" drag :before-upload="beforeupload" :action="action" :on-success="uploadOnSuccess" name="img" :on-change="handleChange" :show-file-list="false">
       <img v-if="imageUrl" :src="imageUrl" class="cover">
       <div class="upload-icon">
         <i class="el-icon-upload"></i>
-        <div class="el-upload__text">将文件拖到此处，或
-          <em>点击上传</em><br>建议尺寸：750*400，支持 jpg,png,gif
+        <div class="el-upload__text">
+          <em>点击上传</em> 建议尺寸：750*400，支持 jpg,png,gif
         </div>
       </div>
     </el-upload>
   </section>
 </template>
 <script>
-import { uploadImg, uploadImgUrl } from "../api/admin";
+import { uploadImgUrl } from "../api/admin";
+console.log(process.env)
 export default {
   data() {
     return {
       action: uploadImgUrl,
-      headers: { "Content-Type": "multipart/form-data" },
       imgType: ["image/jpeg", "image/png", "images/gif"],
+      fileSize: "512000",
       param: "",
       imageUrl: ""
     };
   },
   methods: {
     beforeupload(file) {
-      console.log(this.imgType.includes(file.type));
       if (!this.imgType.includes(file.type)) {
         this.$message.error("图片格式错误！");
         return false;
+      } else if (file.size > this.fileSize) {
+        this.$message.error(`图片大小不能超过${this.fileSize / 1024}kb`);
       }
       //创建临时的路径来展示图片
       var windowURL = window.URL || window.webkitURL;
-
-      this.src = windowURL.createObjectURL(file);
-      //重新写一个表单上传的方法
-      this.param = new FormData();
-      this.param.append("img", file, file.name);
-      //下面append的东西就会到form表单数据的fields中；
-
-      uploadImg(this.param).then(res => {
-        this.imageUrl = res.data;
-        this.$store.commit("coverUrl", this.imageUrl);
-      });
-      return;
-      //然后通过下面的方式把内容通过axios来传到后台
-      this.$axios
-        .post("https://api.raydom.wang/uploadImg", this.param, config)
-        .then(res => {
-          this.imageUrl = `https://api.raydom.wang${res.data}`;
-          this.$store.commit("coverUrl", this.imageUrl);
-        });
-      return false;
+      this.imageUrl = windowURL.createObjectURL(file);
     },
     uploadOnSuccess(res) {
-      console.log(res);
+      let imageUrl = `${process.env.HOST}${res.data}`;
+      console.log(imageUrl)
+      this.$store.commit("coverUrl", imageUrl);
     },
     httprequest() {},
     handleChange(file) {}

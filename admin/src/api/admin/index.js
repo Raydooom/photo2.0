@@ -1,4 +1,4 @@
-import http from '../../utils/http'
+import http from '../http'
 
 // 获取加密key
 export const getKey = (params) => {

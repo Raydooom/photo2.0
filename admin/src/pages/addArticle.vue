@@ -46,7 +46,7 @@
 import quillEditor from "../components/quillEditor"; //调用编辑器
 import upload from "../components/upload";
 import { mapGetters } from "vuex";
-import { getKindList, addArticle } from "../api";
+import { getKindList, addArticle } from "../api/admin/";
 export default {
   data() {
     return {
