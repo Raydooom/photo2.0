@@ -4,7 +4,8 @@ const test = r => require.ensure([], () => r(require('@/pages/test')), 'test')
 const home = r => require.ensure([], () => r(require('@/pages/home')), 'home')
 const login = r => require.ensure([], () => r(require('@/pages/login')), 'login')
 const dashBoard = r => require.ensure([], () => r(require('@/pages/dashBoard')), 'dashBoard')
-const addArticle = r => require.ensure([], () => r(require('@/pages/addArticle')), 'addArticle')
+const addArticle = r => require.ensure([], () => r(require('@/pages/articleAdd')), 'articleAdd')
+const articleEdit = r => require.ensure([], () => r(require('@/pages/articleEdit')), 'articleEdit')
 const articleList = r => require.ensure([], () => r(require('@/pages/articleList')), 'articleList')
 const articleView = r => require.ensure([], () => r(require('@/pages/articleView')), 'articleView')
 
@@ -46,11 +47,18 @@ export default new Router({
       }
     },
     {
-      path: 'articleView',
+      path: 'preview/:id',
       component: articleView,
       name: 'articleView',
       meta: {
-        title: '查看文章'
+        title: '预览文章'
+      }
+    }, {
+      path: 'edit/:id',
+      component: articleEdit,
+      name: 'edit',
+      meta: {
+        title: '编辑文章'
       }
     }
     ]

@@ -4,6 +4,6 @@ module.exports = {
   jwt: {
     secret: 'lushijie-password',
     cookie: 'jwt-token',
-    expire: 3600 // 秒
+    expire: 60 * 60 * 24 * 3 // 秒
   },
 };

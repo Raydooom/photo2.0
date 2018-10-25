@@ -24,9 +24,11 @@
     <div class="content-warp">
       <top-bar></top-bar>
       <div class="main-content">
-        <router-view>
-          <h3>{{routerTitle}}</h3>
-        </router-view>
+        <transition name="slide-fade" mode="out-in">
+          <router-view>
+            <h3>{{routerTitle}}</h3>
+          </router-view>
+        </transition>
       </div>
     </div>
   </section>
@@ -78,6 +80,17 @@ export default {
   height: 100px;
   line-height: 100px;
   text-align: center;
+}
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active 在低于 2.1.8 版本中 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 .main-content {
   padding: 0 25px;

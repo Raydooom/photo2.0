@@ -28,7 +28,6 @@ export const login = (params) => {
   })
 }
 
-
 // 获取文章列表
 export const getArticleList = (params) => {
   let config = {
@@ -43,7 +42,48 @@ export const getArticleList = (params) => {
   })
 }
 
-export const uploadImgUrl = "http://localhost:8360/common/uploadImg/index";
+// 获取文章详情
+export const getArticle = (params) => {
+  let config = {
+    url: "/api/admin/index/getArticle",
+    method: "POST",
+    data: params
+  }
+  return http(config).then(res => {
+    return res.data;
+  }).catch(err => {
+    return err;
+  })
+}
+
+// 更新文章
+export const updateArticle = (params) => {
+  let config = {
+    url: "/api/admin/index/updateArticle",
+    method: "POST",
+    data: params
+  }
+  return http(config).then(res => {
+    return res.data;
+  }).catch(err => {
+    return err;
+  })
+}
+
+
+// 删除文章
+export const delArticle = (params) => {
+  let config = {
+    url: "/api/admin/index/delArticle",
+    method: "POST",
+    data: params
+  }
+  return http(config).then(res => {
+    return res.data;
+  }).catch(err => {
+    return err;
+  })
+}
 
 // 获取文章分类列表
 export const getKindList = (params) => {
@@ -58,6 +98,8 @@ export const getKindList = (params) => {
     return err;
   })
 }
+
+export const uploadImgUrl = "http://localhost:8360/common/uploadImg/index";
 
 // 添加文章
 export const addArticle = (params) => {

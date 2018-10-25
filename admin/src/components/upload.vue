@@ -13,7 +13,6 @@
 </template>
 <script>
 import { uploadImgUrl } from "../api/admin";
-console.log(process.env)
 export default {
   data() {
     return {
@@ -23,6 +22,12 @@ export default {
       param: "",
       imageUrl: ""
     };
+  },
+  props: ["imgUrl"],
+  watch: {
+    imgUrl(val) {
+      this.imageUrl = val;
+    }
   },
   methods: {
     beforeupload(file) {
@@ -38,8 +43,7 @@ export default {
     },
     uploadOnSuccess(res) {
       let imageUrl = `${process.env.HOST}${res.data}`;
-      console.log(imageUrl)
-      this.$store.commit("coverUrl", imageUrl);
+      this.$emit("upLoadImg", imageUrl);
     },
     httprequest() {},
     handleChange(file) {}
