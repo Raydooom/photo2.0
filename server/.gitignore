@@ -37,3 +37,6 @@ uploadImg/
 
 config.development.js
 adapter.development.js
+
+.vscode
+.code-workspace
