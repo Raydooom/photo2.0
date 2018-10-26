@@ -11,6 +11,18 @@ module.exports = class extends think.Model {
     let result = await kindModel.select();
     return result;
   }
+  // 发布文章
+  async addArticle(data) {
+    let articleModel = this.model("article_list");
+    let result = await articleModel.add(data);
+    return result;
+  }
+  // 删除文章
+  async delArticle(data) {
+    let articleModel = this.model("article_list");
+    let result = await articleModel.where(data).delete();
+    return result;
+  }
   // 更新文章
   async updateArticle(condition, data) {
     let articleModel = this.model("article_list");
@@ -27,6 +39,24 @@ module.exports = class extends think.Model {
   async getArticleComment(data) {
     let commentModel = this.model("article_comment");
     let result = await commentModel.where(data).select();
+    return result;
+  }
+  // 添加评论
+  async addArticleComment(data) {
+    let commentModel = this.model("article_comment");
+    let result = await commentModel.add(data);
+    return result;
+  }
+  // 浏览量统计
+  async viewCount(condition, data) {
+    let articleModel = this.model("article_list");
+    let result = await articleModel.where(condition).update(data);
+    return result;
+  }
+  // 点赞
+  async praiseCount(condition, data) {
+    let articleModel = this.model("article_list");
+    let result = await articleModel.where(condition).update(data);
     return result;
   }
 };

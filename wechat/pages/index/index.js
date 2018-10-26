@@ -1,25 +1,24 @@
-const severRequest = require("../../api/index");
-
-// pages/home/home.js
+// pages/index/index.js
+const { severRequest } = require("../../api/index");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    bannerList: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    severRequest("articleList")
-    wx.request({
-      url: "http://localhost:8360/api/index/getArticleList",
-      method: "POST",
-      success(res) {
-        console.log(res.data);
+  onLoad: function () {
+    let data = { isBanner: true };
+    severRequest("getBanner", data).then(res => {
+      if (res.errno == 0) {
+        this.setData({
+          bannerList: res.data
+        })
       }
     })
   },

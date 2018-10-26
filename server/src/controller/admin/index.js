@@ -45,12 +45,13 @@ module.exports = class extends think.Controller {
   // 添加文章
   async addArticleAction() {
     let currentTime = new Date();
-    let { title, coverUrl, kind, homeShow, content } = this.post();
+    let { title, coverUrl, kind, homeShow, content, description } = this.post();
     let data = {
       article_title: title,
       cover_img: coverUrl,
       kind_id: kind,
       home_show: homeShow,
+      description: description,
       content: content,
       create_date: think.datetime(currentTime),
       update_date: think.datetime(currentTime)
@@ -73,11 +74,12 @@ module.exports = class extends think.Controller {
   // 更新文章
   async updateArticleAction() {
     let currentTime = new Date();
-    let { id, title, coverUrl, kind, homeShow, content } = this.post();
+    let { id, title, coverUrl, kind, homeShow, description, content } = this.post();
     let data = {
       article_title: title,
       cover_img: coverUrl,
       kind_id: kind,
+      description: description,
       home_show: homeShow,
       content: content,
       update_date: think.datetime(currentTime)

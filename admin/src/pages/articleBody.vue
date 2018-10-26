@@ -35,6 +35,13 @@
           </el-col>
         </el-row>
         <el-row>
+          <el-col :span="24" prop="description">
+            <el-form-item label="文章描述">
+              <el-input type="textarea" autosize :rows="3" v-model="formData.description" maxlength="100"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="24">
             <el-form-item label="文章内容">
               <quill-editor @getContent="getContent" :articleContent="formData.content"></quill-editor>
@@ -68,6 +75,7 @@ export default {
         kindId: 1,
         kindName: "",
         homeShow: false,
+        description: "",
         content: ""
       },
       rules: {
@@ -88,6 +96,7 @@ export default {
           this.formData.title = res.data.article_title;
           this.formData.kindId = res.data.kind_id;
           this.formData.homeShow = Boolean(res.data.home_show);
+          this.formData.description = res.data.description;
           this.formData.content = res.data.content;
           this.formData.coverUrl = res.data.cover_img;
           this.formData.content = res.data.content;
@@ -126,6 +135,7 @@ export default {
             title: this.formData.title,
             coverUrl: this.formData.coverUrl,
             kind: this.formData.kindId,
+            description: this.formData.description,
             content: this.formData.content,
             homeShow: this.formData.homeShow ? "1" : "0"
           };

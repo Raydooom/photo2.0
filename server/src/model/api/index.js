@@ -1,4 +1,10 @@
 module.exports = class extends think.Model {
+  // 获取banner
+  async getBannerList(condition) {
+    let articleModel = this.model("article_list");
+    let result = await articleModel.where(condition).select();
+    return result;
+  }
   // 获取文章列表
   async getArticleList(page, pageSize) {
     let articleModel = this.model("article_list");
