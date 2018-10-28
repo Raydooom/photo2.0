@@ -40,6 +40,13 @@ module.exports = class extends think.Controller {
     this.success(kindList, "获取分类列表")
   }
 
+  // 根据分类ID获取文章
+  async getKindArticleAction() {
+    let { id } = this.post();
+    const kindList = await this.model('api/index').getKindArticle({ kind_id: ['=', id] });
+    this.success(kindList, "获取分类下文章成功")
+  }
+
   // 根据id获取文章信息
   async getArticleAction() {
     let { id } = this.post();

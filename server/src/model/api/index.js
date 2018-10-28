@@ -17,6 +17,12 @@ module.exports = class extends think.Model {
     let result = await kindModel.select();
     return result;
   }
+  // 根据ID获取文章列表
+  async getKindArticle(condition) {
+    let articleModel = this.model("article_list");
+    let result = await articleModel.where(condition).select();
+    return result;
+  }
   // 发布文章
   async addArticle(data) {
     let articleModel = this.model("article_list");
