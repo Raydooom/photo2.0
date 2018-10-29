@@ -17,28 +17,16 @@ module.exports = class extends think.Model {
     let result = await kindModel.select();
     return result;
   }
+  // 根据ID获取分类
+  async getKindName(condition) {
+    let kindModel = this.model("article_kind_list");
+    let result = await kindModel.where(condition).select();
+    return result;
+  }
   // 根据ID获取文章列表
   async getKindArticle(condition) {
     let articleModel = this.model("article_list");
     let result = await articleModel.where(condition).select();
-    return result;
-  }
-  // 发布文章
-  async addArticle(data) {
-    let articleModel = this.model("article_list");
-    let result = await articleModel.add(data);
-    return result;
-  }
-  // 删除文章
-  async delArticle(data) {
-    let articleModel = this.model("article_list");
-    let result = await articleModel.where(data).delete();
-    return result;
-  }
-  // 更新文章
-  async updateArticle(condition, data) {
-    let articleModel = this.model("article_list");
-    let result = await articleModel.where(condition).update(data);
     return result;
   }
   // 根据ID获取文章
@@ -71,4 +59,11 @@ module.exports = class extends think.Model {
     let result = await articleModel.where(condition).update(data);
     return result;
   }
+  // 根据用户ID获取用户信息
+  async getUserInfo(condition){
+    let userModel = this.model("user");
+    let result = await userModel.where(condition).select();
+    return result;
+  }
+
 };

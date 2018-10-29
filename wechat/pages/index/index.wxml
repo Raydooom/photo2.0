@@ -6,7 +6,7 @@
 <swiper previous-margin="30rpx" duration="300" next-margin="30rpx">
   <block wx:for="{{bannerList}}" wx:key="{{item.id}}">
     <swiper-item>
-      <view class="swiper-item">
+      <navigator class="swiper-item" url='../article/article?id={{item.id}}'>
         <image src="{{item.cover_img}}" mode='aspectFill' class="slide-image" />
         <view class="article-info">
           <text class="title">{{item.article_title}}</text>
@@ -16,7 +16,7 @@
           <image src='../../assets/icons/views.png'></image>
           {{item.views}}
         </view>
-      </view>
+      </navigator>
     </swiper-item>
   </block>
 </swiper>
@@ -29,7 +29,7 @@
   </view>
   <view class="aritcle-list">
     <navigator wx:for="{{articleList}}" wx:key="{{item.id}}" hover-class="none" class="article-item" url='../article/article?id={{item.id}}'>
-      <image class="clover" src='{{item.cover_img}}'></image>
+      <image class="clover" mode='aspectFill' src='{{item.cover_img}}'></image>
       <view class="article-info">
         <text class="article-title">{{item.article_title}}</text>
         <view class="article-view">

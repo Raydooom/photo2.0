@@ -50,23 +50,34 @@ module.exports = class extends think.Controller {
   // 根据id获取文章信息
   async getArticleAction() {
     let { id } = this.post();
-    const result = await this.model('api/index').getArticle({ id: ['=', id] });
-    if (result == 0) {
+    const article = await this.model('api/index').getArticle({ id: ['=', id] });
+    const kindName = await this.model('api/index').getKindName({ id: article[0].kind_id });
+    if (article == 0) {
       this.fail("文章不存在", "查询失败")
     } else {
-      this.success(result[0], "获取详情成功")
+      article[0].praises = article[0].praises ? article[0].praises.split(",").length : "0";
+      article[0].kindName = kindName[0].name;
+      this.success(article[0], "获取详情成功")
     }
   }
 
   // 根据ID获取文章评论
   async getArticleCommentAction() {
     let { id } = this.post();
+    let commentData = [];
     const result = await this.model('api/index').getArticleComment({ article_id: ['=', id] });
     if (result == 0) {
       this.fail("文章不存在", "查询失败")
     } else {
-      this.success(result, "获取文章评论成功")
+      // 查询用户信息
+      for (let i in result) {
+        var user = await this.model('api/index').getUserInfo({ id: result[i].comment_user_id });
+        result[i].userInfo = user[0] || [];
+        commentData.push(result[i]);
+      }
     }
+
+    this.success(commentData, "获取文章评论成功")
   }
 
   // 发布评论

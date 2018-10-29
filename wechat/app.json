@@ -1,13 +1,14 @@
 {
   "pages": [
+    "pages/center/center",
     "pages/index/index",
     "pages/hot/hot",
     "pages/home/home",
     "pages/classify/classify",
-    "pages/center/center",
     "pages/credits/credits",
     "pages/commentList/commentList",
-    "pages/article/article"
+    "pages/article/article",
+    "pages/wallpaper/wallpaper"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -22,6 +23,12 @@
     "list": [
       {
         "pagePath": "pages/index/index",
+        "text": "热门",
+        "iconPath": "/assets/icons/home.png",
+        "selectedIconPath": "/assets/icons/home_active.png"
+      },
+      {
+        "pagePath": "pages/wallpaper/wallpaper",
         "text": "热门",
         "iconPath": "/assets/icons/home.png",
         "selectedIconPath": "/assets/icons/home_active.png"

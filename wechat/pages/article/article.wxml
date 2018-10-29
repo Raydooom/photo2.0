@@ -1,45 +1,35 @@
+<import src="../../wxParse/wxParse.wxml" />
+
 <view class="article-cover">
-    <image mode='aspectFill' wx:if="{{articleDetail.cover_img}}" src="{{articleDetail.cover_img}}"></image>
-    <view class="title-warp">
-        <text class="classify">{{articleDetail.kind_id}}</text>
-        <text class="title">{{articleDetail.article_title}}</text>
-    </view>
+  <image mode='aspectFill' wx:if="{{articleDetail.cover_img}}" src="{{articleDetail.cover_img}}"></image>
+  <view class="title-warp">
+    <text class="classify">{{articleDetail.kindName}}</text>
+    <text class="title">{{articleDetail.article_title}}</text>
+  </view>
 </view>
 <view class="article-warp">
-    <view class="guide">
-        前段时间苹果更新的IOS11版本，相信不少人已经更新到新了吧，今天的视频是用Sketch实操新系统中的AppStore的UI设计。
+  <view class="guide" wx:if="{{articleDetail.description}}">
+    {{articleDetail.description}}
+  </view>
+  <view class="article-main">
+    <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+  </view>
+  <view class="end">
+    Raydom 原创作品
+  </view>
+  <view class="tool-bar">
+    <view class="tool">
+      <image src='../../assets/icons/like.png'></image>
+      {{articleDetail.praises}}
     </view>
-    <view class="article-main">
-        <text class="photo-title">风景</text>
-        <text class="photo-description">前段时间苹果更新的IOS11版本，相信不少人已经更新到新了吧，今天的视频是用Sketch实操新系统中的AppStore的UI设计。</text>
-        <image src='../../assets/test/2.jpg'></image>
+    <navigator hover-class='none' class="tool" url='../commentList/commentList?id={{id}}&title={{articleDetail.article_title}}'>
+      <image src='../../assets/icons/comment.png'></image>
+      {{articleDetail.comments}}
+    </navigator>
+    <view class="tool">
+      <button open-type='share'></button>
+      <image src='../../assets/icons/share.png'></image>
+      {{articleDetail.shares}}
     </view>
-    <view class="article-main">
-        <text class="photo-title">风景</text>
-        <text class="photo-description">前段时间苹果更新的IOS11版本，相信不少人已经更新到新了吧，今天的视频是用Sketch实操新系统中的AppStore的UI设计。</text>
-        <image src='../../assets/test/2.jpg'></image>
-    </view>
-    <view class="article-main">
-        <text class="photo-title">风景</text>
-        <text class="photo-description">前段时间苹果更新的IOS11版本，相信不少人已经更新到新了吧，今天的视频是用Sketch实操新系统中的AppStore的UI设计。</text>
-        <image src='../../assets/test/2.jpg'></image>
-    </view>
-    <view class="end">
-        Raydom 原创作品
-    </view>
-    <view class="tool-bar">
-        <view class="tool">
-            <image src='../../assets/icons/like.png'></image>
-            {{articleDetail.praises.length}}
-        </view>
-        <navigator hover-class='none' class="tool" url='../commentList/commentList'>
-            <image src='../../assets/icons/comment.png'></image>
-            {{articleDetail.comments}}
-        </navigator>
-        <view class="tool">
-            <button open-type='share'></button>
-            <image src='../../assets/icons/share.png'></image>
-            200
-        </view>
-    </view>
+  </view>
 </view>

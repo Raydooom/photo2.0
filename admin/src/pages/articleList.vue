@@ -11,6 +11,7 @@
           </template>
         </el-table-column> -->
         <el-table-column label="标题" width="200" prop="article_title" align="center"></el-table-column>
+        <el-table-column label="描述" prop="description" align="center"></el-table-column>
         <el-table-column label="分类" width="120" sortable prop="kindName" align="center"></el-table-column>
         <el-table-column label="banner" width="120" sortable prop="home_show" align="center">
           <template slot-scope="scope">

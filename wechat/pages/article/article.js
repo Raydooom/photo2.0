@@ -1,6 +1,8 @@
 const {
   severRequest
 } = require("../../api/index");
+const WxParse = require('../../wxParse/wxParse.js');
+
 Page({
 
   /**
@@ -25,6 +27,8 @@ Page({
       this.setData({
         articleDetail: res.data
       })
+      let articleContent = res.data.content;
+      WxParse.wxParse('article', 'html', articleContent, this, 5);
     })
   },
 
