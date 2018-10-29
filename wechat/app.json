@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/center/center",
     "pages/index/index",
+    "pages/center/center",
     "pages/hot/hot",
     "pages/home/home",
     "pages/classify/classify",

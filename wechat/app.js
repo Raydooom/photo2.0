@@ -3,25 +3,29 @@ const {
 } = require("api/index");
 
 App({
-  onLaunch: function() {
-    // 登录
+  wxLogin() {
     wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        severRequest("login", {
-          code: res.code
-        }).then(res => {
-          console.log(res.errmsg)
+      success: (codeRes) => {
+        wx.getUserInfo({
+          lang: "zh_CN",
+          success: (res) => {
+            let data = {
+              code: codeRes.code,
+              userInfo: res.userInfo
+            }
+            severRequest("login", data).then(res => {
+              this.globalData.isLogin = res.data;
+              wx.setStorageSync("token", res.data);
+            })
+          }
         })
       }
     })
-    // 必须是在用户已经授权的情况下调用
-    wx.getUserInfo({
-      withCredentials: true,
-      lang: "zh_CN",
-      success: function(res) {
-        console.log(res)
-      }
-    })
+  },
+  onLaunch() {
+    this.wxLogin();
+  },
+  globalData: {
+    isLogin: ""
   }
 })

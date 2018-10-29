@@ -14,16 +14,19 @@ const api = {
   addArticleComment: "/api/author/addArticleComment", // 发布评论
   // 需要登录的接口
   login: "/api/user/login", // 登录接口，code换取openid
-  getUserInfo: "/api/user/getUserInfo", // 获取用户信息
 }
 
 // promise封装
 function severRequest(apiKey, params = {}, method = "POST") {
+  let token = wx.getStorageSync("token") || "";
   return new Promise((resolve, reject) => {
     wx.request({
       url: HOST + api[apiKey],
       method: method,
       data: params,
+      header: {
+        token
+      },
       success(res) {
         if (res.data.errno == 0) {
           console.log(res.data);

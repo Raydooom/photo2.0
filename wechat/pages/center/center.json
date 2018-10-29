@@ -1,6 +1,9 @@
 {
-    "navigationBarBackgroundColor": "#010005",
-    "disableScroll": true,
-    "navigationBarTextStyle": "white",
-    "navigationBarTitleText": ""
+  "navigationBarBackgroundColor": "#010005",
+  "disableScroll": true,
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "login-toast": "/components/login/login"
+  }
 }

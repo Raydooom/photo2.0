@@ -60,10 +60,22 @@ module.exports = class extends think.Model {
     return result;
   }
   // 根据用户ID获取用户信息
-  async getUserInfo(condition){
+  async getUserInfo(condition) {
     let userModel = this.model("user");
     let result = await userModel.where(condition).select();
     return result;
   }
 
+  // 根据openid查询用户
+  async getUser(condition) {
+    let userModel = this.model("user");
+    let result = await userModel.where(condition).select();
+    return result;
+  }
+  // 创建新用户
+  async createUser(data) {
+    let userModel = this.model("user");
+    let result = await userModel.add(data);
+    return result;
+  }
 };

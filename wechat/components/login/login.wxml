@@ -1,0 +1,6 @@
+<view class="login-warp">
+  <view class="toast">
+    <text>您还没有登录\n请点击立即登录按钮一键登录</text>
+    <button open-type="getUserInfo" wx:if="{{!isAuthUserInfo}}" bindgetuserinfo="getUserInfo">立即登录</button>
+  </view>
+</view>
