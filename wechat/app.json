@@ -8,7 +8,8 @@
     "pages/credits/credits",
     "pages/commentList/commentList",
     "pages/article/article",
-    "pages/wallpaper/wallpaper"
+    "pages/wallpaper/wallpaper",
+    "pages/collect/collect"
   ],
   "window": {
     "backgroundTextStyle": "light",

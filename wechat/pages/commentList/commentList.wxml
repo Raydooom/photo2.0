@@ -8,8 +8,9 @@
             <view class="name">
                 <view>
                     <text class="comment-user-name">{{item.userInfo.user_name}}</text>
-                    <image class="level-icon" src='../../assets/icons/level.png'></image>
-                    <text class="level-name">{{item.userInfo.id}}</text>
+                    <!-- <image class="level-icon" src='../../assets/icons/level.png'></image>
+                    <text class="level-name">{{item.userInfo.id}}</text> -->
+                    <text class="level-name">{{item.create_date}}</text>
                 </view>
 
                 <text class="date">{{item.comment.create_date}}</text>

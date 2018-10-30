@@ -1,54 +1,82 @@
-const request = require("request-promise");
-const jsonwebtoken = require('jsonwebtoken');
+/**
+ * 需要登录信息的接口
+ */
+const Auth = require("./auth");
 
-module.exports = class extends think.Controller {
-  async loginAction() {
-    let { code, userInfo } = this.post();
+module.exports = class extends Auth {
+  // 获取用户信息
+  async getUserInfoAction() {
+    let token = this.header("token");
+    let openid = await this.verifyOpenid(token);
+    const userResult = await this.model('api/index').getUser({ openid: openid });
+    delete userResult.openid;
+    this.success(userResult, "用户信息获取成功");
+  }
 
-    // 获取openid和session_key
-    let options = {
-      method: "GET",
-      url: "https://api.weixin.qq.com/sns/jscode2session",
-      qs: {
-        grant_type: "authorization_code",
-        js_code: code,
-        appid: this.config("wx.appId"),
-        secret: this.config("wx.appSecret")
-      }
+  // 获取用户发布的文章列表
+  async getUserCollectAction() {
+    let token = this.header("token");
+    let openid = await this.verifyOpenid(token);
+    const collectResult = await this.model('api/index').getUserCollect({ openid: openid });
+    console.log(collectResult)
+    let praiseArticle = collectResult[0].praise_article.split(",");
+    let collectList = [];
+    for (let i in praiseArticle) {
+      const article = await this.model('api/index').getArticle({ id: ['=', praiseArticle[i]] });
+      console.log(article)
+      collectList.push(article);
     }
-    let loginInfo = await request(options);
-    let openid = JSON.parse(loginInfo).openid;
+    this.success(collectList, "收藏列表");
+  }
 
-    const result = await this.model('api/index').getUser({ openid: openid });
-    if (result.length) {
-      let token = this.getToken(result[0].openid);
-      this.success(token, "登录成功");
+
+
+  // 发布评论
+  async addArticleCommentAction() {
+    if (!login.isLogin()) {
+      this.fail("未登录");
+      return;
+    }
+    let { id, userId, commentText } = this.post();
+    let data = {
+      article_id: id,
+      comment_user_id: userId,
+      comment_text: commentText,
+      create_date: think.datetime(new Date())
+    }
+    const addCommentResult = await this.model('api/index').addArticleComment(data);
+    if (addCommentResult == 0) {
+      this.fail("文章不存在", "查询失败")
     } else {
+      const commentListResult = await this.model('api/index').getArticleComment({ article_id: ['=', id] });
       let data = {
-        openid: openid,
-        user_name: userInfo.nickName,
-        gender: userInfo.gender,
-        avatar: userInfo.avatarUrl,
-        country: userInfo.country,
-        province: userInfo.province,
-        city: userInfo.city,
-        create_date: think.datetime(new Date())
+        comments: commentListResult.length
       }
-      const result = await this.model('api/index').createUser(data);
-      let token = this.getToken(openid);
-      this.success(token, "新用户登录");
+      // 更新评论数量
+      await this.model('api/index').updateArticle({ id: id }, data);
+      this.success(addCommentResult, "获取文章评论成功")
     }
   }
 
-  // 生成token
-  getToken(openid) {
-    const userInfo = {
-      openid: openid
-    };
-    const { secret, appToken, expire } = this.config('jwt');
-    // 生成token
-    const token = jsonwebtoken.sign(userInfo, secret, { expiresIn: expire });
-    this.cookie(appToken, token);
-    return token;
+  // 点赞统计
+  async praiseCountAction() {
+    if (!login.isLogin()) {
+      this.fail("未登录");
+      return;
+    }
+    let { id, userId } = this.post();
+    const article = await this.model('api/index').getArticle({ id: id });
+    let praiseList = article[0].praises ? article[0].praises.split(",") : [];
+    if (praiseList.includes(userId)) {
+      this.fail("点赞失败，已点过", { praises: praiseList.length })
+    } else {
+      praiseList.unshift(userId);
+      let data = {
+        praises: praiseList.toString()
+      }
+      const result = await this.model('api/index').praiseCount({ id: id }, data);
+      this.success({ praises: praiseList.length }, "点赞成功！")
+    }
   }
+
 }

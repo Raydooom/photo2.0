@@ -1,39 +1,37 @@
 const {
   severRequest
 } = require("../../api/index");
-const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: "",
-    isLogin: ""
+    articleList: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onShow: function(options) {
-    this.setData({
-      isLogin: app.globalData.isLogin ? true : false
-    })
-    severRequest("getUserInfo").then(res => {
+  onLoad: function(options) {
+    severRequest("getUserCollect").then(res => {
       this.setData({
-        userInfo: res.data
+        articleList: res.data
       })
-    }).catch(err => {
-      console.log(err);
     })
   },
-  bindGetUserInfo(res) {
-    console.log(res)
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
 
   },
 

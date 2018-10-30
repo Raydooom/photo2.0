@@ -32,7 +32,7 @@ module.exports = class extends think.Model {
   // 根据ID获取文章
   async getArticle(data) {
     let articleModel = this.model("article_list");
-    let result = await articleModel.where(data).select();
+    let result = await articleModel.where(data).find();
     return result;
   }
   // 根据ID获取文章评论
@@ -53,6 +53,29 @@ module.exports = class extends think.Model {
     let result = await articleModel.where(condition).update(data);
     return result;
   }
+
+  /**
+   * 用户相关
+   * @param {*} condition 
+   */
+  // 创建新用户
+  async createUser(data) {
+    let userModel = this.model("user");
+    let result = await userModel.add(data);
+    return result;
+  }
+  // 根据openid查询用户
+  async getUser(condition) {
+    let userModel = this.model("user");
+    let result = await userModel.where(condition).find();
+    return result;
+  }
+  // 查询用户收藏
+  async getUserCollect(condition) {
+    let userModel = this.model("user");
+    let result = await userModel.where(condition).select();
+    return result;
+  }
   // 点赞
   async praiseCount(condition, data) {
     let articleModel = this.model("article_list");
@@ -63,19 +86,6 @@ module.exports = class extends think.Model {
   async getUserInfo(condition) {
     let userModel = this.model("user");
     let result = await userModel.where(condition).select();
-    return result;
-  }
-
-  // 根据openid查询用户
-  async getUser(condition) {
-    let userModel = this.model("user");
-    let result = await userModel.where(condition).select();
-    return result;
-  }
-  // 创建新用户
-  async createUser(data) {
-    let userModel = this.model("user");
-    let result = await userModel.add(data);
     return result;
   }
 };

@@ -36,7 +36,7 @@ Page({
       })
     })
 
-
+    return
 
     let that = this;
     wx.getStorage({

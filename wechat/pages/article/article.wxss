@@ -20,7 +20,7 @@
   background: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.5)));
 }
 
-.title-warp .classify {
+.title-warp .kind-name {
   font-size: 36rpx;
   color: #fff;
   display: block;

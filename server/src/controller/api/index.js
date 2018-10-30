@@ -51,13 +51,13 @@ module.exports = class extends think.Controller {
   async getArticleAction() {
     let { id } = this.post();
     const article = await this.model('api/index').getArticle({ id: ['=', id] });
-    const kindName = await this.model('api/index').getKindName({ id: article[0].kind_id });
+    const kindName = await this.model('api/index').getKindName({ id: article.kind_id });
     if (article == 0) {
       this.fail("文章不存在", "查询失败")
     } else {
-      article[0].praises = article[0].praises ? article[0].praises.split(",").length : "0";
-      article[0].kindName = kindName[0].name;
-      this.success(article[0], "获取详情成功")
+      article.praises = article.praises ? article.praises.split(",").length : "0";
+      article.kindName = kindName[0].name;
+      this.success(article, "获取详情成功")
     }
   }
 

@@ -26,6 +26,6 @@ App({
     this.wxLogin();
   },
   globalData: {
-    isLogin: ""
+    isLogin: wx.getStorageSync("token") || ""
   }
 })

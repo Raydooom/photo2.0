@@ -1,0 +1,4 @@
+<import src="/templates/articleList/articleList.wxml" />
+<view class="aritcle-list">
+  <template is="articleList" data="{{articleList}}"></template>
+</view>

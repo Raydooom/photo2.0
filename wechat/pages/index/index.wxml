@@ -1,4 +1,5 @@
 <!-- pages/hot/hot.wxml -->
+<import src="/templates/articleList/articleList.wxml" />
 <view class="top-title">
   <text class="main-title">热门推荐</text>
   <text></text>
@@ -28,15 +29,6 @@
     </view>
   </view>
   <view class="aritcle-list">
-    <navigator wx:for="{{articleList}}" wx:key="{{item.id}}" hover-class="none" class="article-item" url='../article/article?id={{item.id}}'>
-      <image class="clover" mode='aspectFill' src='{{item.cover_img}}'></image>
-      <view class="article-info">
-        <text class="article-title">{{item.article_title}}</text>
-        <view class="article-view">
-          <image src='../../assets/icons/views_gray.png'></image>
-          {{item.views}}
-        </view>
-      </view>
-    </navigator>
+    <template is="articleList" data="{{articleList}}"></template>
   </view>
 </view>

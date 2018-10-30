@@ -3,7 +3,7 @@
 <view class="article-cover">
   <image mode='aspectFill' wx:if="{{articleDetail.cover_img}}" src="{{articleDetail.cover_img}}"></image>
   <view class="title-warp">
-    <text class="classify">{{articleDetail.kindName}}</text>
+    <text class="kind-name">{{articleDetail.kindName}}</text>
     <text class="title">{{articleDetail.article_title}}</text>
   </view>
 </view>

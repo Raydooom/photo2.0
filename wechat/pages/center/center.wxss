@@ -61,7 +61,7 @@ page {
 }
 
 .article-item {
-    width: 33.33%;
+    width: 50%;
     float: left;
     text-align: center;
     font-size: 28rpx;

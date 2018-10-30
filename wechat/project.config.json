@@ -31,7 +31,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -44,6 +44,18 @@
 					"name": "评论",
 					"pathName": "pages/commentList/commentList",
 					"query": "id=7"
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/center/center",
+					"query": ""
+				},
+				{
+					"id": 3,
+					"name": "列表",
+					"pathName": "pages/collect/collect",
+					"query": ""
 				}
 			]
 		}

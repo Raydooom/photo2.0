@@ -1,0 +1,12 @@
+<template name="articleList">
+  <navigator wx:for="{{articleList}}" wx:key="{{item.id}}" hover-class="none" class="article-item" url='../article/article?id={{item.id}}'>
+    <image class="clover" mode='aspectFill' src='{{item.cover_img}}'></image>
+    <view class="article-info">
+      <text class="article-title">{{item.article_title}}</text>
+      <view class="article-view">
+        <image src='../../assets/icons/views_gray.png'></image>
+        {{item.views}}
+      </view>
+    </view>
+  </navigator>
+</template>

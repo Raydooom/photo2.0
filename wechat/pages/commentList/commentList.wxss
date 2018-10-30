@@ -63,7 +63,8 @@
 .name .level-name {
     font-size: 24rpx;
     color: #999;
-    vertical-align: middle;
+    vertical-align: text-bottom;
+    padding-left: 14rpx;
 }
 
 .msg-con .name text.date {
