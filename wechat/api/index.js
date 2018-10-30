@@ -15,7 +15,8 @@ const api = {
   // 需要登录的接口
   login: "/api/login/index", // 登录接口，code换取openid
   getUserInfo: "/api/user/getUserInfo", // 获取用户信息
-  getUserCollect: "/api/user/getUserCollect", // 获取用户收藏问文章
+  getCollectArticle: "/api/user/getCollectArticle", // 获取用户收藏问文章
+  getCommentArticle: "/api/user/getCommentArticle", // 获取用户收藏问文章
 }
 
 // promise封装

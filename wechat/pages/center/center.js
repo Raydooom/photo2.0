@@ -9,16 +9,18 @@ Page({
    */
   data: {
     userInfo: "",
-    isLogin: ""
+    isLogin: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onShow: function(options) {
+  onLoad() {
     this.setData({
       isLogin: app.globalData.isLogin ? true : false
     })
+  },
+  onShow: function(options) {
     severRequest("getUserInfo").then(res => {
       this.setData({
         userInfo: res.data

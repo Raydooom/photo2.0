@@ -9,7 +9,8 @@
     "pages/commentList/commentList",
     "pages/article/article",
     "pages/wallpaper/wallpaper",
-    "pages/collect/collect"
+    "pages/collect/collect",
+    "pages/commentArticle/commentArticle"
   ],
   "window": {
     "backgroundTextStyle": "light",

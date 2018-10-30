@@ -70,8 +70,14 @@ module.exports = class extends think.Model {
     let result = await userModel.where(condition).find();
     return result;
   }
-  // 查询用户收藏
-  async getUserCollect(condition) {
+  // 查询用户收藏文章
+  async getCollectArticle(condition) {
+    let userModel = this.model("user");
+    let result = await userModel.where(condition).select();
+    return result;
+  }
+  // 查询用户评论文章
+  async getUserComment(condition) {
     let userModel = this.model("user");
     let result = await userModel.where(condition).select();
     return result;

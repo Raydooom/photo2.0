@@ -9,27 +9,41 @@ module.exports = class extends Auth {
     let token = this.header("token");
     let openid = await this.verifyOpenid(token);
     const userResult = await this.model('api/index').getUser({ openid: openid });
+    userResult.praise_article = userResult.praise_article ? userResult.praise_article.split(",").length : "0";
+    userResult.comment_article = userResult.comment_article ? userResult.comment_article.split(",").length : "0";
     delete userResult.openid;
     this.success(userResult, "用户信息获取成功");
   }
 
-  // 获取用户发布的文章列表
-  async getUserCollectAction() {
+  // 获取用户收藏的文章列表
+  async getCollectArticleAction() {
     let token = this.header("token");
     let openid = await this.verifyOpenid(token);
-    const collectResult = await this.model('api/index').getUserCollect({ openid: openid });
-    console.log(collectResult)
-    let praiseArticle = collectResult[0].praise_article.split(",");
+    const collectResult = await this.model('api/index').getCollectArticle({ openid: openid });
+    let praiseArticle = collectResult[0].praise_article ? collectResult[0].praise_article.split(",") : [];
+    let collectList = [];
+    for (let i in praiseArticle) {
+      const article = await this.model('api/index').getArticle({ id: ['=', praiseArticle[i]] });
+      collectList.push(article);
+    }
+    this.success(collectList, "收藏文章");
+  }
+
+  // 获取用户评论过的文章列表
+  async getCommentArticleAction() {
+    let token = this.header("token");
+    let openid = await this.verifyOpenid(token);
+    const collectResult = await this.model('api/index').getUserComment({ openid: openid });
+    let praiseArticle = collectResult[0].comment_article ? collectResult[0].comment_article.split(",") : [];
+    console.log(praiseArticle)
     let collectList = [];
     for (let i in praiseArticle) {
       const article = await this.model('api/index').getArticle({ id: ['=', praiseArticle[i]] });
       console.log(article)
       collectList.push(article);
     }
-    this.success(collectList, "收藏列表");
+    this.success(collectList, "评论文章");
   }
-
-
 
   // 发布评论
   async addArticleCommentAction() {

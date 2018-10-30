@@ -14,7 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    severRequest("getCollectArticle").then(res => {
+    severRequest("getCommentArticle").then(res => {
       this.setData({
         articleList: res.data
       })

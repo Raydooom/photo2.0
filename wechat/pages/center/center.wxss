@@ -15,7 +15,7 @@ page {
     margin: 160rpx 30rpx 0;
     background: rgba(255, 255, 255, 0.99);
     border-radius: 20rpx;
-    box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20rpx rgba(0, 0, 0, 0);
     position: relative;
     z-index: 2;
 }
