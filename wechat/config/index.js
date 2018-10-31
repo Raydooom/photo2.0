@@ -1,5 +1,0 @@
-const HOST = "";
-
-export {
-    HOST,
-}

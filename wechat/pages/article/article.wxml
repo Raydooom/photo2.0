@@ -17,7 +17,7 @@
   <view class="end">
     Raydom 原创作品
   </view>
-  <view class="tool-bar">
+  <view class="tool-bar {{scrollDirection ? 'active' : ''}}">
     <view class="tool {{articleDetail.isPraise ? 'active' : ''}}" bindtap="addPraise" data-counts="{{articleDetail.praises}}">
       <image src="{{articleDetail.isPraise ? '../../assets/icons/like_active.png' : '../../assets/icons/like.png'}}"></image>
       {{articleDetail.praises}}

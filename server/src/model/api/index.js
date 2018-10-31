@@ -47,8 +47,9 @@ module.exports = class extends think.Model {
     let result = await commentModel.add(data);
     return result;
   }
-  // 浏览量统计
-  async viewCount(condition, data) {
+  
+  // 更新文章列表（评价数、点赞数、分享数）
+  async updateArticle(condition, data) {
     let articleModel = this.model("article_list");
     let result = await articleModel.where(condition).update(data);
     return result;
@@ -80,12 +81,6 @@ module.exports = class extends think.Model {
   async getUserComment(condition) {
     let userModel = this.model("user");
     let result = await userModel.where(condition).select();
-    return result;
-  }
-  // 点赞
-  async addPraise(condition, data) {
-    let articleModel = this.model("article_list");
-    let result = await articleModel.where(condition).update(data);
     return result;
   }
   // 根据用户ID获取用户信息

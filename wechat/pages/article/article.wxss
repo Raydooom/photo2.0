@@ -79,13 +79,18 @@
 
 .tool-bar {
   position: fixed;
-  bottom: 10rpx;
+  bottom: -100rpx;
   width: 96%;
   left: 2%;
   background: rgba(245, 245, 245, 0.95);
   box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
   border: 1px solid #ededed;
   border-radius: 10rpx;
+  transition: 0.3s bottom ease-out;
+}
+
+.tool-bar.active {
+  bottom: 10rpx;
 }
 
 .tool-bar .tool button {

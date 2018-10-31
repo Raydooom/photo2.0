@@ -1,7 +1,9 @@
 const {
   severRequest
 } = require("../../api/index");
-
+const {
+  wxToast
+} = require("../../utils/wxUtils.js");
 Page({
 
   /**
@@ -10,7 +12,6 @@ Page({
   data: {
     articleId: "",
     commentList: "",
-    userId: '',
     active: '',
     loading: true,
     focus: false,
@@ -25,43 +26,12 @@ Page({
    */
   onLoad: function(options) {
     wx.setNavigationBarTitle({
-      title: options.title + '评论'
-    })
-
-    severRequest("getArticleComment", {
-      id: options.id
-    }).then(res => {
-      this.setData({
-        commentList: res.data
-      })
-    })
-
-    return
-
-    let that = this;
-    wx.getStorage({
-      key: 'userId',
-      success: (res) => {
-        console.log(res)
-        if (res.data) {
-          that.setData({
-            userId: res.data
-          })
-        } else {
-          app.getUserId();
-          app.getCode();
-        }
-      },
-      fail: (res) => {
-        console.log(res)
-        app.getUserId();
-        app.getCode();
-      }
+      title: options.title + '评论',
     })
     this.setData({
-      specialId: options.id
+      articleId: options.id
     })
-    this.getComments()
+    this.getComments();
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -80,26 +50,15 @@ Page({
    * 获取评论列表
    */
   getComments: function() {
-    let that = this;
-    wx.request({
-      url: HOST + '/wechat/specialComment',
-      data: {
-        id: this.data.specialId
-      },
-      success: res => {
-        console.log(res);
-        if (res.data.state == 1) {
-          that.setData({
-            commentList: res.data.data,
-            loading: false,
-          })
-
-          // 停止下拉刷新
-          wx.stopPullDownRefresh();
-        } else {
-          console.log("数据查询错误！");
-        }
-      }
+    // 获取评论数据
+    severRequest("getArticleComment", {
+      id: this.data.articleId
+    }).then(res => {
+      this.setData({
+        commentList: res.data
+      })
+      // 停止下拉刷新
+      wx.stopPullDownRefresh();
     })
   },
 
@@ -166,35 +125,24 @@ Page({
   /**
    * 提交评论
    */
-  sendComment: function(e) {
+  sendComment(e) {
     let text = e.detail.value;
-    let that = this;
-
     if (text.trim() == "") {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '内容不能为空！',
-        confirmColor: '#a09fed'
-      })
+      wxToast("请输入评论内容");
       return false;
     }
+
     // 评论内容
-    if (!that.data.isReply) {
-      wx.request({
-        url: HOST + '/wechat/addSpecialComment',
-        data: {
-          id: that.data.specialId,
-          userId: that.data.userId,
-          text: text
-        },
-        success: (res => {
-          that.getComments();
-          that.setData({
-            msg: '',
-            active: '',
-          })
-          console.log(res);
+    if (!this.data.isReply) {
+      let data = {
+        id: this.data.articleId,
+        commentText: text
+      }
+      severRequest("addArticleComment", data).then(res => {
+        this.getComments();
+        this.setData({
+          msg: '',
+          active: '',
         })
       })
     } else {

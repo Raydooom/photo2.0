@@ -14,13 +14,13 @@
                 </view>
 
                 <text class="date">{{item.comment.create_date}}</text>
-                <view class="prise" bindtap='commentPraise' data-comment-id="{{item.comment.id}}" data-praise="{{item.comment.praise}}">
+                <!-- <view class="prise" bindtap='commentPraise' data-comment-id="{{item.comment.id}}" data-praise="{{item.comment.praise}}">
                     <image src="../../assets/icons/like.png"></image>
                     <text>{{item.comment.praise}}</text>
-                </view>
+                </view> -->
             </view>
             <!--  评论内容  -->
-            <text class="msg" bindtap='reply' data-user="{{item.userInfo.nickname}}" data-comment-id="{{item.comment.id}}">{{item.comment_text}}</text>
+            <text class="msg" bindtap='' data-user="{{item.userInfo.nickname}}" data-comment-id="{{item.comment.id}}">{{item.comment_text}}</text>
             <!--  回复信息  -->
             <view class="reply-list" wx:if="{{!item.reply.length == 0}}">
                 <view class="reply-item" wx:for="{{item.reply}}" wx:key="reply">

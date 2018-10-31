@@ -54,17 +54,15 @@ module.exports = class extends think.Controller {
 
   // 根据id获取文章信息
   async getArticleAction() {
-    const { secret } = this.config('jwt');
     let token = this.header("token");
     let { id } = this.post();
     const article = await this.model('api/index').getArticle({ id: ['=', id] });
-
     if (article == 0) {
       this.fail("文章不存在", "查询失败")
     } else {
       // 如果已登录查询该用户是否给该文章点赞
       if (token) {
-        console.log(token)
+        const { secret } = this.config('jwt');
         let userId = jwt.verify(token, secret).userId.toString();
         const article = await this.model('api/index').getArticle({ id: id });
         let praiseList = article.praises ? article.praises.split(",") : [];
@@ -90,7 +88,7 @@ module.exports = class extends think.Controller {
     if (result == 0) {
       this.fail("文章不存在", "查询失败")
     } else {
-      // 查询用户信息
+      // 查询每条用户信息
       for (let i in result) {
         var user = await this.model('api/index').getUserInfo({ id: result[i].comment_user_id });
         result[i].userInfo = user[0] || [];
@@ -106,13 +104,24 @@ module.exports = class extends think.Controller {
     let { id } = this.post();
     const article = await this.model('api/index').getArticle({ id: id });
     let data = {
-      views: article[0].views + 1
+      views: article.views + 1
     }
     const result = await this.model('api/index').viewCount({ id: id }, data);
     if (result == 0) {
       this.fail("浏览量统计失败")
     } else {
-      this.success({ views: article[0].views + 1 }, "浏览量统计成功")
+      this.success({ views: article.views + 1 }, "浏览量统计成功")
     }
+  }
+
+  // 转发统计
+  async shareCountAction() {
+    let { id } = this.post();
+    const article = await this.model('api/index').getArticle({ id: id });
+    let data = {
+      shares: article.shares + 1
+    }
+    const result = await this.model('api/index').updateArticle({ id: id }, data);
+    this.success({ shares: article.shares + 1 }, "分享统计成功")
   }
 }

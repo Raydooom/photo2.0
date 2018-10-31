@@ -4,7 +4,9 @@
 const Auth = require("./auth");
 
 module.exports = class extends Auth {
-
+  /**
+   * 个人中心页面接口
+   */
   // 获取用户信息
   async getUserInfoAction() {
     let token = this.header("token");
@@ -27,7 +29,7 @@ module.exports = class extends Auth {
       const article = await this.model('api/index').getArticle({ id: ['=', praiseArticle[i]] });
       collectList.push(article);
     }
-    this.success(collectList, "收藏文章");
+    this.success(collectList, "用户收藏的文章");
   }
 
   // 获取用户评论过的文章列表
@@ -36,40 +38,18 @@ module.exports = class extends Auth {
     let openid = await this.verifyOpenid(token);
     const collectResult = await this.model('api/index').getUserComment({ openid: openid });
     let praiseArticle = collectResult[0].comment_article ? collectResult[0].comment_article.split(",") : [];
-    console.log(praiseArticle)
     let collectList = [];
     for (let i in praiseArticle) {
       const article = await this.model('api/index').getArticle({ id: ['=', praiseArticle[i]] });
-      console.log(article)
       collectList.push(article);
     }
-    this.success(collectList, "评论文章");
+    this.success(collectList, "用户评论过的文章");
   }
 
-  // 发布评论
-  async addArticleCommentAction() {
-    let { id, userId, commentText } = this.post();
-    let data = {
-      article_id: id,
-      comment_user_id: userId,
-      comment_text: commentText,
-      create_date: think.datetime(new Date())
-    }
-    const addCommentResult = await this.model('api/index').addArticleComment(data);
-    if (addCommentResult == 0) {
-      this.fail("文章不存在", "查询失败")
-    } else {
-      const commentListResult = await this.model('api/index').getArticleComment({ article_id: ['=', id] });
-      let data = {
-        comments: commentListResult.length
-      }
-      // 更新评论数量
-      await this.model('api/index').updateArticle({ id: id }, data);
-      this.success(addCommentResult, "获取文章评论成功")
-    }
-  }
-
-  // 点赞统计
+  /**
+   * 文章相关接口
+   */
+  // 点赞统计(收藏)
   async addPraiseAction() {
     let token = this.header("token");
     let { id } = this.post();
@@ -87,6 +67,33 @@ module.exports = class extends Auth {
     let data = {
       praises: praiseList.toString()
     }
-    const result = await this.model('api/index').addPraise({ id: id }, data);
+    const result = await this.model('api/index').updateArticle({ id: id }, data);
   }
+
+  // 发布评论
+  async addArticleCommentAction() {
+    let token = this.header("token");
+    let { id, commentText } = this.post();
+    let userId = this.verifyUserId(token).toString();
+    let data = {
+      article_id: id,
+      comment_user_id: userId,
+      comment_text: commentText,
+      create_date: think.datetime(new Date())
+    }
+    const addCommentResult = await this.model('api/index').addArticleComment(data);
+    if (addCommentResult == 0) {
+      this.fail("文章不存在", "查询失败")
+    } else {
+      const commentListResult = await this.model('api/index').getArticleComment({ article_id: ['=', id] });
+      let data = {
+        comments: commentListResult.length
+      }
+      // 更新评论数量
+      await this.model('api/index').updateArticle({ id: id }, data);
+      this.success({ commentId: addCommentResult }, "获取文章评论成功")
+    }
+  }
+
+
 }

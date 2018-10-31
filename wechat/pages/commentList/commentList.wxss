@@ -45,7 +45,7 @@
 .comment-user-name {
     margin-top: -2rpx;
     display: inline-block;
-    max-width: 300rpx;
+    max-width: 230rpx;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

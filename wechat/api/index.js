@@ -12,6 +12,8 @@ const api = {
   getKindArticle: "/api/index/getKindArticle", // 获取分类下文章列表
   getArticle: "/api/index/getArticle", // 根据文章ID获取文章详情
   getArticleComment: "/api/index/getArticleComment", // 获取文章评论
+  viewCount: "/api/index/viewCount", // 浏览量
+  shareCount: "/api/index/shareCount", // 分享统计
   // 需要登录的接口
   login: "/api/login/index", // 登录接口，code换取openid
   getUserInfo: "/api/user/getUserInfo", // 获取用户信息
@@ -19,7 +21,7 @@ const api = {
   getCommentArticle: "/api/user/getCommentArticle", // 获取用户收藏问文章
   // 文章相关
   addPraise: "/api/user/addPraise", // 点赞
-
+  addArticleComment: "/api/user/addArticleComment", // 添加评论
 }
 
 // promise封装
