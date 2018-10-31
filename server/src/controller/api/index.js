@@ -1,3 +1,8 @@
+/**
+ * 不需要登录的查询接口
+ * @public 
+ */
+const jwt = require('jsonwebtoken');
 module.exports = class extends think.Controller {
   // 获取banner
   async getBannerAction() {
@@ -49,12 +54,28 @@ module.exports = class extends think.Controller {
 
   // 根据id获取文章信息
   async getArticleAction() {
+    const { secret } = this.config('jwt');
+    let token = this.header("token");
     let { id } = this.post();
     const article = await this.model('api/index').getArticle({ id: ['=', id] });
-    const kindName = await this.model('api/index').getKindName({ id: article.kind_id });
+
     if (article == 0) {
       this.fail("文章不存在", "查询失败")
     } else {
+      // 如果已登录查询该用户是否给该文章点赞
+      if (token) {
+        console.log(token)
+        let userId = jwt.verify(token, secret).userId.toString();
+        const article = await this.model('api/index').getArticle({ id: id });
+        let praiseList = article.praises ? article.praises.split(",") : [];
+        if (praiseList.includes(userId)) {
+          article.isPraise = true;
+        } else {
+          article.isPraise = false;
+        }
+      }
+      // 查询文章分类名称
+      const kindName = await this.model('api/index').getKindName({ id: article.kind_id });
       article.praises = article.praises ? article.praises.split(",").length : "0";
       article.kindName = kindName[0].name;
       this.success(article, "获取详情成功")
@@ -80,30 +101,6 @@ module.exports = class extends think.Controller {
     this.success(commentData, "获取文章评论成功")
   }
 
-  // 发布评论
-  async addArticleCommentAction() {
-    let { id, userId, commentText } = this.post();
-    let data = {
-      article_id: id,
-      comment_user_id: userId,
-      comment_text: commentText,
-      create_date: think.datetime(new Date())
-    }
-    const addCommentResult = await this.model('api/index').addArticleComment(data);
-
-    if (addCommentResult == 0) {
-      this.fail("文章不存在", "查询失败")
-    } else {
-      const commentListResult = await this.model('api/index').getArticleComment({ article_id: ['=', id] });
-      let data = {
-        comments: commentListResult.length
-      }
-      // 更新评论数量
-      await this.model('api/index').updateArticle({ id: id }, data);
-      this.success(addCommentResult, "获取文章评论成功")
-    }
-  }
-
   // 浏览量统计
   async viewCountAction() {
     let { id } = this.post();
@@ -118,22 +115,4 @@ module.exports = class extends think.Controller {
       this.success({ views: article[0].views + 1 }, "浏览量统计成功")
     }
   }
-
-  // 点赞统计
-  async praiseCountAction() {
-    let { id, userId } = this.post();
-    const article = await this.model('api/index').getArticle({ id: id });
-    let praiseList = article[0].praises ? article[0].praises.split(",") : [];
-    if (praiseList.includes(userId)) {
-      this.fail("点赞失败，已点过", { praises: praiseList.length })
-    } else {
-      praiseList.unshift(userId);
-      let data = {
-        praises: praiseList.toString()
-      }
-      const result = await this.model('api/index').praiseCount({ id: id }, data);
-      this.success({ praises: praiseList.length }, "点赞成功！")
-    }
-  }
-
 }

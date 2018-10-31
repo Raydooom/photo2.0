@@ -1,1 +1,5 @@
-{}
+{
+  "usingComponents": {
+    "login-toast": "/components/login/login"
+  }
+}

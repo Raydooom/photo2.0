@@ -16,11 +16,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    this.setData({
-      isLogin: app.globalData.isLogin ? true : false
-    })
+
   },
   onShow: function(options) {
+    this.setData({
+      isLogin: app.globalData.isLogin
+    })
     severRequest("getUserInfo").then(res => {
       this.setData({
         userInfo: res.data

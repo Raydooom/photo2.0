@@ -21,7 +21,8 @@ module.exports = class extends think.Controller {
 
     const result = await this.model('api/index').getUser({ openid: openid });
     if (result.id) {
-      let token = this.getToken(result.openid);
+      this.cache("currentUserId", result.id);
+      let token = this.getToken(result.id);
       this.success(token, "登录成功");
     } else {
       let data = {
@@ -35,17 +36,16 @@ module.exports = class extends think.Controller {
         create_date: think.datetime(new Date())
       }
       const result = await this.model('api/index').createUser(data);
-      let token = this.getToken(openid);
+      let token = this.getToken(result);
       this.success(token, "新用户登录");
     }
   }
 
   // 生成token
-  getToken(openid) {
+  getToken(userId) {
     const { secret, appToken, expire } = this.config('jwt');
     // 生成token
-    const token = jsonwebtoken.sign({ openid }, secret, { expiresIn: expire });
-    let aa = jsonwebtoken.verify(token, secret).openid;
+    const token = jsonwebtoken.sign({ userId }, secret, { expiresIn: expire });
     return token;
   }
 }

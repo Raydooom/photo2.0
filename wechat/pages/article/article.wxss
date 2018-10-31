@@ -109,6 +109,10 @@
   padding: 4rpx 0;
 }
 
+.tool-bar .tool.active {
+  color: #e51e30;
+}
+
 .tool-bar image {
   display: block;
   width: 48rpx;

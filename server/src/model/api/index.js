@@ -83,7 +83,7 @@ module.exports = class extends think.Model {
     return result;
   }
   // 点赞
-  async praiseCount(condition, data) {
+  async addPraise(condition, data) {
     let articleModel = this.model("article_list");
     let result = await articleModel.where(condition).update(data);
     return result;

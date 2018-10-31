@@ -3,7 +3,8 @@ import Promise from "../utils/external/es6-promise.min";
 // const HOST = "http://localhost:8360";
 // const HOST = "http://192.168.1.110:8360";
 const HOST = "http://172.16.156.152:8360";
-
+const app = getApp();
+console.log(app)
 // 接口列表
 const api = {
   getBanner: "/api/index/getBanner", // 获取banner
@@ -11,12 +12,14 @@ const api = {
   getKindArticle: "/api/index/getKindArticle", // 获取分类下文章列表
   getArticle: "/api/index/getArticle", // 根据文章ID获取文章详情
   getArticleComment: "/api/index/getArticleComment", // 获取文章评论
-  addArticleComment: "/api/author/addArticleComment", // 发布评论
   // 需要登录的接口
   login: "/api/login/index", // 登录接口，code换取openid
   getUserInfo: "/api/user/getUserInfo", // 获取用户信息
   getCollectArticle: "/api/user/getCollectArticle", // 获取用户收藏问文章
   getCommentArticle: "/api/user/getCommentArticle", // 获取用户收藏问文章
+  // 文章相关
+  addPraise: "/api/user/addPraise", // 点赞
+
 }
 
 // promise封装
@@ -34,11 +37,15 @@ function severRequest(apiKey, params = {}, method = "POST") {
         if (res.data.errno == 0) {
           console.log(res.data);
           resolve(res.data);
+        } else if (res.data.errno == 1000) {
+          reject(res.data);
         } else {
+          console.log("错误信息", res.data);
           reject(res.data);
         }
       },
       fail(err) {
+        console.log(err)
         reject(err);
       }
     })

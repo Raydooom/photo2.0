@@ -14,7 +14,7 @@ App({
               userInfo: res.userInfo
             }
             severRequest("login", data).then(res => {
-              this.globalData.isLogin = res.data;
+              this.globalData.isLogin = true;
               wx.setStorageSync("token", res.data);
             })
           }
@@ -26,6 +26,6 @@ App({
     this.wxLogin();
   },
   globalData: {
-    isLogin: wx.getStorageSync("token") || ""
+    isLogin: wx.getStorageSync("token") ? true : false
   }
 })
