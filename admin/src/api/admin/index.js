@@ -3,7 +3,7 @@ import http from '../http'
 // 获取加密key
 export const getKey = (params) => {
   let config = {
-    url: "/api/admin/login/getAesKey",
+    url: "/admin/login/getAesKey",
     method: "POST",
     data: params
   }
@@ -17,7 +17,7 @@ export const getKey = (params) => {
 // 登录
 export const login = (params) => {
   let config = {
-    url: "/api/admin/login",
+    url: "/admin/login",
     method: "POST",
     data: params
   }
@@ -31,7 +31,7 @@ export const login = (params) => {
 // 获取文章列表
 export const getArticleList = (params) => {
   let config = {
-    url: "/api/admin/index/getArticleList",
+    url: "/admin/index/getArticleList",
     method: "POST",
     data: params
   }
@@ -45,7 +45,7 @@ export const getArticleList = (params) => {
 // 获取文章详情
 export const getArticle = (params) => {
   let config = {
-    url: "/api/admin/index/getArticle",
+    url: "/admin/index/getArticle",
     method: "POST",
     data: params
   }
@@ -59,7 +59,7 @@ export const getArticle = (params) => {
 // 更新文章
 export const updateArticle = (params) => {
   let config = {
-    url: "/api/admin/index/updateArticle",
+    url: "/admin/index/updateArticle",
     method: "POST",
     data: params
   }
@@ -74,7 +74,7 @@ export const updateArticle = (params) => {
 // 删除文章
 export const delArticle = (params) => {
   let config = {
-    url: "/api/admin/index/delArticle",
+    url: "/admin/index/delArticle",
     method: "POST",
     data: params
   }
@@ -88,7 +88,7 @@ export const delArticle = (params) => {
 // 获取文章分类列表
 export const getKindList = (params) => {
   let config = {
-    url: "/api/admin/index/getKindList",
+    url: "/admin/index/getKindList",
     method: "POST",
     data: params
   }
@@ -104,7 +104,7 @@ export const uploadImgUrl = "http://localhost:8360/common/uploadImg/index";
 // 添加文章
 export const addArticle = (params) => {
   let config = {
-    url: "/api/admin/index/addArticle",
+    url: "/admin/index/addArticle",
     method: "POST",
     data: params
   }
@@ -118,7 +118,7 @@ export const addArticle = (params) => {
 // 获取关于开发者
 export const editAboutDeveloper = (params) => {
   let config = {
-    url: "/api/admin/index/editAboutDeveloper",
+    url: "/admin/index/editAboutDeveloper",
     method: "POST",
     data: params
   }
@@ -133,7 +133,7 @@ export const editAboutDeveloper = (params) => {
 // 编辑关于开发者
 export const getAboutDeveloper = (params) => {
   let config = {
-    url: "/api/admin/index/getAboutDeveloper",
+    url: "/admin/index/getAboutDeveloper",
     method: "POST",
     data: params
   }

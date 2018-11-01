@@ -21,7 +21,7 @@ module.exports = {
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
     proxyTable: {
       '/api': {
-        target: 'http://localhost:8360', //设置你调用的接口域名和端口号 别忘了加http
+        target: 'https://server.raydom.wang', //设置你调用的接口域名和端口号 别忘了加http
         secure: true,  // https接口需要配置
         changeOrigin: true,  // 跨域配置
         pathRewrite: {

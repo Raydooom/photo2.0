@@ -2,7 +2,7 @@ import Promise from "../utils/external/es6-promise.min";
 
 // const HOST = "http://localhost:8360";
 // const HOST = "http://192.168.1.110:8360";
-const HOST = "http://172.16.156.152:8360";
+const HOST = "https://server.raydom.wang";
 const app = getApp();
 console.log(app)
 // 接口列表
