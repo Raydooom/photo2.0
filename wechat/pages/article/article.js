@@ -27,14 +27,25 @@ Page({
     this.setData({
       id: options.id
     });
+  },
+  onShow() {
     severRequest("getArticle", {
-      id: options.id
+      id: this.data.id
     }).then(res => {
       this.setData({
         articleDetail: res.data
       })
       let articleContent = res.data.content;
       WxParse.wxParse('article', 'html', articleContent, this, 5);
+    })
+
+    severRequest("viewCount", {
+      id: this.data.id
+    }).then(res => {
+      let views = "articleDetail.views";
+      this.setData({
+        [views]: res.data.views
+      })
     })
   },
   // 点赞

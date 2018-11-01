@@ -10,8 +10,8 @@ module.exports = class extends Auth {
   // 获取用户信息
   async getUserInfoAction() {
     let token = this.header("token");
-    let openid = await this.verifyOpenid(token);
-    const userResult = await this.model('api/index').getUser({ openid: openid });
+    let userId = await this.verifyUserId(token);
+    const userResult = await this.model('api/index').getUser({ id: userId });
     userResult.praise_article = userResult.praise_article ? userResult.praise_article.split(",").length : "0";
     userResult.comment_article = userResult.comment_article ? userResult.comment_article.split(",").length : "0";
     delete userResult.openid;
@@ -21,8 +21,8 @@ module.exports = class extends Auth {
   // 获取用户收藏的文章列表
   async getCollectArticleAction() {
     let token = this.header("token");
-    let openid = await this.verifyOpenid(token);
-    const collectResult = await this.model('api/index').getCollectArticle({ openid: openid });
+    let userId = await this.verifyUserId(token);
+    const collectResult = await this.model('api/index').getCollectArticle({ id: userId });
     let praiseArticle = collectResult[0].praise_article ? collectResult[0].praise_article.split(",") : [];
     let collectList = [];
     for (let i in praiseArticle) {
@@ -35,8 +35,8 @@ module.exports = class extends Auth {
   // 获取用户评论过的文章列表
   async getCommentArticleAction() {
     let token = this.header("token");
-    let openid = await this.verifyOpenid(token);
-    const collectResult = await this.model('api/index').getUserComment({ openid: openid });
+    let userId = await this.verifyUserId(token);
+    const collectResult = await this.model('api/index').getUserComment({ id: userId });
     let praiseArticle = collectResult[0].comment_article ? collectResult[0].comment_article.split(",") : [];
     let collectList = [];
     for (let i in praiseArticle) {
@@ -54,6 +54,7 @@ module.exports = class extends Auth {
     let token = this.header("token");
     let { id } = this.post();
     let userId = this.verifyUserId(token).toString();
+    // 查询文章列表数据
     const article = await this.model('api/index').getArticle({ id: id });
     let praiseList = article.praises ? article.praises.split(",") : [];
     if (praiseList.includes(userId)) {
@@ -67,7 +68,23 @@ module.exports = class extends Auth {
     let data = {
       praises: praiseList.toString()
     }
+    // 更新文章表
     const result = await this.model('api/index').updateArticle({ id: id }, data);
+
+    // 查询用户表数据
+    const userResult = await this.model('api/index').getUser({ id: userId });
+    let praiseArticle = userResult.praise_article ? userResult.praise_article.split(",") : [];
+    if (praiseArticle.includes(id)) {
+      let index = praiseArticle.indexOf(id);
+      praiseArticle.splice(index);
+    } else {
+      praiseArticle.unshift(id);
+    }
+    let userData = {
+      praise_article: praiseArticle.toString()
+    }
+    // 更新用户表
+    const updateUser = await this.model('api/index').updateUser({ id: userId }, userData);
   }
 
   // 发布评论
@@ -89,11 +106,24 @@ module.exports = class extends Auth {
       let data = {
         comments: commentListResult.length
       }
-      // 更新评论数量
+      // 更新文章列表评论数量
       await this.model('api/index').updateArticle({ id: id }, data);
       this.success({ commentId: addCommentResult }, "获取文章评论成功")
     }
+
+    // 查询用户表数据
+    const userResult = await this.model('api/index').getUser({ id: userId });
+    let commentArticle = userResult.comment_article ? userResult.comment_article.split(",") : [];
+    if (commentArticle.includes(id)) {
+      let index = commentArticle.indexOf(id);
+      commentArticle.splice(index);
+    } else {
+      commentArticle.unshift(id);
+    }
+    let userData = {
+      comment_article: commentArticle.toString()
+    }
+    // 更新用户表
+    const updateUser = await this.model('api/index').updateUser({ id: userId }, userData);
   }
-
-
 }

@@ -14,6 +14,7 @@ const api = {
   getArticleComment: "/api/index/getArticleComment", // 获取文章评论
   viewCount: "/api/index/viewCount", // 浏览量
   shareCount: "/api/index/shareCount", // 分享统计
+  getAboutDeveloper: "/api/index/getAboutDeveloper", // 获取关于开发者
   // 需要登录的接口
   login: "/api/login/index", // 登录接口，code换取openid
   getUserInfo: "/api/user/getUserInfo", // 获取用户信息

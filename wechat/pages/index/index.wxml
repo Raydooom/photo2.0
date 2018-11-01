@@ -22,8 +22,8 @@
   </block>
 </swiper>
 <!-- 分类 -->
-<view class="classify">
-  <view class="title-warp">
+<view class="classify {{ fixed ? 'addPadding' : ''}}">
+  <view class="title-warp {{ fixed ? 'fixed' : ''}}">
     <view class="classify-title">
       <view wx:for="{{kindList}}" bindtap="changeKind" data-id="{{item.id}}" wx:key="{{item.id}}" class="class-name {{activeKind == item.id ? 'active' : ''}}">{{item.name}}</view>
     </view>

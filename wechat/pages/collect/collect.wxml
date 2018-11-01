@@ -2,3 +2,4 @@
 <view class="aritcle-list">
   <template is="articleList" data="{{articleList}}"></template>
 </view>
+<view class="no-data" wx:if="{{articleList.length == 0}}">暂时没有内容哦~</view>

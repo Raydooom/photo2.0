@@ -48,6 +48,14 @@ module.exports = class extends think.Model {
     return result;
   }
   
+  
+  // 关于开发者内容获取
+  async getAboutDeveloper(condition) {
+    let model = this.model("about");
+    let result = await model.where(condition).find();
+    return result;
+  }
+
   // 更新文章列表（评价数、点赞数、分享数）
   async updateArticle(condition, data) {
     let articleModel = this.model("article_list");
@@ -69,6 +77,12 @@ module.exports = class extends think.Model {
   async getUser(condition) {
     let userModel = this.model("user");
     let result = await userModel.where(condition).find();
+    return result;
+  }
+  // 更新用户表
+  async updateUser(condition,data) {
+    let userModel = this.model("user");
+    let result = await userModel.where(condition).update(data);
     return result;
   }
   // 查询用户收藏文章

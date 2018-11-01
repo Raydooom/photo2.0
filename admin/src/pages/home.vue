@@ -19,6 +19,14 @@
             <el-menu-item index="/addArticle">添加文章</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
+        <el-menu-item index="/aboutWxApp">
+          <i class="el-icon-menu"></i>
+          <span slot="title">关于小程序</span>
+        </el-menu-item>
+        <el-menu-item index="/aboutDeveloper">
+          <i class="el-icon-menu"></i>
+          <span slot="title">关于开发者</span>
+        </el-menu-item>
       </el-menu>
     </div>
     <div class="content-warp">

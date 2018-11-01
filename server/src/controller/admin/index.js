@@ -109,4 +109,26 @@ module.exports = class extends think.Controller {
       this.success(result, "获取文章评论成功")
     }
   }
+
+  // 编辑关于开发者
+  async editAboutDeveloperAction() {
+    let { key, title, content } = this.post();
+    const result = await this.model('admin/index').editAboutDeveloper({ key: key }, { title, content });
+    if (result == 0) {
+      this.fail("关于开发者编辑失败")
+    } else {
+      this.success(result, "关于开发者编辑成功")
+    }
+  }
+
+  // 获取关于开发者
+  async getAboutDeveloperAction() {
+    let { key } = this.post()
+    const result = await this.model('admin/index').getAboutDeveloper({ key: key });
+    if (result == 0) {
+      this.fail("关于开发者获取失败")
+    } else {
+      this.success(result, "关于开发者获取成功")
+    }
+  }
 }

@@ -84,8 +84,8 @@ page {
 /*菜单*/
 
 .menu-warp {
-    background: #fff;
-    background: rgba(255, 255, 255, 0.95);
+    background-color: #fff;
+    /* background: rgba(255, 255, 255, 0.95); */
     border-radius: 20rpx;
     box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1);
     margin: 30rpx 30rpx;
@@ -94,7 +94,9 @@ page {
     padding: 30rpx 40rpx;
     position: relative;
 }
-
+.href{
+  background: #fff;
+}
 .menu-warp .icon {
     display: inline-block;
     width: 40rpx;

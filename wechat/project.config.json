@@ -31,7 +31,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -55,6 +55,12 @@
 					"id": 3,
 					"name": "列表",
 					"pathName": "pages/collect/collect",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "壁纸",
+					"pathName": "pages/home/home",
 					"query": ""
 				}
 			]

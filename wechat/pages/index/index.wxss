@@ -78,3 +78,17 @@ swiper-item .discription {
   vertical-align: middle;
 }
 
+.classify.addPadding {
+  padding-top: 92rpx;
+}
+
+.title-warp {
+  background: #f40;
+}
+
+.title-warp.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}

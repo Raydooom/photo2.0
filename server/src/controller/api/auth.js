@@ -2,14 +2,21 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = class extends think.Controller {
+  // constructor(){
+  //   super();
+    
+  //   console.log(this)
+  // }
   // 登录校验
   async __before() {
+    console.log()
     let token = this.header("token");
     if (token) {
       let userId = this.verifyUserId(token);
       const userResult = await this.model('api/index').getUser({ id: userId });
       if (userResult.id) {
         think.logger.info('校验登录成功');
+        this.userId = userId;
       } else {
         this.fail("用户不存在");
         return false;

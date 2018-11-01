@@ -114,3 +114,33 @@ export const addArticle = (params) => {
     return err;
   })
 }
+
+// 获取关于开发者
+export const editAboutDeveloper = (params) => {
+  let config = {
+    url: "/api/admin/index/editAboutDeveloper",
+    method: "POST",
+    data: params
+  }
+  return http(config).then(res => {
+    return res.data;
+  }).catch(err => {
+    return err;
+  })
+}
+
+
+// 编辑关于开发者
+export const getAboutDeveloper = (params) => {
+  let config = {
+    url: "/api/admin/index/getAboutDeveloper",
+    method: "POST",
+    data: params
+  }
+  return http(config).then(res => {
+    return res.data;
+  }).catch(err => {
+    return err;
+  })
+}
+

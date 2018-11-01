@@ -106,7 +106,7 @@ module.exports = class extends think.Controller {
     let data = {
       views: article.views + 1
     }
-    const result = await this.model('api/index').viewCount({ id: id }, data);
+    const result = await this.model('api/index').updateArticle({ id: id }, data);
     if (result == 0) {
       this.fail("浏览量统计失败")
     } else {
@@ -123,5 +123,16 @@ module.exports = class extends think.Controller {
     }
     const result = await this.model('api/index').updateArticle({ id: id }, data);
     this.success({ shares: article.shares + 1 }, "分享统计成功")
+  }
+
+  // 获取关于开发者
+  async getAboutDeveloperAction() {
+    let { key } = this.post();
+    const result = await this.model('api/index').getAboutDeveloper({ key: key });
+    if (result == 0) {
+      this.fail("关于开发者获取失败")
+    } else {
+      this.success(result, "关于开发者获取成功")
+    }
   }
 }

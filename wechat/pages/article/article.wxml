@@ -15,7 +15,8 @@
     <template is="wxParse" data="{{wxParseData:article.nodes}}" />
   </view>
   <view class="end">
-    Raydom 原创作品
+    <text class="views">浏览量 {{articleDetail.views}}</text>
+    <text>Raydom 发布于 {{articleDetail.create_date}}</text>
   </view>
   <view class="tool-bar {{scrollDirection ? 'active' : ''}}">
     <view class="tool {{articleDetail.isPraise ? 'active' : ''}}" bindtap="addPraise" data-counts="{{articleDetail.praises}}">

@@ -10,7 +10,9 @@
     "pages/article/article",
     "pages/wallpaper/wallpaper",
     "pages/collect/collect",
-    "pages/commentArticle/commentArticle"
+    "pages/commentArticle/commentArticle",
+    "pages/aboutWxApp/aboutWxApp",
+    "pages/aboutDeveloper/aboutDeveloper"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -28,18 +30,6 @@
         "text": "热门",
         "iconPath": "/assets/icons/home.png",
         "selectedIconPath": "/assets/icons/home_active.png"
-      },
-      {
-        "pagePath": "pages/wallpaper/wallpaper",
-        "text": "热门",
-        "iconPath": "/assets/icons/home.png",
-        "selectedIconPath": "/assets/icons/home_active.png"
-      },
-      {
-        "pagePath": "pages/home/home",
-        "text": "专题",
-        "iconPath": "/assets/icons/classify.png",
-        "selectedIconPath": "/assets/icons/classify_active.png"
       },
       {
         "pagePath": "pages/center/center",

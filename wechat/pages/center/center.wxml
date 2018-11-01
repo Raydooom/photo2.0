@@ -14,15 +14,15 @@
         <text class="num">20</text>我的积分</navigator> -->
     </view>
   </view>
-  <!-- <view class="menu-warp">
+  <navigator url="../aboutWxApp/aboutWxApp" hover-class="none" class="menu-warp">
     <image class="icon" src='../../assets/icons/about.png'></image>
-    关于我想学摄影
+    关于小程序
     <image class="next" src='../../assets/icons/next.png'></image>
-  </view>
-  <view class="menu-warp">
+  </navigator>
+  <navigator url="../aboutDeveloper/aboutDeveloper" hover-class="none" class="menu-warp">
     <image class="icon" src='../../assets/icons/developer.png'></image>
     关于开发者
     <image class="next" src='../../assets/icons/next.png'></image>
-  </view> -->
+  </navigator>
   <login-toast wx:if="{{!isLogin}}"></login-toast>
 </view>

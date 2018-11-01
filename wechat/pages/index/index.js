@@ -11,13 +11,20 @@ Page({
     bannerList: "",
     kindList: "",
     activeKind: 1,
-    articleList: ""
+    articleList: "",
+    fixed: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function() {
+
+  },
+  onShow() {
+    this.getData();
+  },
+  getData() {
     // 获取banner数据
     let data = {
       isBanner: true
@@ -27,7 +34,6 @@ Page({
         bannerList: res.data
       })
     })
-
     // 获取分类列表数据
     severRequest("getKindList").then(res => {
       this.setData({
@@ -51,5 +57,23 @@ Page({
         articleList: res.data
       })
     })
-  }
+  },
+  // 滚动监听
+  onPageScroll(e) {
+    if (e.scrollTop < 265) {
+      this.setData({
+        fixed: false
+      })
+      wx.setNavigationBarTitle({
+        title: "",
+      })
+    } else {
+      wx.setNavigationBarTitle({
+        title: "我想学摄影",
+      })
+      this.setData({
+        fixed: true
+      })
+    }
+  },
 })

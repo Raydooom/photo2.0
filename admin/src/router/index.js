@@ -9,7 +9,8 @@ const articleEdit = r => require.ensure([], () => r(require('@/pages/articleEdit
 const articleList = r => require.ensure([], () => r(require('@/pages/articleList')), 'articleList')
 const articleView = r => require.ensure([], () => r(require('@/pages/articleView')), 'articleView')
 
-
+const aboutDeveloper = r => require.ensure([], () => r(require('@/pages/aboutDeveloper')), "aboutDeveloper")
+const aboutWxApp = r => require.ensure([], () => r(require('@/pages/aboutWxApp')), "aboutWxApp")
 
 
 const errorPage = r => require.ensure([], () => r(require('@/pages/errorPage')), 'errorPage')
@@ -60,9 +61,20 @@ export default new Router({
       meta: {
         title: '编辑文章'
       }
+    },
+    {
+      path: '/aboutDeveloper',
+      name: aboutDeveloper,
+      component: aboutDeveloper
+    },
+    {
+      path: '/aboutWxApp',
+      name: aboutWxApp,
+      component: aboutWxApp
     }
     ]
-  }, {
+  },
+  {
     path: '/test',
     name: test,
     component: test

@@ -1,4 +1,5 @@
 <import src="/templates/articleList/articleList.wxml" />
-<view class="aritcle-list">
+<view class="aritcle-list" wx:if="{{articleList.length > 0}}">
   <template is="articleList" data="{{articleList}}"></template>
 </view>
+<view class="no-data" wx:else>暂时没有内容哦~</view>

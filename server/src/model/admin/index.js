@@ -41,22 +41,16 @@ module.exports = class extends think.Model {
     let result = await commentModel.where(data).select();
     return result;
   }
-  // 添加评论
-  async addArticleComment(data) {
-    let commentModel = this.model("article_comment");
-    let result = await commentModel.add(data);
+  // 关于开发者内容编辑
+  async editAboutDeveloper(condition, data) {
+    let model = this.model("about");
+    let result = await model.where(condition).update(data);
     return result;
   }
-  // 浏览量统计
-  async viewCount(condition, data) {
-    let articleModel = this.model("article_list");
-    let result = await articleModel.where(condition).update(data);
-    return result;
-  }
-  // 点赞
-  async praiseCount(condition, data) {
-    let articleModel = this.model("article_list");
-    let result = await articleModel.where(condition).update(data);
+  // 关于开发者内容获取
+  async getAboutDeveloper(condition) {
+    let model = this.model("about");
+    let result = await model.where(condition).find();
     return result;
   }
 };
