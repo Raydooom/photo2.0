@@ -3,8 +3,6 @@ import Promise from "../utils/external/es6-promise.min";
 // const HOST = "http://localhost:8360";
 // const HOST = "http://192.168.1.110:8360";
 const HOST = "https://server.raydom.wang";
-const app = getApp();
-console.log(app)
 // 接口列表
 const api = {
   getBanner: "/api/index/getBanner", // 获取banner
@@ -25,7 +23,7 @@ const api = {
   addArticleComment: "/api/user/addArticleComment", // 添加评论
 }
 
-// promise封装
+// 微信request请求promise封装
 function severRequest(apiKey, params = {}, method = "POST") {
   let token = wx.getStorageSync("token") || "";
   return new Promise((resolve, reject) => {

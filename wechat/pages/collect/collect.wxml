@@ -1,4 +1,6 @@
-<import src="/templates/articleList/articleList.wxml" />
+<import src="/templates/articleList.wxml" />
+<import src="/templates/loading.wxml" />
+<template wx:if="{{loading}}" is="page-loading" />
 <view class="aritcle-list">
   <template is="articleList" data="{{articleList}}"></template>
 </view>

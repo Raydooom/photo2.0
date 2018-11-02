@@ -17,7 +17,8 @@ Page({
     articleDetail: "",
     isLogin: true,
     scrollDirection: 0,
-    scrollTop: 0
+    scrollTop: 0,
+    loading: true
   },
 
   /**
@@ -33,7 +34,8 @@ Page({
       id: this.data.id
     }).then(res => {
       this.setData({
-        articleDetail: res.data
+        articleDetail: res.data,
+        loading: false
       })
       let articleContent = res.data.content;
       WxParse.wxParse('article', 'html', articleContent, this, 5);

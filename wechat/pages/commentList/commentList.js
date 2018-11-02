@@ -55,7 +55,8 @@ Page({
       id: this.data.articleId
     }).then(res => {
       this.setData({
-        commentList: res.data
+        commentList: res.data,
+        loading: false
       })
       // 停止下拉刷新
       wx.stopPullDownRefresh();

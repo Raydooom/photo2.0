@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    articleList: ""
+    articleList: "",
+    loading: true
   },
 
   /**
@@ -16,7 +17,8 @@ Page({
   onLoad: function(options) {
     severRequest("getCollectArticle").then(res => {
       this.setData({
-        articleList: res.data
+        articleList: res.data,
+        loading: true
       })
     })
   },

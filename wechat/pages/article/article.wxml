@@ -1,5 +1,7 @@
 <import src="../../wxParse/wxParse.wxml" />
 
+<import src="/templates/loading.wxml" />
+<template wx:if="{{loading}}" is="page-loading" />
 <view class="article-cover">
   <image mode='aspectFill' wx:if="{{articleDetail.cover_img}}" src="{{articleDetail.cover_img}}"></image>
   <view class="title-warp">

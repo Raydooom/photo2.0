@@ -2,6 +2,7 @@
 
 page {
   padding-bottom: 10rpx;
+  height: 100%;
 }
 
 .top-title .main-title {
