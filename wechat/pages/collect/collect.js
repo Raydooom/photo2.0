@@ -18,7 +18,7 @@ Page({
     severRequest("getCollectArticle").then(res => {
       this.setData({
         articleList: res.data,
-        loading: true
+        loading: false
       })
     })
   },
