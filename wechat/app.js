@@ -1,25 +1,33 @@
 const {
   severRequest
 } = require("api/index");
+const {
+  wxPromise
+} = require("/utils/wxUtils.js");
+const {
+  Promise
+} = require("/utils/external/es6-promise.min.js");
 
 App({
   wxLogin() {
-    wx.login({
-      success: (codeRes) => {
-        wx.getUserInfo({
+    return new Promise((resolve, reject) => {
+      // 获取code码
+      wxPromise(wx.login).then(loginRes => {
+        // 获取用户信息
+        wxPromise(wx.getUserInfo, {
           lang: "zh_CN",
-          success: (res) => {
-            let data = {
-              code: codeRes.code,
-              userInfo: res.userInfo
-            }
-            severRequest("login", data).then(res => {
-              this.globalData.isLogin = true;
-              wx.setStorageSync("token", res.data);
-            })
+        }).then(res => {
+          let data = {
+            code: loginRes.code,
+            userInfo: res.userInfo
           }
+          severRequest("login", data).then(res => {
+            this.globalData.isLogin = true;
+            wx.setStorageSync("token", res.data);
+            resolve();
+          })
         })
-      }
+      })
     })
   },
   onLaunch() {

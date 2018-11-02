@@ -1,4 +1,6 @@
 <import src="../../wxParse/wxParse.wxml" />
+<import src="/templates/loading.wxml" />
+<template wx:if="{{loading}}" is="page-loading" />
 <view class="title">{{title}}</view>
 <view class="content">
   <template is="wxParse" data="{{wxParseData:content.nodes}}" />

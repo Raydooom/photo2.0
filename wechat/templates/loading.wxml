@@ -1,0 +1,10 @@
+<template name="page-loading">
+  <view class="loading-warp">
+    <view class="loading">
+      <image src="../../assets/icons/loading.png"></image>
+      <image src="../../assets/icons/loading.png"></image>
+      <image src="../../assets/icons/loading.png"></image>
+    </view>
+    <view class="loading-text">正在加载</view>
+  </view>
+</template>

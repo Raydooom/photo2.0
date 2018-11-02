@@ -1,4 +1,21 @@
-function wxToast(text, icon) {
+const Promise = require("./external/es6-promise.min.js");
+
+// promise封装微信官方api方法
+const wxPromise = (wxApi, options) => {
+  return new Promise((resolve, reject) => {
+    wxApi({
+      options,
+      success: (res) => {
+        resolve(res)
+      },
+      fail: (err) => {
+        reject(err)
+      }
+    })
+  })
+}
+// 微信弹框
+const wxToast = (text, icon) => {
   wx.showToast({
     title: text,
     mask: true,
@@ -8,5 +25,6 @@ function wxToast(text, icon) {
 }
 
 module.exports = {
-  wxToast: wxToast
+  wxPromise: wxPromise,
+  wxToast: wxToast,
 }

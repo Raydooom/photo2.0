@@ -1,15 +1,15 @@
 <view>
   <image class="center_bg" mode='aspectFill' src='../../assets/images/center_bg.jpg'></image>
   <view class="avatar-warp">
-    <image class="avatar" mode='aspectFill' src='{{userInfo.avatar}}'></image>
-    <view class="nickname">{{userInfo.user_name}}</view>
+    <image class="avatar" mode='aspectFill' src='{{userInfo.avatar || "../../assets/icons/default_avatar.jpg"}}'></image>
+    <view class="nickname">{{userInfo.user_name || '未登录'}}</view>
     <!-- <view class="user-info">
       <image src='../../assets/icons/level.png'></image>影坛新手</view> -->
     <view class="article-info">
       <navigator url="../collect/collect" hover-class='none' class="article-item">
-        <text class="num">{{userInfo.praise_article}}</text>我的点赞</navigator>
+        <text class="num">{{userInfo.praise_article || 0}}</text>我的点赞</navigator>
       <navigator url="../commentArticle/commentArticle" class="article-item">
-        <text class="num">{{userInfo.comment_article}}</text>我的评论</navigator>
+        <text class="num">{{userInfo.comment_article || 0}}</text>我的评论</navigator>
       <!-- <navigator hover-class='none' url='../credits/credits' class="article-item">
         <text class="num">20</text>我的积分</navigator> -->
     </view>
@@ -24,5 +24,5 @@
     关于开发者
     <image class="next" src='../../assets/icons/next.png'></image>
   </navigator>
-  <login-toast wx:if="{{!isLogin}}"></login-toast>
+  <login-toast wx:if="{{!isLogin}}" bind:loginSuccess="login"></login-toast>
 </view>

@@ -23,8 +23,7 @@ Component({
   methods: {
     getUserInfo(e) {
       if (e.detail.errMsg == "getUserInfo:ok") {
-        app.wxLogin();
-        // severRequest("")
+        this.triggerEvent('loginSuccess');
       }
     }
   }

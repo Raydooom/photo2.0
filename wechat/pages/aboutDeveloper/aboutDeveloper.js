@@ -9,6 +9,7 @@ Page({
    */
   data: {
     title: "",
+    loading: true
   },
 
   /**
@@ -20,7 +21,8 @@ Page({
     }).then(res => {
       this.setData({
         content: res.data.content,
-        title: res.data.title
+        title: res.data.title,
+        loading: false
       })
       let content = res.data.content;
       WxParse.wxParse('content', 'html', content, this, 5);

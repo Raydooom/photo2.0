@@ -92,3 +92,42 @@ navigator:hover {
   display: inline-block;
   margin-right: 10rpx;
 }
+
+/* loading动画 */
+
+.loading-warp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  flex-direction: column;
+  background: #efefef;
+}
+
+.loading image {
+  width: 50rpx;
+  height: 50rpx;
+  margin: 0 6rpx;
+  animation: 1s rotate infinite linear;
+}
+
+@keyframes rotate {
+  form {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: 24rpx;
+  color: #666;
+  text-align: center;
+  padding-top: 10rpx;
+}

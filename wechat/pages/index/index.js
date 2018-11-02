@@ -12,7 +12,8 @@ Page({
     kindList: "",
     activeKind: 1,
     articleList: "",
-    fixed: false
+    fixed: false,
+    loading: true
   },
   onShow() {
     this.getData();
@@ -47,7 +48,8 @@ Page({
     }
     severRequest("getKindArticle", data).then(res => {
       this.setData({
-        articleList: res.data
+        articleList: res.data,
+        loading: false
       })
     })
   },
