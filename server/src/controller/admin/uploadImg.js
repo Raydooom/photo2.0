@@ -14,7 +14,7 @@ module.exports = class extends think.Controller {
     let datas = fs.readFileSync(filepath);
     //写文件
     fs.writeFileSync(savepath + newfilename, datas);
-    let newpath = "/static/uploadimg/" + newfilename;
+    let newpath = "/static/uploadImg/" + newfilename;
 
     this.success(newpath, "上传成功！")
   }

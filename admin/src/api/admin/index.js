@@ -99,7 +99,7 @@ export const getKindList = (params) => {
   })
 }
 
-export const uploadImgUrl = "http://localhost:8360/common/uploadImg/index";
+export const uploadImgUrl = "/admin/uploadImg/index";
 
 // 添加文章
 export const addArticle = (params) => {
