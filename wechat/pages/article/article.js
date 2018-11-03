@@ -30,6 +30,9 @@ Page({
     });
   },
   onShow() {
+    this.getData();
+  },
+  getData() {
     severRequest("getArticle", {
       id: this.data.id
     }).then(res => {
@@ -48,6 +51,15 @@ Page({
       this.setData({
         [views]: res.data.views
       })
+    })
+  },
+  login() {
+    app.wxLogin().then(() => {
+      this.setData({
+        isLogin: app.globalData.isLogin
+      })
+      this.getData();
+      wxToast("登录成功");
     })
   },
   // 点赞

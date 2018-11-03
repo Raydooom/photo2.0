@@ -36,4 +36,4 @@
     </view>
   </view>
 </view>
-<login-toast wx:if="{{!isLogin}}"></login-toast>
+<login-toast wx:if="{{!isLogin}}" bind:loginSuccess="login"></login-toast>

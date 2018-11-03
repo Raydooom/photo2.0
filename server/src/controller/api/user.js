@@ -57,9 +57,12 @@ module.exports = class extends Auth {
     // 查询文章列表数据
     const article = await this.model('api/index').getArticle({ id: id });
     let praiseList = article.praises ? article.praises.split(",") : [];
+    think.logger.info(praiseList, "已点赞id");
     if (praiseList.includes(userId)) {
       let index = praiseList.indexOf(userId);
-      praiseList.splice(index);
+      think.logger.info(index, "用户id");
+      praiseList.splice(index, 1);
+      think.logger.info(praiseList, "取消后");
       this.success({ praises: praiseList.length, isPraise: false }, "取消点赞")
     } else {
       praiseList.unshift(userId);
@@ -76,7 +79,7 @@ module.exports = class extends Auth {
     let praiseArticle = userResult.praise_article ? userResult.praise_article.split(",") : [];
     if (praiseArticle.includes(id)) {
       let index = praiseArticle.indexOf(id);
-      praiseArticle.splice(index);
+      praiseArticle.splice(index, 1);
     } else {
       praiseArticle.unshift(id);
     }
