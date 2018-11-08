@@ -14,16 +14,15 @@ module.exports = class extends think.Controller {
     const userList = await this.model("admin/login").getUser();
     const { account, password } = this.post();
 
-    const userInfo = {
-      name: userList
-    };
-    const { secret, cookie, expire } = this.config('jwt');
+    // const userInfo = {
+    //   name: userList
+    // };
+    // const { secret, cookie, expire } = this.config('jwt');
     // 生成token
-    const token = jsonwebtoken.sign(userInfo, secret, { expiresIn: expire });
-    this.cookie(cookie, token);
-    this.success({ token: token, userName: account }, "登录成功！");
+    // const token = jsonwebtoken.sign(userInfo, secret, { expiresIn: expire });
+    // this.cookie(cookie, token);
+    // this.success({ token: token, userName: account }, "登录成功！");
 
-    return
     try {
       userList.forEach(el => {
         // 解密

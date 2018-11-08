@@ -18,7 +18,7 @@ export default {
     return {
       action: uploadImgUrl,
       imgType: ["image/jpeg", "image/png", "images/gif"],
-      fileSize: "512000",
+      fileSize: "2048000",
       param: "",
       imageUrl: ""
     };
