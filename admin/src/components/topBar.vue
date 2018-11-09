@@ -1,20 +1,37 @@
 <template>
   <header>
-    <h4>统计</h4>
+    <h4>{{title}}</h4>
     <div class="user-info">
       <span class="msg-btn">
         <i class="el-icon-bell"></i>
         <i class="msg-num">123</i>
       </span>
       <span class="logout">
-        <el-button type="primary" round icon="el-icon-news">退出</el-button>
+        <el-button type="primary" round icon="el-icon-news" @click="logout">退出</el-button>
       </span>
     </div>
   </header>
 </template>
 
 <script>
-export default {};
+import { logout } from "@/api/admin";
+export default {
+  data() {
+    return {};
+  },
+  computed: {
+    title() {
+      return this.$store.state.routerTitle;
+    }
+  },
+  methods: {
+    logout() {
+      logout().then(res => {
+        this.$router.push("/login");
+      });
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

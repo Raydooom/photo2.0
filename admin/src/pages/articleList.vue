@@ -1,6 +1,5 @@
 <template>
   <div>
-    <slot></slot>
     <div class="main-container">
       <el-table :data="articleList" border>
         <el-table-column type="index" label="序号" width="60" align="center"></el-table-column>

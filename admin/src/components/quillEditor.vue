@@ -66,7 +66,7 @@ export default {
   },
   watch: {
     articleContent(newVal) {
-      console.log(newVal);
+      // console.log(newVal);
       this.content = newVal;
     }
   },

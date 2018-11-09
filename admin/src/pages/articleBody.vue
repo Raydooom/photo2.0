@@ -1,6 +1,5 @@
 <template>
   <section>
-    <slot></slot>
     <div class="main-container">
       <el-form ref="form" :model="formData" :rules="rules" label-position="right" label-width="100px">
         <el-row>

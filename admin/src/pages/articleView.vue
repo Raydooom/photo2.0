@@ -1,6 +1,5 @@
 <template>
   <section>
-    <slot></slot>
     <div class="main-container">
       <div class="mobile-view">
         <div class="cover-img"><img :src="articleInfo.cover_img" alt="封面图片"></div>

@@ -2,12 +2,12 @@
   <section class="main">
     <div class="menu">
       <div class="logo">
-        <!-- 我想学摄影 -->
+        我想学摄影
       </div>
       <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" router>
         <el-menu-item index="/dashBoard">
           <i class="el-icon-menu"></i>
-          <span slot="title">统计</span>
+          <span slot="title">数据统计</span>
         </el-menu-item>
         <el-submenu index="/articleList">
           <template slot="title">
@@ -16,7 +16,7 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="/articleList">文章列表</el-menu-item>
-            <el-menu-item index="/addArticle">添加文章</el-menu-item>
+            <el-menu-item index="/articleAdd">添加文章</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-menu-item index="/aboutWxApp">
@@ -34,7 +34,6 @@
       <div class="main-content">
         <transition name="slide-fade" mode="out-in">
           <router-view>
-            <h3>{{routerTitle}}</h3>
           </router-view>
         </transition>
       </div>
@@ -101,7 +100,7 @@ export default {
   opacity: 0;
 }
 .main-content {
-  padding: 0 25px;
+  padding: 25px 25px;
   h3 {
     font-size: 20px;
     margin: 20px 0;

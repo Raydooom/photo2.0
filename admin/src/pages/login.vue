@@ -4,7 +4,7 @@
       <img src="../assets/images/login.jpg">
     </div>
     <div class="right">
-      <!-- <h2>我想学摄影管理系统</h2> -->
+      <h2>我想学摄影管理系统</h2>
       <ul class="form-wrap">
         <li>
           <el-input placeholder="请输入管理员账号" maxlength="16" v-model="account" clearable autofocus></el-input>
@@ -34,8 +34,17 @@ export default {
   },
   created() {
     this.getKey();
+    document.onkeydown = () => {
+      var key = window.event.keyCode;
+      if (key == 13) {
+        this.login();
+      }
+    };
   },
   methods: {
+    submit() {
+      console.log(123);
+    },
     // 获取加密key
     getKey() {
       getKey().then(res => {

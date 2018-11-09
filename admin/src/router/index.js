@@ -1,17 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const test = r => require.ensure([], () => r(require('@/pages/test')), 'test')
-const home = r => require.ensure([], () => r(require('@/pages/home')), 'home')
-const login = r => require.ensure([], () => r(require('@/pages/login')), 'login')
-const dashBoard = r => require.ensure([], () => r(require('@/pages/dashBoard')), 'dashBoard')
-const addArticle = r => require.ensure([], () => r(require('@/pages/articleAdd')), 'articleAdd')
-const articleEdit = r => require.ensure([], () => r(require('@/pages/articleEdit')), 'articleEdit')
-const articleList = r => require.ensure([], () => r(require('@/pages/articleList')), 'articleList')
-const articleView = r => require.ensure([], () => r(require('@/pages/articleView')), 'articleView')
 
-const aboutDeveloper = r => require.ensure([], () => r(require('@/pages/aboutDeveloper')), "aboutDeveloper")
-const aboutWxApp = r => require.ensure([], () => r(require('@/pages/aboutWxApp')), "aboutWxApp")
+// webpack 按需加载页面模块
+const test = () => import("@/pages/test");
+const home = () => import("@/pages/home");
+const login = () => import("@/pages/login");
+const dashBoard = () => import("@/pages/dashBoard");
+const articleAdd = () => import("@/pages/articleAdd");
+const articleEdit = () => import("@/pages/articleEdit");
+const articleList = () => import("@/pages/articleList");
+const articleView = () => import("@/pages/articleView");
 
+const aboutDeveloper = () => import("@/pages/aboutDeveloper");
+const aboutWxApp = () => import("@/pages/aboutWxApp");
 
 const errorPage = r => require.ensure([], () => r(require('@/pages/errorPage')), 'errorPage')
 Vue.use(Router)
@@ -30,7 +31,7 @@ export default new Router({
       path: 'dashBoard',
       component: dashBoard,
       meta: {
-        title: '统计信息'
+        title: '数据统计'
       }
     },
     {
@@ -41,8 +42,8 @@ export default new Router({
       }
     },
     {
-      path: 'addArticle',
-      component: addArticle,
+      path: 'articleAdd',
+      component: articleAdd,
       meta: {
         title: '添加文章'
       }
@@ -65,12 +66,18 @@ export default new Router({
     {
       path: '/aboutDeveloper',
       name: aboutDeveloper,
-      component: aboutDeveloper
+      component: aboutDeveloper,
+      meta: {
+        title: '关于开发者'
+      }
     },
     {
       path: '/aboutWxApp',
       name: aboutWxApp,
-      component: aboutWxApp
+      component: aboutWxApp,
+      meta: {
+        title: '关于小程序'
+      }
     }
     ]
   },
