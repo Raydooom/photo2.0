@@ -3,9 +3,10 @@
     <image class="clover" mode='aspectFill' src='{{item.cover_img}}'></image>
     <view class="article-info">
       <text class="article-title">{{item.article_title}}</text>
+      <text class="article-des">{{item.description}}</text>
       <view class="article-view">
-        <image src='../../assets/icons/views_gray.png'></image>
-        {{item.views}}
+        <!-- <image src='../../assets/icons/views_gray.png'></image> -->
+        浏览 {{item.views}}
       </view>
     </view>
   </navigator>
