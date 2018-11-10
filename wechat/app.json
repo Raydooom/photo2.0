@@ -32,6 +32,12 @@
         "selectedIconPath": "/assets/icons/home_active.png"
       },
       {
+        "pagePath": "pages/wallpaper/wallpaper",
+        "text": "壁纸",
+        "iconPath": "/assets/icons/home.png",
+        "selectedIconPath": "/assets/icons/home_active.png"
+      },
+      {
         "pagePath": "pages/center/center",
         "text": "我的",
         "iconPath": "/assets/icons/center.png",

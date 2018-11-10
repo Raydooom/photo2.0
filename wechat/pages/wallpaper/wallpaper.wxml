@@ -1,2 +1,20 @@
-<!--pages/wallpaper/wallpaper.wxml-->
-<text>pages/wallpaper/wallpaper.wxml</text>
+<swiper bindanimationfinish="animationFinish">
+  <block wx:for="{{wallpaperList}}" wx:key="{{item.id}}">
+    <swiper-item>
+      <image class="img" src="{{item.url}}" mode='aspectFill'></image>
+      <view class="text-wrap">
+        <view class="date">
+          <text class="day">{{item.day}}</text>
+          <text class="month">{{item.month}}</text>
+        </view>
+        <view class="text">{{item.text}}</view>
+        <view class="line"></view>
+        <view class="title">
+          <text>{{item.title}}</text>
+          <view class="praise">
+            <image mode='' src="../../assets/icons/like_white.png"></image>{{item.praises}}</view>
+        </view>
+      </view>
+    </swiper-item>
+  </block>
+</swiper>

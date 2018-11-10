@@ -58,9 +58,9 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "壁纸",
-					"pathName": "pages/home/home",
+					"pathName": "pages/wallpaper/wallpaper",
 					"query": ""
 				}
 			]
