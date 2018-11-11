@@ -61,7 +61,27 @@ swiper-item {
   justify-content: space-between;
 }
 
-.text-wrap .praise image {
+.text-wrap .handle {
+  display: flex;
+}
+
+.handle .down {
+  font-size: 28rpx;
+  border-radius: 20rpx;
+  border: 2rpx solid #fff;
+  line-height: 36rpx;
+  padding: 0 20rpx;
+  margin-right: 40rpx;
+  opacity: 0.8;
+}
+
+.handle .down image {
+  display: inline-block;
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.handle .praise image {
   display: inline-block;
   width: 40rpx;
   height: 40rpx;

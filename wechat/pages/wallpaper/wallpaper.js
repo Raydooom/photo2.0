@@ -1,4 +1,7 @@
-// pages/wallpaper/wallpaper.js
+const {
+  wxToast,
+  wxPromise
+} = require("../../utils/wxUtils.js");
 Page({
   /**
    * 页面的初始数据
@@ -32,6 +35,7 @@ Page({
       }
     ],
     total: 0,
+    activeIndex: 0
   },
 
   /**
@@ -39,18 +43,44 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      total: this.data.wallpaperList.length
+      total: this.data.wallpaperList.length,
+      activeIndex: this.data.wallpaperList.length - 1
     })
   },
   animationFinish(e) {
-    if (e.detail.current == this.data.total - 1) {
+    if (e.detail.current == 0) {
+      let newArr = this.data.wallpaperList;
+      let data = [];
+      for (let i = newArr.length - 1; i >= 0; i--) {
+        data.unshift(this.data.wallpaperList[i]);
+      }
       this.setData({
-        wallpaperList: this.data.wallpaperList.concat(this.data.wallpaperList)
+        activeIndex: newArr.length,
+        wallpaperList: data
       })
       this.setData({
         total: this.data.wallpaperList.length
       })
     }
+  },
+  downImg(e) {
+    wx.downloadFile({
+      url: e.currentTarget.dataset.url,
+      success: res => {
+        console.log(res)
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success: res => {
+            wxToast("保存成功");
+          },
+          fail: err => {
+            wxToast("保存失败");
+          }
+        })
+      }
+    })
+
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

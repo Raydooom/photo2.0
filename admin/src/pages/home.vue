@@ -19,6 +19,16 @@
             <el-menu-item index="/addArticle">添加文章</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
+        <el-submenu index="/choicenessAdd">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span>精选</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="/choicenessList">精选列表</el-menu-item>
+            <el-menu-item index="/choicenessAdd">添加精选</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
         <el-menu-item index="/aboutWxApp">
           <i class="el-icon-menu"></i>
           <span slot="title">关于小程序</span>

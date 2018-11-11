@@ -11,7 +11,8 @@ const articleView = r => require.ensure([], () => r(require('@/pages/articleView
 
 const aboutDeveloper = r => require.ensure([], () => r(require('@/pages/aboutDeveloper')), "aboutDeveloper")
 const aboutWxApp = r => require.ensure([], () => r(require('@/pages/aboutWxApp')), "aboutWxApp")
-
+const choicenessList = () => import("@/pages/choiceness/list");
+const choicenessAdd = () => import("@/pages/choiceness/add");
 
 const errorPage = r => require.ensure([], () => r(require('@/pages/errorPage')), 'errorPage')
 Vue.use(Router)
@@ -45,6 +46,20 @@ export default new Router({
       component: addArticle,
       meta: {
         title: '添加文章'
+      }
+    },
+    {
+      path: 'choicenessList',
+      component: choicenessList,
+      meta: {
+        title: '精选壁纸'
+      }
+    },
+    {
+      path: 'choicenessAdd',
+      component: choicenessAdd,
+      meta: {
+        title: '添加壁纸'
       }
     },
     {

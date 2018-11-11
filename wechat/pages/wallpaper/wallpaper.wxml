@@ -1,4 +1,4 @@
-<swiper bindanimationfinish="animationFinish">
+<swiper bindanimationfinish="animationFinish" current="{{activeIndex}}">
   <block wx:for="{{wallpaperList}}" wx:key="{{item.id}}">
     <swiper-item>
       <image class="img" src="{{item.url}}" mode='aspectFill'></image>
@@ -11,8 +11,14 @@
         <view class="line"></view>
         <view class="title">
           <text>{{item.title}}</text>
-          <view class="praise">
-            <image mode='' src="../../assets/icons/like_white.png"></image>{{item.praises}}</view>
+          <view class="handle">
+            <view class="down" bindtap="downImg" data-url="{{item.url}}">
+              <image src="../../assets/icons/down.png"></image>
+            </view>
+            <view class="praise">
+              <image mode='' src="../../assets/icons/like_white.png"></image>{{item.praises}}
+            </view>
+          </view>
         </view>
       </view>
     </swiper-item>
