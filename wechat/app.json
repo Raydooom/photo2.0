@@ -27,9 +27,15 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "热门",
+        "text": "首页",
         "iconPath": "/assets/icons/home.png",
         "selectedIconPath": "/assets/icons/home_active.png"
+      },
+      {
+        "pagePath": "pages/wallpaper/wallpaper",
+        "text": "精选",
+        "iconPath": "/assets/icons/image.png",
+        "selectedIconPath": "/assets/icons/image_active.png"
       },
       {
         "pagePath": "pages/center/center",
