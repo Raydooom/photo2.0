@@ -2,38 +2,15 @@ const {
   wxToast,
   wxPromise
 } = require("../../utils/wxUtils.js");
+const {
+  severRequest
+} = require("../../api/index");
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    wallpaperList: [{
-        id: 1,
-        url: "https://server.raydom.wang/static/uploadImg/5oyo4cnyx4.jpg",
-        day: "13",
-        month: "2018.10",
-        title: "立冬",
-        praises: "20",
-        text: "中国民间以立冬为冬季之始，立冬期间，有需进补以度严冬的食俗。"
-      },
-      {
-        id: 2,
-        url: "https://server.raydom.wang/static/uploadImg/gcafisukxvb.jpg",
-        day: "12",
-        month: "2018.10",
-        title: "立冬",
-        praises: "20",
-        text: "中国民间以立冬为冬季之始，立冬期间，有需进补以度严冬的食俗。"
-      }, {
-        id: 3,
-        url: "https://server.raydom.wang/static/uploadImg/o6hou4omkyd.jpg",
-        day: "11",
-        month: "2018.10",
-        title: "立冬",
-        praises: "20",
-        text: "中国民间以立冬为冬季之始，立冬期间，有需进补以度严冬的食俗。"
-      }
-    ],
+    wallpaperList: "",
     total: 0,
     activeIndex: 0
   },
@@ -44,24 +21,32 @@ Page({
   onLoad: function(options) {
     this.setData({
       total: this.data.wallpaperList.length,
-      activeIndex: this.data.wallpaperList.length - 1
+      // activeIndex: this.data.wallpaperList.length - 1
+    })
+    this.getData();
+  },
+  getData() {
+    severRequest("getDailyList").then(res => {
+      this.setData({
+        wallpaperList: res.data.data
+      })
     })
   },
   animationFinish(e) {
-    if (e.detail.current == 0) {
-      let newArr = this.data.wallpaperList;
-      let data = [];
-      for (let i = newArr.length - 1; i >= 0; i--) {
-        data.unshift(this.data.wallpaperList[i]);
-      }
-      this.setData({
-        activeIndex: newArr.length,
-        wallpaperList: data
-      })
-      this.setData({
-        total: this.data.wallpaperList.length
-      })
-    }
+    // if (e.detail.current == 0) {
+    //   let newArr = this.data.wallpaperList;
+    //   let data = [];
+    //   for (let i = newArr.length - 1; i >= 0; i--) {
+    //     data.unshift(this.data.wallpaperList[i]);
+    //   }
+    //   this.setData({
+    //     activeIndex: newArr.length,
+    //     wallpaperList: data
+    //   })
+    //   this.setData({
+    //     total: this.data.wallpaperList.length
+    //   })
+    // }
   },
   downImg(e) {
     wx.downloadFile({

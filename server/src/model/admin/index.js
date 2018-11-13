@@ -73,4 +73,16 @@ module.exports = class extends think.Model {
     let result = await model.where(condition).delete();
     return result;
   }
-};  
+  // 获取详情
+  async getDaily(condition) {
+    let model = this.model("daily");
+    let result = await model.where(condition).find();
+    return result;
+  }
+  // 更新
+  async updateDaily(condition, data) {
+    let articleModel = this.model("daily");
+    let result = await articleModel.where(condition).update(data);
+    return result;
+  }
+}

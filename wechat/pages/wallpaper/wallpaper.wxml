@@ -1,18 +1,18 @@
 <swiper bindanimationfinish="animationFinish" current="{{activeIndex}}">
   <block wx:for="{{wallpaperList}}" wx:key="{{item.id}}">
     <swiper-item>
-      <image class="img" src="{{item.url}}" mode='aspectFill'></image>
+      <image class="img" src="{{item.img_url}}" mode='aspectFill'></image>
       <view class="text-wrap">
         <view class="date">
           <text class="day">{{item.day}}</text>
           <text class="month">{{item.month}}</text>
         </view>
-        <view class="text">{{item.text}}</view>
+        <view class="text">{{item.content}}</view>
         <view class="line"></view>
         <view class="title">
-          <text>{{item.title}}</text>
+          <text>{{item.from}}</text>
           <view class="handle">
-            <view class="down" bindtap="downImg" data-url="{{item.url}}">
+            <view class="down" bindtap="downImg" data-url="{{item.img_url}}">
               <image src="../../assets/icons/down.png"></image>
             </view>
             <view class="praise">

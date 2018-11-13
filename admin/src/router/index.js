@@ -15,6 +15,7 @@ const aboutDeveloper = () => import("@/pages/aboutDeveloper");
 const aboutWxApp = () => import("@/pages/aboutWxApp");
 const dailyList = () => import("@/pages/daily/list");
 const dailyAdd = () => import("@/pages/daily/add");
+const dailyEdit = () => import("@/pages/daily/edit");
 
 const errorPage = () => import('@/pages/errorPage');
 Vue.use(Router)
@@ -51,6 +52,21 @@ export default new Router({
       }
     },
     {
+      path: 'preview/:id',
+      component: articleView,
+      name: 'articleView',
+      meta: {
+        title: '预览文章'
+      }
+    }, {
+      path: 'edit/:id',
+      component: articleEdit,
+      name: 'edit',
+      meta: {
+        title: '编辑文章'
+      }
+    },
+    {
       path: 'dailyList',
       component: dailyList,
       meta: {
@@ -65,18 +81,10 @@ export default new Router({
       }
     },
     {
-      path: 'preview/:id',
-      component: articleView,
-      name: 'articleView',
+      path: 'dailyEdit/:id',
+      component: dailyEdit,
       meta: {
-        title: '预览文章'
-      }
-    }, {
-      path: 'edit/:id',
-      component: articleEdit,
-      name: 'edit',
-      meta: {
-        title: '编辑文章'
+        title: '添加精选'
       }
     },
     {

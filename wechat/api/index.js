@@ -1,8 +1,8 @@
 import Promise from "../utils/external/es6-promise.min";
 
-// const HOST = "http://localhost:8360";
+const HOST = "http://localhost:8360";
 // const HOST = "http://192.168.1.110:8360";
-const HOST = "https://server.raydom.wang";
+// const HOST = "https://server.raydom.wang";
 // 接口列表
 const api = {
   getBanner: "/api/index/getBanner", // 获取banner
@@ -13,6 +13,7 @@ const api = {
   viewCount: "/api/index/viewCount", // 浏览量
   shareCount: "/api/index/shareCount", // 分享统计
   getAboutDeveloper: "/api/index/getAboutDeveloper", // 获取关于开发者
+  getDailyList: "/api/index/getDailyList", // 获取精选列表
   // 需要登录的接口
   login: "/api/login/index", // 登录接口，code换取openid
   getUserInfo: "/api/user/getUserInfo", // 获取用户信息
@@ -20,7 +21,9 @@ const api = {
   getCommentArticle: "/api/user/getCommentArticle", // 获取用户收藏问文章
   // 文章相关
   addPraise: "/api/user/addPraise", // 点赞
-  addArticleComment: "/api/user/addArticleComment", // 添加评论
+  addArticleComment: "/api/user/addArticleComment" // 添加评论
+
+  
 }
 
 // 微信request请求promise封装

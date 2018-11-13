@@ -198,3 +198,31 @@ export const delDaily = params => {
     return err;
   })
 }
+
+// 精选详情
+export const getDaily = params => {
+  let config = {
+    url: "/admin/index/getDaily",
+    method: "POST",
+    data: params
+  }
+  return http(config).then(res => {
+    return res.data;
+  }).catch(err => {
+    return err;
+  })
+}
+
+// 精选更新
+export const updateDaily = params => {
+  let config = {
+    url: "/admin/index/updateDaily",
+    method: "POST",
+    data: params
+  }
+  return http(config).then(res => {
+    return res.data;
+  }).catch(err => {
+    return err;
+  })
+}

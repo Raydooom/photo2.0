@@ -42,7 +42,7 @@
 </template>
 <script>
 import upload from "@/components/upload";
-import { getDailyList, addDaily, updateDaily, getDaily } from "@/api/admin/";
+import { addDaily, updateDaily, getDaily } from "@/api/admin/";
 export default {
   data() {
     return {
@@ -69,16 +69,12 @@ export default {
       let params = { id: this.id };
       getDaily(params).then(res => {
         if (res.errno == 0) {
-          this.formData.title = res.data.article_title;
-          this.formData.kindId = res.data.kind_id;
-          this.formData.homeShow = Boolean(res.data.home_show);
-          this.formData.description = res.data.description;
-          this.formData.content = res.data.content;
-          this.formData.coverUrl = res.data.cover_img;
-          this.formData.content = res.data.content;
+          this.formData = {
+            ...res.data
+          };
         } else {
           this.$message.error("获取详情失败");
-          this.$router.go(-1);
+          // this.$router.go(-1);
         }
       });
     }
@@ -93,6 +89,7 @@ export default {
       this.$refs["form"].validate(validate => {
         if (validate) {
           let params = {
+            id: this.id,
             ...this.formData
           };
           if (!this.id) {

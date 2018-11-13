@@ -17,7 +17,6 @@
         <el-table-column label="点赞数" width="100" sortable prop="praises" align="center"></el-table-column>
         <el-table-column label="操作" width="140" align="center">
           <template slot-scope="scope">
-            <el-button size="mini" type="text" @click="preview(scope.row.id)">查看</el-button>
             <el-button size="mini" @click="edit(scope.row.id)" type="text">编辑</el-button>
             <el-button size="mini" @click="del(scope.row.id)" type="text">删除</el-button>
           </template>
@@ -62,12 +61,8 @@ export default {
       this.page = e;
       this.getList();
     },
-    // 查看
-    preview(id) {
-      this.$router.push("preview/" + id);
-    },
     edit(id) {
-      this.$router.push("edit/" + id);
+      this.$router.push("dailyEdit/" + id);
     },
     del(id) {
       this.$confirm("确定要删除该文章吗?", "提示", {

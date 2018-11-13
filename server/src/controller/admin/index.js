@@ -136,7 +136,6 @@ module.exports = class extends think.Controller {
   async addDailyAction() {
     let currentTime = new Date();
     let { content, from, img_url, date } = this.post();
-    console.log(date)
     let day = new Date(date);
     let data = {
       content,
@@ -164,5 +163,30 @@ module.exports = class extends think.Controller {
     let { id } = this.post();
     const result = await this.model('admin/index').delDaily({ id: id });
     this.success(result, "删除精选成功")
+  }
+
+  // 获取详情
+  async getDailyAction() {
+    let { id } = this.post();
+    const result = await this.model('admin/index').getDaily({ id: id });
+    this.success(result, "获取精选成功")
+  }
+
+  // 更新详情
+  async updateDailyAction() {
+    let currentTime = new Date();
+    let { id, content, from, img_url, date } = this.post();
+    let day = new Date(date);
+    let data = {
+      content,
+      from,
+      img_url,
+      day: day.getUTCDate(),
+      month: day.getUTCMonth() + 1,
+      year: day.getUTCFullYear(),
+      update_date: think.datetime(currentTime)
+    };
+    const result = await this.model('admin/index').updateDaily({ id: id }, data);
+    this.success(result, "更新精选成功")
   }
 }
