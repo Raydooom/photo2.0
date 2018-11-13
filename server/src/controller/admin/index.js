@@ -131,4 +131,38 @@ module.exports = class extends think.Controller {
       this.success(result, "关于开发者获取成功")
     }
   }
+
+  // 添加精选
+  async addDailyAction() {
+    let currentTime = new Date();
+    let { content, from, img_url, date } = this.post();
+    console.log(date)
+    let day = new Date(date);
+    let data = {
+      content,
+      from,
+      img_url,
+      day: day.getUTCDate(),
+      month: day.getUTCMonth() + 1,
+      year: day.getUTCFullYear(),
+      create_date: think.datetime(currentTime),
+      update_date: think.datetime(currentTime)
+    };
+    const result = await this.model('admin/index').addDaily(data);
+    this.success(result, "添加精选成功")
+  }
+
+  // 精选列表
+  async getDailyListAction() {
+    let { page, pageSize } = this.post();
+    const result = await this.model('admin/index').getDailyList(page, pageSize);
+    this.success(result, "获取精选列表成功")
+  }
+
+  // 删除精选
+  async delDailyAction() {
+    let { id } = this.post();
+    const result = await this.model('admin/index').delDaily({ id: id });
+    this.success(result, "删除精选成功")
+  }
 }

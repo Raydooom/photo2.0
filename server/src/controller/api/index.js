@@ -135,4 +135,11 @@ module.exports = class extends think.Controller {
       this.success(result, "关于开发者获取成功")
     }
   }
+
+  // 每日精选
+  async getDailyListAction() {
+    let { page, pageSize } = this.post();
+    const result = await this.model('api/index').getDailyList(page, pageSize);
+    this.success(result, "获取精选列表成功")
+  }
 }

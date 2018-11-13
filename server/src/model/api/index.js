@@ -47,8 +47,8 @@ module.exports = class extends think.Model {
     let result = await commentModel.add(data);
     return result;
   }
-  
-  
+
+
   // 关于开发者内容获取
   async getAboutDeveloper(condition) {
     let model = this.model("about");
@@ -80,7 +80,7 @@ module.exports = class extends think.Model {
     return result;
   }
   // 更新用户表
-  async updateUser(condition,data) {
+  async updateUser(condition, data) {
     let userModel = this.model("user");
     let result = await userModel.where(condition).update(data);
     return result;
@@ -101,6 +101,14 @@ module.exports = class extends think.Model {
   async getUserInfo(condition) {
     let userModel = this.model("user");
     let result = await userModel.where(condition).select();
+    return result;
+  }
+
+  // 精选相关
+  // 获取列表
+  async getDailyList(page, pageSize) {
+    let model = this.model("daily");
+    let result = await model.page(page, pageSize).countSelect();
     return result;
   }
 };

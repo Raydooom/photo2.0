@@ -13,8 +13,8 @@ const articleView = () => import("@/pages/articleView");
 
 const aboutDeveloper = () => import("@/pages/aboutDeveloper");
 const aboutWxApp = () => import("@/pages/aboutWxApp");
-const choicenessList = () => import("@/pages/choiceness/list");
-const choicenessAdd = () => import("@/pages/choiceness/add");
+const dailyList = () => import("@/pages/daily/list");
+const dailyAdd = () => import("@/pages/daily/add");
 
 const errorPage = () => import('@/pages/errorPage');
 Vue.use(Router)
@@ -51,17 +51,17 @@ export default new Router({
       }
     },
     {
-      path: 'choicenessList',
-      component: choicenessList,
+      path: 'dailyList',
+      component: dailyList,
       meta: {
-        title: '精选壁纸'
+        title: '每日精选'
       }
     },
     {
-      path: 'choicenessAdd',
-      component: choicenessAdd,
+      path: 'dailyAdd',
+      component: dailyAdd,
       meta: {
-        title: '添加壁纸'
+        title: '添加精选'
       }
     },
     {

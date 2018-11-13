@@ -157,3 +157,44 @@ export const getAboutDeveloper = params => {
   })
 }
 
+// 精选接口
+export const getDailyList = params => {
+  let config = {
+    url: "/admin/index/getDailyList",
+    method: "POST",
+    data: params
+  }
+  return http(config).then(res => {
+    return res.data;
+  }).catch(err => {
+    return err;
+  })
+}
+
+// 添加精选
+export const addDaily = params => {
+  let config = {
+    url: "/admin/index/addDaily",
+    method: "POST",
+    data: params
+  }
+  return http(config).then(res => {
+    return res.data;
+  }).catch(err => {
+    return err;
+  })
+}
+
+// 删除精选
+export const delDaily = params => {
+  let config = {
+    url: "/admin/index/delDaily",
+    method: "POST",
+    data: params
+  }
+  return http(config).then(res => {
+    return res.data;
+  }).catch(err => {
+    return err;
+  })
+}

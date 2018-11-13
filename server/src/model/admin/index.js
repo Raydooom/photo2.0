@@ -53,4 +53,24 @@ module.exports = class extends think.Model {
     let result = await model.where(condition).find();
     return result;
   }
-};
+
+  // 精选相关
+  // 添加
+  async addDaily(data) {
+    let model = this.model("daily");
+    let result = await model.add(data);
+    return result;
+  }
+  // 获取列表
+  async getDailyList(page, pageSize) {
+    let model = this.model("daily");
+    let result = await model.page(page, pageSize).countSelect();
+    return result;
+  }
+  // 删除
+  async delDaily(condition) {
+    let model = this.model("daily");
+    let result = await model.where(condition).delete();
+    return result;
+  }
+};  

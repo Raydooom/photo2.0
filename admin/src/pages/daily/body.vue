@@ -4,40 +4,31 @@
     <div class="main-container">
       <el-form ref="form" :model="formData" :rules="rules" label-position="right" label-width="100px">
         <el-row>
+          <el-col :span="24">
+            <el-form-item label="文字" prop="content">
+              <el-input type="textarea" autosize :rows="3" v-model="formData.content" maxlength="30"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="12">
-            <el-form-item label="来自于" prop="title">
-              <el-input v-model="formData.title" placeholder="请输入内容" clearable maxlength="12"></el-input>
+            <el-form-item label="来自于" prop="from">
+              <el-input v-model="formData.from" placeholder="请输入内容" clearable maxlength="12"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
             <el-form-item label="图片">
-              <upload @upLoadImg="getCoverUrl" :imgUrl="formData.coverUrl"></upload>
+              <upload @upLoadImg="getCoverUrl" :imgUrl="formData.img_url"></upload>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="选择分类" prop="kindId">
-              <el-select v-model="formData.kindId" placeholder="请选择">
-                <el-option v-for="item in kindList" :key="item.value" :label="item.name" :value="item.id">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="24" prop="description">
-            <el-form-item label="文章描述">
-              <el-input type="textarea" autosize :rows="3" v-model="formData.description" maxlength="100"></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="24">
-            <el-form-item label="文章内容">
-              <quill-editor @getContent="getContent" :articleContent="formData.content"></quill-editor>
+            <el-form-item label="选择日期" prop="date">
+              <el-date-picker v-model="formData.date" type="date" placeholder="选择日期">
+              </el-date-picker>
             </el-form-item>
           </el-col>
         </el-row>
@@ -50,41 +41,33 @@
   </section>
 </template>
 <script>
-import quillEditor from "@/components/quillEditor"; //调用编辑器
 import upload from "@/components/upload";
-import {
-  getKindList,
-  addArticle,
-  updateArticle,
-  getArticle
-} from "@/api/admin/";
+import { getDailyList, addDaily, updateDaily, getDaily } from "@/api/admin/";
 export default {
   data() {
     return {
       kindList: "",
       formData: {
-        title: "",
-        coverUrl: "",
-        kindId: 1,
-        kindName: "",
-        homeShow: false,
-        description: "",
+        from: "",
+        img_url: "",
+        date: "",
         content: ""
       },
       rules: {
-        title: [{ required: true, message: "标题不能为空" }]
+        content: [{ required: true, message: "文字内容不能为空" }],
+        from: [{ required: true, message: "出自不能为空" }],
+        date: [{ required: true, message: "日期不能为空" }]
       }
     };
   },
   props: ["id"],
   components: {
-    quillEditor,
     upload
   },
   watch: {
     id() {
       let params = { id: this.id };
-      getArticle(params).then(res => {
+      getDaily(params).then(res => {
         if (res.errno == 0) {
           this.formData.title = res.data.article_title;
           this.formData.kindId = res.data.kind_id;
@@ -101,46 +84,26 @@ export default {
     }
   },
   methods: {
-    // 获取分类
-    getKindList() {
-      getKindList()
-        .then(res => {
-          this.kindList = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
-    // 获取富文本框内容
-    getContent(data) {
-      this.formData.content = data;
-    },
     // 获取封面图片路径
     getCoverUrl(data) {
-      this.formData.coverUrl = data;
+      this.formData.img_url = data;
     },
     // 发布文章
     publish() {
       this.$refs["form"].validate(validate => {
         if (validate) {
           let params = {
-            id: this.id,
-            title: this.formData.title,
-            coverUrl: this.formData.coverUrl,
-            kind: this.formData.kindId,
-            description: this.formData.description,
-            content: this.formData.content,
-            homeShow: this.formData.homeShow ? "1" : "0"
+            ...this.formData
           };
           if (!this.id) {
-            addArticle(params).then(res => {
+            addDaily(params).then(res => {
               if (res.errno == 0) {
                 this.$message.success(res.errmsg);
+                this.$router.go(-1);
               }
             });
-            this.$router.go(-1);
           } else {
-            updateArticle(params).then(res => {
+            updateDaily(params).then(res => {
               if (res.errno == 0) {
                 this.$message.success(res.errmsg);
                 this.$router.go(-1);

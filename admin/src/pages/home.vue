@@ -19,14 +19,14 @@
             <el-menu-item index="/articleAdd">添加文章</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-submenu index="/choicenessAdd">
+        <el-submenu index="/dailyAdd">
           <template slot="title">
             <i class="el-icon-location"></i>
-            <span>精选</span>
+            <span>每日精选</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/choicenessList">精选列表</el-menu-item>
-            <el-menu-item index="/choicenessAdd">添加精选</el-menu-item>
+            <el-menu-item index="/dailyList">精选列表</el-menu-item>
+            <el-menu-item index="/dailyAdd">添加精选</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-menu-item index="/aboutWxApp">
