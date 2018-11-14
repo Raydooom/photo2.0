@@ -12,42 +12,63 @@ Page({
   data: {
     wallpaperList: "",
     total: 0,
-    activeIndex: 0
+    activeIndex: 0,
+    page: 1,
+    pageSize: 5,
+    addData: "",
+    getMore: true,
+    loadText: "正在加载",
+    loading: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.setData({
-      total: this.data.wallpaperList.length,
-      // activeIndex: this.data.wallpaperList.length - 1
-    })
     this.getData();
   },
   getData() {
-    severRequest("getDailyList").then(res => {
+    let params = {
+      page: this.data.page,
+      pageSize: this.data.pageSize
+    }
+    severRequest("getDailyList", params).then(res => {
       this.setData({
-        wallpaperList: res.data.data
+        page: this.data.page + 1,
+        wallpaperList: res.data.data,
+        total: res.data.data.length,
+        activeIndex: res.data.data.length - 1,
+        loading: false
       })
     })
   },
   animationFinish(e) {
-    // if (e.detail.current == 0) {
-    //   let newArr = this.data.wallpaperList;
-    //   let data = [];
-    //   for (let i = newArr.length - 1; i >= 0; i--) {
-    //     data.unshift(this.data.wallpaperList[i]);
-    //   }
-    //   this.setData({
-    //     activeIndex: newArr.length,
-    //     wallpaperList: data
-    //   })
-    //   this.setData({
-    //     total: this.data.wallpaperList.length
-    //   })
-    // }
+    // 分步加载
+    if (e.detail.current == 0 && this.data.getMore) {
+      let params = {
+        page: this.data.page,
+        pageSize: this.data.pageSize
+      }
+      console.log(this.data.getMore)
+      severRequest("getDailyList", params).then(res => {
+        // 获取数据为空，不再请求
+        if (res.data.data.length == 0) {
+          this.setData({
+            getMore: false,
+            loadText: "没有更多了"
+          })
+        } else {
+          this.setData({
+            page: this.data.page + 1,
+            addData: res.data.data,
+            wallpaperList: res.data.data.concat(this.data.wallpaperList),
+            activeIndex: res.data.data.length
+          })
+        }
+      })
+    }
   },
+
   downImg(e) {
     wx.downloadFile({
       url: e.currentTarget.dataset.url,
@@ -64,49 +85,6 @@ Page({
         })
       }
     })
-
-
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
   },
 
   /**

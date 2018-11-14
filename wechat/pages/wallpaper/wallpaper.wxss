@@ -1,7 +1,26 @@
+page {
+  background: #222;
+}
+
+.load-text, .right-load-text {
+  color: #aaa;
+  width: 28rpx;
+  font-size: 28rpx;
+  position: fixed;
+  z-index: 0;
+  top: 50%;
+  margin-top: -76rpx;
+  left: 20rpx;
+}
+
+.right-load-text {
+  left: auto;
+  right: 20rpx;
+}
+
 page, swiper, swiper-item, .content-wrap {
   width: 100%;
   height: 100%;
-  background: #222;
 }
 
 swiper-item {

@@ -1,3 +1,7 @@
+<import src="/templates/loading.wxml" />
+<template wx:if="{{loading}}" is="page-loading" />
+<view class="load-text">{{loadText}}</view>
+<view class="right-load-text">没有更多了</view>
 <swiper bindanimationfinish="animationFinish" current="{{activeIndex}}">
   <block wx:for="{{wallpaperList}}" wx:key="{{item.id}}">
     <swiper-item>
@@ -5,7 +9,7 @@
       <view class="text-wrap">
         <view class="date">
           <text class="day">{{item.day}}</text>
-          <text class="month">{{item.month}}</text>
+          <text class="month">{{item.month}}.{{item.year}}</text>
         </view>
         <view class="text">{{item.content}}</view>
         <view class="line"></view>
