@@ -1,8 +1,8 @@
 import Promise from "../utils/external/es6-promise.min";
 
-const HOST = "http://localhost:8360";
+// const HOST = "http://localhost:8360";
 // const HOST = "http://192.168.1.110:8360";
-// const HOST = "https://server.raydom.wang";
+const HOST = "https://server.raydom.wang";
 // 接口列表
 const api = {
   getBanner: "/api/index/getBanner", // 获取banner

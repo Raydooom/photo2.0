@@ -137,6 +137,7 @@ module.exports = class extends think.Controller {
     let currentTime = new Date();
     let { content, from, img_url, date } = this.post();
     let day = new Date(date);
+    let sort = new Date(date).getTime()/10000;  // 排序
     let data = {
       content,
       from,
@@ -145,7 +146,8 @@ module.exports = class extends think.Controller {
       month: day.getUTCMonth() + 1,
       year: day.getUTCFullYear(),
       create_date: think.datetime(currentTime),
-      update_date: think.datetime(currentTime)
+      update_date: think.datetime(currentTime),
+      sort: sort
     };
     const result = await this.model('admin/index').addDaily(data);
     this.success(result, "添加精选成功")
@@ -177,6 +179,7 @@ module.exports = class extends think.Controller {
     let currentTime = new Date();
     let { id, content, from, img_url, date } = this.post();
     let day = new Date(date);
+    let sort = new Date(date).getTime()/10000;
     let data = {
       content,
       from,
@@ -184,7 +187,8 @@ module.exports = class extends think.Controller {
       day: day.getUTCDate(),
       month: day.getUTCMonth() + 1,
       year: day.getUTCFullYear(),
-      update_date: think.datetime(currentTime)
+      update_date: think.datetime(currentTime),
+      sort
     };
     const result = await this.model('admin/index').updateDaily({ id: id }, data);
     this.success(result, "更新精选成功")

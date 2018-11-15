@@ -105,10 +105,10 @@ module.exports = class extends think.Model {
   }
 
   // 精选相关
-  // 获取列表
   async getDailyList(page, pageSize) {
     let model = this.model("daily");
-    let result = await model.page(page, pageSize).countSelect();
+    let result = await model.order('sort ASC').page(page, pageSize).countSelect();
     return result;
   }
+
 };
