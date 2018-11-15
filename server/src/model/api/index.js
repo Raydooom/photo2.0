@@ -110,5 +110,10 @@ module.exports = class extends think.Model {
     let result = await model.order('sort ASC').page(page, pageSize).countSelect();
     return result;
   }
-
+  // 点赞
+  async updateDaily(condition, data) {
+    let articleModel = this.model("daily");
+    let result = await articleModel.where(condition).update(data);
+    return result;
+  }
 };

@@ -34,7 +34,7 @@ Page({
     }
     severRequest("getDailyList", params).then(res => {
       this.setData({
-        page: this.data.page + 1,
+        page: this.data.page,
         wallpaperList: res.data.data,
         total: res.data.data.length,
         activeIndex: res.data.data.length - 1,
@@ -46,10 +46,9 @@ Page({
     // 分步加载
     if (e.detail.current == 0 && this.data.getMore) {
       let params = {
-        page: this.data.page,
+        page: this.data.page + 1,
         pageSize: this.data.pageSize
       }
-      console.log(this.data.getMore)
       severRequest("getDailyList", params).then(res => {
         // 获取数据为空，不再请求
         if (res.data.data.length == 0) {
@@ -70,10 +69,16 @@ Page({
   },
 
   downImg(e) {
+    let data = {
+      id: e.currentTarget.dataset.id,
+      download: e.currentTarget.dataset.download + 1
+    }
+    severRequest("dailyDownload", data).then(res => {
+      console.log(res.errmsg)
+    })
     wx.downloadFile({
       url: e.currentTarget.dataset.url,
       success: res => {
-        console.log(res)
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
           success: res => {
@@ -86,7 +91,23 @@ Page({
       }
     })
   },
-
+  // 点赞
+  praise(e) {
+    let data = {
+      id: e.currentTarget.dataset.id,
+      praises: e.currentTarget.dataset.praises + 1,
+      index: e.currentTarget.dataset.index
+    }
+    severRequest("dailyPraise", data).then(res => {
+      if (res.data == 1) {
+        console.log(res.errmsg);
+        let praises = `wallpaperList[${data.index}].praises`;
+        this.setData({
+          [praises]: data.praises
+        })
+      }
+    })
+  },
   /**
    * 用户点击右上角分享
    */

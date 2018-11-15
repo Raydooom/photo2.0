@@ -1,30 +1,32 @@
 <import src="/templates/loading.wxml" />
 <template wx:if="{{loading}}" is="page-loading" />
-<view class="load-text">{{loadText}}</view>
-<view class="right-load-text">没有更多了</view>
-<swiper bindanimationfinish="animationFinish" current="{{activeIndex}}">
-  <block wx:for="{{wallpaperList}}" wx:key="{{item.id}}">
-    <swiper-item>
-      <image class="img" src="{{item.img_url}}" mode='aspectFill'></image>
-      <view class="text-wrap">
-        <view class="date">
-          <text class="day">{{item.day}}</text>
-          <text class="month">{{item.month}}.{{item.year}}</text>
-        </view>
-        <view class="text">{{item.content}}</view>
-        <view class="line"></view>
-        <view class="title">
-          <text>{{item.from}}</text>
-          <view class="handle">
-            <view class="down" bindtap="downImg" data-url="{{item.img_url}}">
-              <image src="../../assets/icons/down.png"></image>
-            </view>
-            <view class="praise">
-              <image mode='' src="../../assets/icons/like_white.png"></image>{{item.praises}}
+<block wx:else>
+  <view class="load-text">{{loadText}}</view>
+  <view class="right-load-text">没有更多了</view>
+  <swiper bindanimationfinish="animationFinish" current="{{activeIndex}}">
+    <block wx:for="{{wallpaperList}}" wx:key="{{item.id}}">
+      <swiper-item>
+        <image class="img" src="{{item.img_url}}" mode='aspectFill'></image>
+        <view class="text-wrap">
+          <view class="date">
+            <text class="day">{{item.day}}</text>
+            <text class="month">{{item.month}}.{{item.year}}</text>
+          </view>
+          <view class="text">{{item.content}}</view>
+          <view class="line"></view>
+          <view class="title">
+            <text>{{item.from}}</text>
+            <view class="handle">
+              <view class="down" bindtap="downImg" data-index="{{index}}" data-download="{{item.download}}" data-id="{{item.id}}" data-url="{{item.img_url}}">
+                <image src="../../assets/icons/down.png"></image>
+              </view>
+              <view class="praise" bindtap="praise" data-index="{{index}}" data-id="{{item.id}}" data-praises="{{item.praises}}">
+                <image mode='' src="../../assets/icons/like_white.png"></image>{{item.praises}}
+              </view>
             </view>
           </view>
         </view>
-      </view>
-    </swiper-item>
-  </block>
-</swiper>
+      </swiper-item>
+    </block>
+  </swiper>
+</block>

@@ -14,6 +14,8 @@ const api = {
   shareCount: "/api/index/shareCount", // 分享统计
   getAboutDeveloper: "/api/index/getAboutDeveloper", // 获取关于开发者
   getDailyList: "/api/index/getDailyList", // 获取精选列表
+  dailyPraise: "/api/index/dailyPraise", // 点赞统计
+  dailyDownload: "/api/index/dailyDownload", // 下载统计
   // 需要登录的接口
   login: "/api/login/index", // 登录接口，code换取openid
   getUserInfo: "/api/user/getUserInfo", // 获取用户信息
@@ -23,7 +25,7 @@ const api = {
   addPraise: "/api/user/addPraise", // 点赞
   addArticleComment: "/api/user/addArticleComment" // 添加评论
 
-  
+
 }
 
 // 微信request请求promise封装
