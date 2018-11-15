@@ -1,19 +1,36 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本地
-Source Server Version : 80012
+Source Server         : ecs
+Source Server Version : 50642
 Source Host           : localhost:3306
 Source Database       : think_server
 
 Target Server Type    : MYSQL
-Target Server Version : 80012
+Target Server Version : 50642
 File Encoding         : 65001
 
-Date: 2018-10-26 19:05:43
+Date: 2018-11-15 17:41:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `about`
+-- ----------------------------
+DROP TABLE IF EXISTS `about`;
+CREATE TABLE `about` (
+  `key` char(125) COLLATE utf8mb4_bin NOT NULL,
+  `title` char(125) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `content` varchar(1024) COLLATE utf8mb4_bin DEFAULT '',
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- ----------------------------
+-- Records of about
+-- ----------------------------
+INSERT INTO `about` VALUES ('wxApp', '关于我想学摄影小程序', '<p>    作为一名互联网时代的前端工程师，怎么能没有自己的小应用？？？</p><p><br></p><p><span class=\"ql-size-small\" style=\"color: rgb(68, 68, 68);\">    正好对摄影挺感兴趣的，几经周折学习，终于磕磕巴巴做出了这个小程序，哈哈哈。。。</span></p><p><br></p><p><span style=\"color: rgb(68, 68, 68);\">主要使用到的技术，小程序不用多说。后端服务用的是基于nodejs的thinkjs，上一版用的是koa2，自从看了thinkjs发现这不是thinkphp的js版吗？哈哈哈，然后就咔咔咔用了一周时间写了这个小程序的后端服务。数据库用的mysql，当然作为一个前端，写的都很简单，没考虑那么多性能，校验什么的。也是一个边学边用的过程。</span></p><p><br></p><p><span class=\"ql-size-small\" style=\"color: rgb(68, 68, 68);\">    做为一个业余中的业余的前端摄影师，偶尔会拍点自认为还可以的照片发上去，喜欢的同学就点个赞。</span></p>');
+INSERT INTO `about` VALUES ('wxDeveloper', '关于开发者', '<p class=\"ql-align-center\"><span class=\"ql-size-small\">14年毕业后，在前端领域磕磕绊绊也混了4年多，最底层前端开发一名。</span></p>');
 
 -- ----------------------------
 -- Table structure for `admin_user`
@@ -21,15 +38,15 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `admin_user`;
 CREATE TABLE `admin_user` (
   `id` int(1) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `account` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
+  `account` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Records of admin_user
 -- ----------------------------
-INSERT INTO `admin_user` VALUES ('1', 'admin', '123456');
+INSERT INTO `admin_user` VALUES ('1', 'admin', '1234qwer');
 
 -- ----------------------------
 -- Table structure for `article_comment`
@@ -39,21 +56,16 @@ CREATE TABLE `article_comment` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `article_id` char(6) COLLATE utf8mb4_bin NOT NULL DEFAULT '0',
   `comment_user_id` int(6) NOT NULL,
-  `comment_text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `create_date` char(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `comment_text` varchar(1024) COLLATE utf8mb4_bin DEFAULT '',
+  `create_date` char(24) COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Records of article_comment
 -- ----------------------------
-INSERT INTO `article_comment` VALUES ('7', '7', '12', 0x6173E689A56164E58F917765E68CBCE58EBB, '2018-10-25 16:10:37');
-INSERT INTO `article_comment` VALUES ('8', '7', '12', 0x6173E689A56164E58F917765E68CBCE58EBBE59388E59388, '2018-10-25 16:12:00');
-INSERT INTO `article_comment` VALUES ('9', '7', '12', 0x7361646661737172313233313233, '2018-10-26 15:21:08');
-INSERT INTO `article_comment` VALUES ('10', '7', '12', 0x7361646661737172313233313233, '2018-10-26 15:21:24');
-INSERT INTO `article_comment` VALUES ('11', '7', '12', 0x7361646661737172313233313233, '2018-10-26 15:24:21');
-INSERT INTO `article_comment` VALUES ('12', '7', '12', 0x7361646661737172313233313233, '2018-10-26 15:24:45');
-INSERT INTO `article_comment` VALUES ('13', '8', '12', 0x7361646661737172313233313233, '2018-10-26 15:27:24');
+INSERT INTO `article_comment` VALUES ('22', '28', '30', '我只是想测试下评论功能，仅此而已，虽然照片也很美???', '2018-11-01 23:12:38');
+INSERT INTO `article_comment` VALUES ('23', '30', '30', '?????', '2018-11-10 14:11:48');
 
 -- ----------------------------
 -- Table structure for `article_kind_list`
@@ -61,9 +73,9 @@ INSERT INTO `article_comment` VALUES ('13', '8', '12', 0x73616466617371723132333
 DROP TABLE IF EXISTS `article_kind_list`;
 CREATE TABLE `article_kind_list` (
   `id` int(2) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Records of article_kind_list
@@ -78,54 +90,80 @@ INSERT INTO `article_kind_list` VALUES ('3', '游记');
 DROP TABLE IF EXISTS `article_list`;
 CREATE TABLE `article_list` (
   `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
-  `article_title` varchar(255) DEFAULT NULL,
-  `cover_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `article_title` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `cover_img` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
   `kind_id` int(6) DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `content` text,
+  `description` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `content` text COLLATE utf8mb4_bin,
   `home_show` int(1) DEFAULT '0',
   `views` int(6) DEFAULT '0',
-  `praises` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `praises` varchar(2048) COLLATE utf8mb4_bin DEFAULT '',
+  `shares` int(6) DEFAULT '0',
   `comments` int(6) DEFAULT '0',
-  `create_date` char(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `update_date` char(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `create_date` char(24) COLLATE utf8mb4_bin DEFAULT NULL,
+  `update_date` char(24) COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Records of article_list
 -- ----------------------------
-INSERT INTO `article_list` VALUES ('7', '文章名', 'http://img1.imgtn.bdimg.com/it/u=371772476,1548437417&fm=26&gp=0.jpg', '1', null, '123123123', '1', '5', '12,5,4,3,1,2', '6', '2018-10-24 16:28:14', '2018-10-26 15:29:53');
-INSERT INTO `article_list` VALUES ('8', '123124', 'http://img1.imgtn.bdimg.com/it/u=371772476,1548437417&fm=26&gp=0.jpg', '1', null, '<p>123123123</p>', '1', '0', '12', '1', '2018-10-24 16:28:19', null);
-INSERT INTO `article_list` VALUES ('9', '123124', 'http://img1.imgtn.bdimg.com/it/u=371772476,1548437417&fm=26&gp=0.jpg', '1', null, '123123123', '0', '0', null, '0', '2018-10-23 16:10:13', null);
-INSERT INTO `article_list` VALUES ('10', '123123', 'http://localhost:8360/static/uploadimg/nu99kphuz.jpg', '2', null, '<p>123123</p>', '0', '0', null, '0', '2018-10-24 11:17:40', null);
-INSERT INTO `article_list` VALUES ('11', '123123', 'http://localhost:8360/static/uploadimg/nu99kphuz.jpg', '2', null, '<p>123123</p>', '0', '0', null, '0', '2018-10-24 11:18:56', null);
-INSERT INTO `article_list` VALUES ('12', '123', 'http://localhost:8360/static/uploadimg/b3x1yp4l4p4.jpg', '1', null, '<p>123</p>', '1', '0', null, '0', '2018-10-24 11:19:29', null);
-INSERT INTO `article_list` VALUES ('13', '文章名', 'http://img1.imgtn.bdimg.com/it/u=371772476,1548437417&fm=26&gp=0.jpg', '3', null, '123123123', '0', '0', null, '0', '2018-10-24 15:18:10', null);
-INSERT INTO `article_list` VALUES ('14', '文章名', 'http://localhost:8360/static/uploadimg/9qtszlsc1im.png', '3', null, '123123123', '0', '0', null, '0', '2018-10-24 15:20:11', null);
-INSERT INTO `article_list` VALUES ('15', '文章名', 'http://localhost:8360/static/uploadimg/9qtszlsc1im.png', '3', null, '123123123', '0', '0', null, '0', '2018-10-24 15:20:18', null);
-INSERT INTO `article_list` VALUES ('16', '内容回显测试', 'http://localhost:8360/static/uploadimg/oq6kciz4iv.png', '2', null, '<p>内容回显<img src=\"http://localhost:8360/static/uploadimg/j7fl9iei8gm.png\"></p>', '0', '0', '0', '0', '2018-10-24 15:26:17', null);
-INSERT INTO `article_list` VALUES ('21', '文章名', 'http://pic23.nipic.com/20120816/10630322_204821643000_2.jpg', '1', null, '123123123', '0', '0', null, '0', '2018-10-26 15:11:45', '2018-10-26 15:11:45');
-INSERT INTO `article_list` VALUES ('22', '文章名', 'http://up.enterdesk.com/edpic_source/cf/08/63/cf086352b55948489accbdd2b2b69b46.jpg', '1', null, '123123123', '0', '0', null, '0', '2018-10-26 18:49:57', '2018-10-26 18:49:57');
-INSERT INTO `article_list` VALUES ('23', '文章名', 'http://up.enterdesk.com/edpic_source/cf/08/63/cf086352b55948489accbdd2b2b69b46.jpg', '1', null, '<p>123123123</p>', '1', '0', null, '0', '2018-10-26 18:50:18', '2018-10-26 18:51:07');
-INSERT INTO `article_list` VALUES ('24', '文章名', 'http://up.enterdesk.com/edpic_source/cf/08/63/cf086352b55948489accbdd2b2b69b46.jpg', '1', null, '123123123', '0', '0', null, '0', '2018-10-26 18:53:25', '2018-10-26 18:53:25');
-INSERT INTO `article_list` VALUES ('25', '文章名', 'http://up.enterdesk.com/edpic_source/cf/08/63/cf086352b55948489accbdd2b2b69b46.jpg', '1', '文章描述', '<p>123123123</p>', '1', '0', null, '0', '2018-10-26 18:55:38', '2018-10-26 18:56:08');
+INSERT INTO `article_list` VALUES ('28', '日落', 'https://server.raydom.wang/static/uploadImg/e76f69n3mkf.jpg', '1', '2017年最后一天的日落。', 0x3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F796F3764733878346430732E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F626F7066786B33677569652E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F62797964356268763536662E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F676361666973756B7876622E6A7067223E3C2F703E, '1', '157', '30,33', '5', '1', '2018-11-01 22:46:38', '2018-11-01 22:48:34');
+INSERT INTO `article_list` VALUES ('29', '温榆河畔', 'https://server.raydom.wang/static/uploadImg/viyrlde01wg.jpg', '1', '去年夏天在温榆河边拍的，今年不知什么时候，河边的树全被砍完了，光秃秃的。', 0x3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F6A627136313771373363662E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F63636276767A72663434652E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F676A75623861736F33382E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F3331693371793862776B752E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F356F796F34636E7978342E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F636373317662663765696F2E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F32746D317577316B3536702E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F616C6E32386239766E78642E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C62723E3C2F703E, '1', '37', '30', '1', '0', '2018-11-03 11:03:27', '2018-11-10 11:06:37');
+INSERT INTO `article_list` VALUES ('30', '登鹳雀楼', 'https://server.raydom.wang/static/uploadImg/47z1bqcuvoq.jpg', '3', '“白日依山尽，黄河入海流。欲穷千里目，更上一层楼。”在来的途中，听小朋友们背了一路的《登鹳雀楼》，终于见到鹳雀楼真面目了。', 0x3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F34357473636379736475622E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F6C6D6661703639366837682E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F6938716532337466306A6C2E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F6F36686F75346F6D6B79642E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F66747771716D7A316E752E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F38677A3471383376746E2E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F68347273777732356B63772E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F6C766772317975647370632E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F6D6663723572326578672E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F6A6B76616A77356A72712E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F763332357A6C627A366B392E6A7067223E3C2F703E3C703E3C62723E3C2F703E3C703E3C696D67207372633D2268747470733A2F2F7365727665722E726179646F6D2E77616E672F7374617469632F75706C6F6164496D672F787776393032386470672E6A7067223E3C2F703E, '1', '24', '30', '0', '1', '2018-11-10 13:50:11', '2018-11-10 14:01:49');
+
+-- ----------------------------
+-- Table structure for `daily`
+-- ----------------------------
+DROP TABLE IF EXISTS `daily`;
+CREATE TABLE `daily` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `img_url` char(128) NOT NULL DEFAULT '',
+  `content` char(128) NOT NULL DEFAULT '',
+  `from` char(64) NOT NULL DEFAULT '',
+  `day` char(2) DEFAULT '00',
+  `month` char(2) DEFAULT '00',
+  `year` char(4) DEFAULT '',
+  `create_date` char(32) DEFAULT '',
+  `praises` int(6) NOT NULL DEFAULT '0',
+  `download` int(6) NOT NULL DEFAULT '0',
+  `update_date` char(32) DEFAULT '',
+  `sort` int(9) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of daily
+-- ----------------------------
+INSERT INTO `daily` VALUES ('14', 'https://server.raydom.wang/static/uploadImg/hjamda5sv4a.jpg', '累的时候，再坚持一下', 'Raydom', '13', '11', '2018', '2018-11-14 22:34:35', '13', '1', '2018-11-14 22:34:35', '154212480');
+INSERT INTO `daily` VALUES ('15', 'https://server.raydom.wang//static/uploadImg/cwzjbmv5r2.jpg', '要敢于争取', '不抱怨的世界', '12', '11', '2018', '2018-11-15 17:05:14', '4', '1', '2018-11-15 17:05:14', '154203840');
 
 -- ----------------------------
 -- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` int(6) NOT NULL,
+  `id` int(6) NOT NULL AUTO_INCREMENT,
   `user_name` char(64) COLLATE utf8mb4_bin DEFAULT NULL,
   `gender` int(1) DEFAULT '0',
   `avatar` char(255) COLLATE utf8mb4_bin DEFAULT NULL,
   `province` char(32) COLLATE utf8mb4_bin DEFAULT NULL,
   `city` char(32) COLLATE utf8mb4_bin DEFAULT NULL,
   `create_date` char(32) COLLATE utf8mb4_bin DEFAULT NULL,
+  `openid` char(64) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `country` char(32) COLLATE utf8mb4_bin DEFAULT '',
+  `praise_article` varchar(1024) COLLATE utf8mb4_bin DEFAULT '',
+  `comment_article` varchar(1024) COLLATE utf8mb4_bin DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('30', 'Raydooom', '1', 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqE7UMLOYODjHTIpdpibgYNGCQnF7FsAicatibNR3kz5dWuGNicVaagg6c5nBaxrLtZkr5MSGmOFcMQnw/132', '', '', '2018-11-01 19:01:56', 'otvsK0cR45_mL-BKResOj9p2JtGc', '中国', '29,30,28', '30,28');
+INSERT INTO `user` VALUES ('31', 'Magenta', '1', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKbyQhBrQjwKtkK20TBKLLeHdCC3fHLJn4p52ydMH2l1EbTqqFkKCttZTpXrT9JibLxRmcicIad8veg/132', '河南', '郑州', '2018-11-01 19:04:26', 'otvsK0ZqDYwJIxbHiSBBYFf8RWO0', '中国', '', '');
+INSERT INTO `user` VALUES ('32', '花荣', '0', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIcpwzXOIMNqc3bzJTyqInEV6oKib3zHsOQFEf2R6NbLpMuNLTDomWOHsVicyEpThua9cewUgzwfkvQ/132', '', '', '2018-11-02 15:59:17', 'otvsK0b-ATMmSHEMEE9sbaQ44sE0', '', '', '');
+INSERT INTO `user` VALUES ('33', '李应', '0', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJGrDY3cRGPxOU4grjqdnKKYTGibNaLEIKzFHYMEX0r0Yj8SkViaTtUE0UXEJibLypyGNRuSTqCiaGLgw/132', '', '', '2018-11-02 16:51:41', 'otvsK0WKuKOJB-6LbiOdXtM6SD0Q', '', '28', '');
+INSERT INTO `user` VALUES ('34', '小悦悦', '0', '', '', '', '2018-11-03 15:55:24', 'otvsK0X5H1twdx3PXbFyKQqVVuQ8', '', '', '');
+INSERT INTO `user` VALUES ('35', '鲁智深', '0', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJ0OUJicXE9EiccqmMGbgC4I1aiaN9qfXegI0frhvVZicnPztCjQQz7icEWtMYyG7VicAvQ6zeHZJy5fNfQ/132', '', '', '2018-11-03 16:27:03', 'otvsK0cy5W7Hw5YibgANqXg-8Dt8', '', '', '');
+INSERT INTO `user` VALUES ('36', '方群', '2', 'https://wx.qlogo.cn/mmopen/vi_32/LWicoUend7QPKEWiaJqdPyuBIibeLVTBvicicMfK8dFoJUDaRxA18ibLrNPnuHrXTLmOkTvozJ8mMyTnlLL2qVezUSjg/132', 'Hunan', 'Shaoyang', '2018-11-13 19:50:02', 'otvsK0aq1ftzjIHwQmS9y33RAG_I', 'China', '', '');
