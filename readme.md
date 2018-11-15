@@ -1,7 +1,7 @@
 ### Photo2.0 （我想学摄影）
 > 此项目主要是学习thinkjs做的一个文章发布系统项目。前端目前只开发了微信小程序版本，后台管理用的vue，服务端是基于node的thinkjs。目前开发功能比较简单，后续有时间还会继续。。。
 
-<p align="center">
+<p align="left">
     <img width="200" src="https://raw.githubusercontent.com/Raydooom/photo2.0/master/images/gh_a9ada37d4c7c_344.jpg">
 </p>
 
