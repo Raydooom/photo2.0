@@ -117,10 +117,7 @@ module.exports = class extends Auth {
     // 查询用户表数据
     const userResult = await this.model('api/index').getUser({ id: userId });
     let commentArticle = userResult.comment_article ? userResult.comment_article.split(",") : [];
-    if (commentArticle.includes(id)) {
-      let index = commentArticle.indexOf(id);
-      commentArticle.splice(index);
-    } else {
+    if (!commentArticle.includes(id)) {
       commentArticle.unshift(id);
     }
     let userData = {

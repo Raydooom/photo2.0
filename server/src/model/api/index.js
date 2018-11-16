@@ -2,13 +2,13 @@ module.exports = class extends think.Model {
   // 获取banner
   async getBannerList(condition) {
     let articleModel = this.model("article_list");
-    let result = await articleModel.where(condition).select();
+    let result = await articleModel.where(condition).order('create_date DESC').select();
     return result;
   }
   // 获取文章列表
   async getArticleList(page, pageSize) {
     let articleModel = this.model("article_list");
-    let result = await articleModel.page(page, pageSize).countSelect();
+    let result = await articleModel.page(page, pageSize).order('create_date DESC').countSelect();
     return result;
   }
   // 获取分类列表
@@ -26,7 +26,7 @@ module.exports = class extends think.Model {
   // 根据ID获取文章列表
   async getKindArticle(condition) {
     let articleModel = this.model("article_list");
-    let result = await articleModel.where(condition).select();
+    let result = await articleModel.where(condition).order('create_date DESC').select();
     return result;
   }
   // 根据ID获取文章
@@ -38,7 +38,7 @@ module.exports = class extends think.Model {
   // 根据ID获取文章评论
   async getArticleComment(data) {
     let commentModel = this.model("article_comment");
-    let result = await commentModel.where(data).select();
+    let result = await commentModel.where(data).order('create_date DESC').select();
     return result;
   }
   // 添加评论
