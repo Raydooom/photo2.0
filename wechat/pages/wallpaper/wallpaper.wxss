@@ -107,3 +107,11 @@ swiper-item {
   vertical-align: middle;
   margin-right: 10rpx;
 }
+
+.share-btn {
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  z-index: 2;
+  color: #fff;
+}

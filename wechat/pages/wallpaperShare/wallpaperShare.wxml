@@ -1,0 +1,23 @@
+<import src="/templates/loading.wxml" />
+<template wx:if="{{loading}}" is="page-loading" />
+<view wx:else class="canvas-warp">
+  <canvas canvas-id="canvas" style="width:{{windowWidth}}px;height:{{windowHeight}}px;" class="canvas"></canvas>
+  <view class="menu-item">
+    <view class="switch-warp">
+      <view>
+        <switch checked color="#5756c0" bindchange="qrCodeSelect" />二维码水印
+      </view>
+      <view>
+        <switch checked color="#5756c0" bindchange="textSelect" />文字
+      </view>
+    </view>
+    <view class="btn-warp ">
+      <view>
+        <button open-type='share'>微信好友</button>
+      </view>
+      <view>朋友圈</view>
+      <view bindtap="saveImg">保存到相册</view>
+    </view>
+
+  </view>
+</view>

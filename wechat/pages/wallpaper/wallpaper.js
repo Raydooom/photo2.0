@@ -108,10 +108,11 @@ Page({
       }
     })
   },
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
+  // 分享
+  share(e) {
+    let id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '../wallpaperShare/wallpaperShare?id=' + id,
+    })
   }
 })

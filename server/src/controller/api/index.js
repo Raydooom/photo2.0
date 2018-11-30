@@ -155,4 +155,10 @@ module.exports = class extends think.Controller {
     const result = await this.model('api/index').updateDaily({ id }, { download });
     this.success(result, "下载统计成功")
   }
+  // 根据id获取每日精选内容
+  async getDailyAction() {
+    let { id } = this.post();
+    const result = await this.model('api/index').getDaily({ id });
+    this.success(result, "获取精选详情成功")
+  }
 }

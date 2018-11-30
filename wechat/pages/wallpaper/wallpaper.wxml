@@ -7,6 +7,7 @@
     <block wx:for="{{wallpaperList}}" wx:key="{{item.id}}">
       <swiper-item>
         <image class="img" src="{{item.img_url}}" mode='aspectFill'></image>
+        <view class="share-btn" bindtap="share" data-id='{{item.id}}'>分享</view>
         <view class="text-wrap">
           <view class="date">
             <text class="day">{{item.day}}</text>

@@ -4,7 +4,7 @@ const Promise = require("./external/es6-promise.min.js");
 const wxPromise = (wxApi, options) => {
   return new Promise((resolve, reject) => {
     wxApi({
-      options,
+      ...options,
       success: (res) => {
         resolve(res)
       },

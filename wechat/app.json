@@ -12,7 +12,8 @@
     "pages/collect/collect",
     "pages/commentArticle/commentArticle",
     "pages/aboutWxApp/aboutWxApp",
-    "pages/aboutDeveloper/aboutDeveloper"
+    "pages/aboutDeveloper/aboutDeveloper",
+    "pages/wallpaperShare/wallpaperShare"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -60,8 +60,8 @@
 				{
 					"id": 4,
 					"name": "壁纸",
-					"pathName": "pages/wallpaper/wallpaper",
-					"query": ""
+					"pathName": "pages/wallpaperShare/wallpaperShare",
+					"query": "id=15"
 				}
 			]
 		}

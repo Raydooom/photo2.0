@@ -110,10 +110,16 @@ module.exports = class extends think.Model {
     let result = await model.order('sort ASC').page(page, pageSize).countSelect();
     return result;
   }
-  // 点赞
+  // 点赞、下载统计
   async updateDaily(condition, data) {
     let articleModel = this.model("daily");
     let result = await articleModel.where(condition).update(data);
+    return result;
+  }
+  // 精选详情
+  async getDaily(condition) {
+    let articleModel = this.model("daily");
+    let result = await articleModel.where(condition).find();
     return result;
   }
 };
