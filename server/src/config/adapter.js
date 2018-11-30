@@ -1,17 +1,17 @@
 const fileCache = require('think-cache-file');
 const nunjucks = require('think-view-nunjucks');
 const fileSession = require('think-session-file');
+const redisCache = require('think-cache-redis');
 const mysql = require('think-model-mysql');
-const {Console, File, DateFile} = require('think-logger3');
+const { Console, File, DateFile } = require('think-logger3');
 const path = require('path');
 const isDev = think.env === 'development';
-
 /**
  * cache adapter config
  * @type {Object}
  */
 exports.cache = {
-  type: 'file',
+  type: 'redis',
   common: {
     timeout: 24 * 60 * 60 * 1000 // millisecond
   },
@@ -20,6 +20,13 @@ exports.cache = {
     cachePath: path.join(think.ROOT_PATH, 'runtime/cache'), // absoulte path is necessarily required
     pathDepth: 1,
     gcInterval: 24 * 60 * 60 * 1000 // gc interval
+  },
+  redis: {
+    handle: redisCache,
+    port: 6379,
+    host: '127.0.0.1',
+    password: '',
+    db: 0
   }
 };
 

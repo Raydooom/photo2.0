@@ -1,5 +1,5 @@
 export default {
-  type: 'file', //缓存方式
+  type: 'redis', //缓存方式
   adapter: {
     file: {
       timeout: 6 * 3600, //6 hours
@@ -8,7 +8,7 @@ export default {
       file_ext: '.json' //缓存文件的扩展名
     },
     redis: {
-      prefix: 'thinkjs_', //缓存名称前缀
+      prefix: '', //缓存名称前缀
     }
   }
 };
